@@ -1,0 +1,49 @@
+TIÊU ĐỀ: Hỏi Thầy Một Câu - Hạt Bụi Trên Đường - Tập 10
+
+HOOK: Đôi khi, chỉ cần dừng lại một chút, gió cũng đủ cuốn đi mọi bụi mờ trong tâm.
+
+ALIAS: hat-bui-tren-duong
+
+TAGS: thiền, tĩnh tâm, chánh niệm
+
+SCRIPT:
+Một hôm, người học trò than rằng:
+
+'Thưa Thầy, sao con thấy lòng nặng nề, dù chẳng có gì xảy ra.'
+
+Thầy dẫn anh ra đường làng, nơi nắng chiều phủ đầy bụi.
+
+Thầy dừng lại nói:
+
+'Hãy đứng yên.'
+
+Gió khẽ thổi, bụi tan dần.
+
+Thầy nói:
+
+'Tâm con cũng vậy, càng chạy, bụi càng bay.
+
+Khi dừng lại, bụi mới lắng, và con sẽ thấy con đường vốn đã rõ từ lâu.'
+
+Người học trò đứng im, ánh nắng rọi lên gương mặt, và anh khẽ mỉm cười, vì nhận ra rằng bình yên chưa từng đi đâu cả.
+
+VISUAL PROMPTS:
+Scene 1: Đường làng buổi chiều
+  Mô tả: Toàn cảnh đường làng phủ bụi, ánh nắng vàng nghiêng, Thầy và học trò đi giữa khung.
+  Style: Tone vàng ấm, ánh sáng nhẹ, cảm giác thiền vị.
+
+Scene 2: Bụi bay trong nắng
+  Mô tả: Cận cảnh hạt bụi lấp lánh trong nắng, chuyển động chậm, nền là bóng người đứng yên.
+  Style: Tone sáng nhẹ, ánh vàng trắng, cảm giác trong trẻo.
+
+Scene 3: Thầy dừng lại
+  Mô tả: Thầy quay lại nhìn học trò, ánh mắt hiền, gió thổi làm áo nâu lay nhẹ.
+  Style: Tone ấm, ánh sáng tự nhiên, khung trung cận.
+
+Scene 4: Lời Thầy
+  Mô tả: Cận tay Thầy chỉ về mặt đường, bụi dần lắng xuống, ánh nắng phản chiếu nhẹ.
+  Style: Tone vàng be, ánh sáng mờ, cảm giác dịu và tĩnh.
+
+Scene 5: Cảnh kết
+  Mô tả: Người học trò đứng yên trong nắng, khung rộng, bụi tan, không khí trong và yên.
+  Style: Tone sáng vàng trắng, khung mở, kết nhẹ và an nhiên.

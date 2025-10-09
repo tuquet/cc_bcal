@@ -1,0 +1,43 @@
+TIÊU ĐỀ: Hỏi Thầy Một Câu - Ngọn Đèn Trong Đêm - Tập 4
+
+HOOK: Không cần thấy hết con đường, chỉ cần đủ sáng cho một bước đi.
+
+ALIAS: ngon-den-trong-dem
+
+TAGS: thiền, tỉnh thức, dũng cảm
+
+SCRIPT:
+Một học trò thú nhận với Thầy nỗi sợ bóng tối dai dẳng như chiếc bóng theo sau mỗi khi anh phải đi qua con dốc sau chùa vào ban đêm, tâm anh co lại, trí tưởng tượng dệt ra vô vàn điều đáng sợ.
+
+Thầy không lý giải dài dòng, chỉ thắp một ngọn đèn nhỏ rồi trao cho anh, bảo hãy mang đèn đi.
+
+Anh bước ra hiên, lát sau quay lại nói, ánh sáng này nhỏ quá, con chỉ thấy quanh mình.
+
+Thầy mỉm cười, vậy là đủ, con chỉ cần thấy bước kế tiếp, không cần thấy hết con đường.
+
+Lời ấy như một mũi kim đâm vỡ lớp sương trong đầu, anh cầm đèn đi vào đêm, nhận ra rằng bóng tối không phải kẻ thù, chỉ là phần đường phía trước chưa được chiếu rọi.
+
+Với mỗi bước, vùng sáng nhỏ di chuyển theo, và nỗi sợ tan vào khoảng không như sương gặp nắng.
+
+Ngọn đèn vẫn nhỏ, nhưng trong lòng anh vừa thắp thêm một ngọn khác lớn hơn.
+
+VISUAL PROMPTS:
+Scene 1: Căn phòng đèn dầu
+  Mô tả: Trung cảnh nội thất gỗ tối ấm; Thầy và học trò ngồi đối diện; chỉ một đèn dầu le lói; máy giữ yên.
+  Style: Màu tối ấm vàng, cảm xúc trầm, tone thân mật, bố cục trung tĩnh.
+
+Scene 2: Thắp đèn
+  Mô tả: Cận bàn tay Thầy châm lửa; ngọn lửa nhỏ bừng; ánh sáng phản chiếu trong mắt hiền của Thầy.
+  Style: Màu ấm vàng, tinh tế, bố cục cận tối giản, chuyển động rất chậm.
+
+Scene 3: Bước vào đêm
+  Mô tả: Toàn cảnh hiên chùa tối; học trò cầm đèn đi ra; vùng sáng nhỏ di động giữa bóng tối; máy pan theo.
+  Style: Màu tương phản mạnh, cảm giác cô tịch, tone thiền, bố cục toàn với điểm sáng duy nhất.
+
+Scene 4: Lời Thầy vọng
+  Mô tả: Trung cận Thầy ở ngưỡng cửa, nụ cười hiền, ngọn lửa phản chiếu; gió khẽ lay ngọn đèn.
+  Style: Màu tối ấm, cảm xúc an ủi, bố cục trung cận, nhịp chậm.
+
+Scene 5: Ánh sáng dẫn đường
+  Mô tả: Toàn cảnh con dốc sau chùa, đèn nhỏ di chuyển; màn đêm rộng; khung fade-out khi đèn xa dần.
+  Style: Màu trầm, tone hy vọng, bố cục tối giản, khoảng trống lớn.

@@ -1,0 +1,43 @@
+{
+  "title": "Hỏi Thầy Một Câu - Chiếc Bát Vỡ - Tập 2",
+  "hook": "Biết rằng mọi thứ rồi sẽ vỡ, ta mới trân trọng khi còn nguyên.",
+  "alias": "chiec-bat-vo",
+  "tag": [
+    "thiền",
+    "vô thường",
+    "buông bỏ"
+  ],
+  "script_text": "Chiều muộn, người đệ tử ôm vội vào lòng những mảnh gốm sứ, thở hổn hển gọi Thầy, giọng run run xin lỗi vì đã lỡ làm vỡ chiếc bát mình quý nhất, thứ anh vẫn lau chùi mỗi ngày như một nghi thức giữ gìn bình yên. Thầy nhìn anh, ánh mắt bình yên như mặt hồ sau gió, Thầy nói chậm mà rõ, ta đã biết nó vỡ từ ngày con mang nó về. Người đệ tử sửng sốt, sao Thầy biết, Thầy mỉm cười, bởi mọi vật sinh ra đều đã mang mầm tan vỡ, biết như thế, con sẽ thương từng phút nó còn nguyên. Gió đi qua hành lang gỗ, mùi trà thoảng lên, tiếng chuông xa rơi xuống khoảng chiều nhạt nét. Người đệ tử ngồi xuống, những mảnh bát nằm yên trên khăn vải thô, tay anh bỗng thả lỏng, như thể nắm tay lâu nay đã mỏi. Anh chợt hiểu, không có bình yên nào đến từ việc nắm giữ, bình yên đến khi ta trân trọng mà không buộc ràng, khi ta ngắm một đóa hoa đang nở dù biết ngày mai nó sẽ tàn, khi ta yêu một người bằng trái tim rộng chứ không phải bằng bàn tay siết chặt. Trong sự hiểu ấy, nỗi tiếc nuối bỗng nhẹ như hơi thở.",
+  "visual_prompts": [
+    {
+      "scene": 1,
+      "title": "Chiều trong sân chùa",
+      "description": "Toàn cảnh sân gạch cũ dưới nắng hoàng hôn, học trò bước nhanh trên lối đá, ôm mảnh bát; máy pan nhẹ theo chuyển động.",
+      "visual_style": "Màu ấm vàng cam, cảm xúc bồi hồi, tone hoài niệm, bố cục toàn chuyển sang trung."
+    },
+    {
+      "scene": 2,
+      "title": "Phòng trà tĩnh",
+      "description": "Trung cảnh Thầy ngồi bên bàn trà gỗ, ánh sáng nghiêng qua cửa sổ tre; học trò quỳ phía trước đặt mảnh bát lên khăn.",
+      "visual_style": "Màu nâu gỗ be, tĩnh lặng, tone thiền, bố cục trung cân đối, ánh sáng mềm."
+    },
+    {
+      "scene": 3,
+      "title": "Lời Thầy như gió",
+      "description": "Cận gương mặt Thầy mỉm cười hiền; rèm tre khẽ lay, bụi sáng lơ lửng; máy giữ yên để nhấn câu nói.",
+      "visual_style": "Màu ấm vàng nhạt, cảm xúc sâu, bố cục cận tối giản, nhịp chậm."
+    },
+    {
+      "scene": 4,
+      "title": "Khoảnh khắc buông",
+      "description": "Cận tay học trò thả lỏng cạnh mảnh bát, ánh chiều hắt trên gốm vỡ; hơi thở dài giải tỏa; máy dolly-out rất chậm.",
+      "visual_style": "Màu trung tính ấm, cảm giác nhẹ, tone chấp nhận, bố cục cận sang trung."
+    },
+    {
+      "scene": 5,
+      "title": "Kết trong chuông xa",
+      "description": "Toàn cảnh phòng trà trống, khung tĩnh, mảnh bát nằm yên; âm chuông ngân, ánh sáng dần nhạt, fade-out.",
+      "visual_style": "Màu vàng nhạt, tone thiền vị, bố cục tối giản, kết êm."
+    }
+  ]
+}

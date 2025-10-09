@@ -1,0 +1,47 @@
+TIÊU ĐỀ: Hỏi Thầy Một Câu - Cánh Cửa Không Khóa - Tập 9
+
+HOOK: Nhiều khi, thứ giam giữ ta chỉ là nỗi sợ trong đầu.
+
+ALIAS: canh-cua-khong-khoa
+
+TAGS: thiền, giải thoát, tự do
+
+SCRIPT:
+Một người học trò kể với Thầy rằng mình cảm thấy bị kẹt trong chính cuộc sống của mình, như con chim trong lồng.
+
+Thầy dẫn anh đến một căn phòng cũ và nói:
+
+'Con hãy tìm cách ra ngoài.'
+
+Anh loay hoay mãi mà không được.
+
+Cuối cùng, Thầy bước đến, nhẹ đẩy cánh cửa, nó mở ra dễ dàng.
+
+Thầy nói:
+
+'Cửa không khóa, chỉ do con nghĩ thế.
+
+Tự do không ở ngoài kia, nó bắt đầu khi con thôi sợ bên trong.'
+
+Người học trò cúi đầu, bước ra ngoài, ánh sáng chiếu lên khuôn mặt, nhẹ như một nụ cười vừa mở ra trong lòng.
+
+VISUAL PROMPTS:
+Scene 1: Căn phòng cũ
+  Mô tả: Phòng gỗ tối, cửa sổ hẹp, ánh sáng yếu. Người học trò đứng giữa phòng, nhìn quanh bối rối.
+  Style: Tone tối nâu, ánh sáng hẹp, cảm giác gò bó.
+
+Scene 2: Cánh cửa
+  Mô tả: Người học trò cố đẩy cửa, tay run, tiếng gió ngoài kia lọt qua khe nhỏ.
+  Style: Tone lạnh, ánh sáng chênh tối, cảm xúc lo lắng.
+
+Scene 3: Thầy bước đến
+  Mô tả: Thầy tiến lại gần, chạm nhẹ vào cánh cửa, nó mở ra, ánh sáng ùa vào phòng.
+  Style: Tone vàng trắng, chuyển động mượt, cảm giác giải thoát.
+
+Scene 4: Lời Thầy
+  Mô tả: Cận mặt Thầy mỉm cười, ánh sáng phản chiếu trong mắt hiền. Không gian tĩnh.
+  Style: Tone ấm nhẹ, ánh sáng mềm, khung trung cận.
+
+Scene 5: Ra ngoài ánh sáng
+  Mô tả: Người học trò bước ra ngoài, ánh sáng phủ khắp, gió nhẹ thổi qua, nụ cười hiện dần.
+  Style: Tone sáng ấm, khung hình mở, cảm giác tự do và an nhiên.

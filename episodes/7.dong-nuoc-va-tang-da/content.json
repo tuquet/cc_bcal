@@ -1,0 +1,43 @@
+{
+  "title": "Hỏi Thầy Một Câu - Dòng Nước Và Tảng Đá - Tập 7",
+  "hook": "Khi không chống lại, nước cũng vượt qua được đá.",
+  "alias": "dong-nuoc-va-tang-da",
+  "tag": [
+    "thiền",
+    "buông bỏ",
+    "nhẫn nại"
+  ],
+  "script_text": "Một hôm, người học trò đến bên Thầy, than rằng: 'Thưa Thầy, sao con cố gắng mãi mà cuộc đời vẫn nhiều trở ngại, như có gì chặn trước mặt.' Thầy dẫn anh ra suối. Dòng nước chảy quanh tảng đá lớn, nhẹ nhàng mà liên tục. Thầy hỏi: 'Con thấy gì?' Người học trò đáp: 'Nước không thể đi thẳng, nên đành đổi hướng.' Thầy mỉm cười: 'Đúng, nhưng nước không yếu đi, chỉ tìm lối khác để đi tiếp. Vì nó không tranh với đá, nên chẳng bao giờ dừng lại.' Người học trò im lặng, nhìn dòng suối uốn quanh tảng đá. Anh bỗng hiểu, đôi khi, sức mạnh không nằm ở việc vượt qua bằng sức, mà ở chỗ biết mềm để đi qua. Tiếng suối chảy róc rách, như lời dạy vẫn còn ngân mãi.",
+  "visual_prompts": [
+    {
+      "scene": 1,
+      "title": "Con suối trong rừng",
+      "description": "Buổi sáng sớm, ánh nắng xuyên qua tán lá, dòng suối nhỏ uốn quanh những tảng đá phủ rêu. Thầy và học trò đứng bên bờ.",
+      "visual_style": "Tone xanh lam và be sáng, ánh sáng tự nhiên, cảm giác tươi và tĩnh."
+    },
+    {
+      "scene": 2,
+      "title": "Nước gặp đá",
+      "description": "Dòng nước trong trẻo đập nhẹ vào tảng đá, bọt trắng tan ra rồi chảy tiếp, mềm mại nhưng bền bỉ.",
+      "visual_style": "Cận cảnh chậm, ánh sáng lung linh phản chiếu, bố cục đối lập mềm và cứng."
+    },
+    {
+      "scene": 3,
+      "title": "Thầy chỉ dạy",
+      "description": "Thầy nhìn dòng suối, giọng trầm ấm. Người học trò lắng nghe, gió thổi nhẹ qua tán cây, vài chiếc lá rơi xuống nước.",
+      "visual_style": "Tone vàng xanh, ánh sáng tự nhiên, cảm giác sâu và dịu."
+    },
+    {
+      "scene": 4,
+      "title": "Khoảnh khắc hiểu ra",
+      "description": "Người học trò nhìn theo dòng nước uốn quanh tảng đá, gương mặt dần giãn ra, nụ cười nhẹ xuất hiện.",
+      "visual_style": "Ánh sáng ấm, tone trung tính, bố cục tập trung vào biểu cảm tĩnh và an nhiên."
+    },
+    {
+      "scene": 5,
+      "title": "Cảnh kết",
+      "description": "Dòng suối chảy xa, ánh sáng phản chiếu trên mặt nước. Tiếng nước và tiếng gió hòa vào nhau, khung hình fade-out chậm.",
+      "visual_style": "Tone sáng nhẹ, ánh vàng pha xanh, khung hình mở, cảm giác thanh thoát và bình yên."
+    }
+  ]
+}
