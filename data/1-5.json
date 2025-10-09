@@ -1,0 +1,197 @@
+[
+  {
+    "title": "Hỏi Thầy Một Câu - Tâm Như Mặt Hồ - Tập 1",
+    "hook": "Khi mặt hồ biết lặng, bầu trời mới hiện ra.",
+    "alias": "tam-nhu-mat-ho",
+    "tag": ["thiền", "tĩnh tâm", "chánh niệm"],
+    "script_text": "Một buổi sáng tĩnh lặng, có người tìm đến Thầy với đôi mắt còn vướng mệt mỏi, anh nói rằng mình đã ngồi thiền thật lâu mà tâm vẫn xao động như sóng, chẳng phút nào yên được, phải làm sao đây Thầy. Thầy không đáp, chỉ mỉm cười rồi dẫn anh đi dọc lối đá phủ rêu sau chùa, nơi mặt hồ nằm im như tấm gương. Gió sớm thổi nhẹ, mùi lá ẩm quen thuộc, vài con chim gọi nhau từ xa, tất cả như đang chờ điều gì sắp nói. Thầy cúi xuống nhặt một viên sỏi và ném vào mặt nước, những vòng sóng đồng tâm nở ra, chạy đến tận bờ rồi tan, chỉ còn những vệt sáng lấp lánh. Thầy hỏi, con thấy gì, người ấy đáp, mặt nước động. Thầy gật đầu, khẽ nói, đợi đi. Cả hai đứng yên, để thời gian đi qua mà không giục, để hơi thở chảy như dòng nước. Khi sóng đã lắng, hồ phẳng trở lại, mây trời in xuống sâu và rõ, Thầy hỏi lần nữa, bây giờ con thấy gì, người ấy nhìn hồi lâu rồi khẽ đáp, con thấy mây và trời trong đáy hồ. Thầy mỉm cười, tâm con cũng như mặt hồ ấy, khi thôi cố làm cho yên, nó sẽ tự lặng. Một tiếng chuông xa ngân lên, người ấy khép mi mắt, trong ngực như vừa nở ra một khoảng trời trong suốt.",
+    "visual_prompts": [
+      {
+        "scene": 1,
+        "title": "Lối đá phủ rêu",
+        "description": "Máy quay toàn cảnh đi tracking chậm theo sau Thầy và học trò trên lối đá ẩm rêu sau chùa, sương sớm mỏng, tre và tán lá phủ bóng.",
+        "visual_style": "Màu lạnh xanh lam nhạt, cảm xúc tĩnh lặng, tone thiền vị, bố cục toàn kết hợp trung cảnh cân đối."
+      },
+      {
+        "scene": 2,
+        "title": "Mặt hồ buổi sớm",
+        "description": "Máy hạ thấp ngang mặt nước, phản chiếu bầu trời nhạt màu; tay Thầy nhặt một viên sỏi ở cận cảnh, ném ra giữa khung.",
+        "visual_style": "Màu trung tính hơi lạnh, cảm giác mong manh, bố cục cận tay và toàn mặt nước, nhịp chậm."
+      },
+      {
+        "scene": 3,
+        "title": "Vòng sóng lan",
+        "description": "Cận đặc tả vòng sóng đồng tâm lan ra, camera dolly-in rất chậm để nhấn nhá chuyển động mềm; âm gió và nước nhẹ.",
+        "visual_style": "Màu mát, ánh sáng dịu, tone thiền, bố cục cận trung cân bằng tối giản."
+      },
+      {
+        "scene": 4,
+        "title": "Hồ lặng như gương",
+        "description": "Sau vài nhịp, máy nâng lên toàn cảnh, mặt hồ phẳng phản chiếu mây; khuôn mặt học trò nghiêng, bình thản hơn.",
+        "visual_style": "Màu ấm nhẹ vàng nhạt, cảm xúc mở ra, bố cục toàn với điểm nhấn phản chiếu bầu trời."
+      },
+      {
+        "scene": 5,
+        "title": "Dư âm tiếng chuông",
+        "description": "Máy đứng yên nhìn làn gió làm lá tre lay nhẹ, mặt hồ vẫn phẳng, khung hình fade-out chậm theo tiếng chuông xa.",
+        "visual_style": "Màu sáng mềm, tone kết nhẹ, bố cục tĩnh tối giản, nhấn vào không gian rỗng."
+      }
+    ]
+  },
+  {
+    "title": "Hỏi Thầy Một Câu - Chiếc Bát Vỡ - Tập 2",
+    "hook": "Biết rằng mọi thứ rồi sẽ vỡ, ta mới trân trọng khi còn nguyên.",
+    "alias": "chiec-bat-vo",
+    "tag": ["thiền", "vô thường", "buông bỏ"],
+    "script_text": "Chiều muộn, người đệ tử ôm vội vào lòng những mảnh gốm sứ, thở hổn hển gọi Thầy, giọng run run xin lỗi vì đã lỡ làm vỡ chiếc bát mình quý nhất, thứ anh vẫn lau chùi mỗi ngày như một nghi thức giữ gìn bình yên. Thầy nhìn anh, ánh mắt bình yên như mặt hồ sau gió, Thầy nói chậm mà rõ, ta đã biết nó vỡ từ ngày con mang nó về. Người đệ tử sửng sốt, sao Thầy biết, Thầy mỉm cười, bởi mọi vật sinh ra đều đã mang mầm tan vỡ, biết như thế, con sẽ thương từng phút nó còn nguyên. Gió đi qua hành lang gỗ, mùi trà thoảng lên, tiếng chuông xa rơi xuống khoảng chiều nhạt nét. Người đệ tử ngồi xuống, những mảnh bát nằm yên trên khăn vải thô, tay anh bỗng thả lỏng, như thể nắm tay lâu nay đã mỏi. Anh chợt hiểu, không có bình yên nào đến từ việc nắm giữ, bình yên đến khi ta trân trọng mà không buộc ràng, khi ta ngắm một đóa hoa đang nở dù biết ngày mai nó sẽ tàn, khi ta yêu một người bằng trái tim rộng chứ không phải bằng bàn tay siết chặt. Trong sự hiểu ấy, nỗi tiếc nuối bỗng nhẹ như hơi thở.",
+    "visual_prompts": [
+      {
+        "scene": 1,
+        "title": "Chiều trong sân chùa",
+        "description": "Toàn cảnh sân gạch cũ dưới nắng hoàng hôn, học trò bước nhanh trên lối đá, ôm mảnh bát; máy pan nhẹ theo chuyển động.",
+        "visual_style": "Màu ấm vàng cam, cảm xúc bồi hồi, tone hoài niệm, bố cục toàn chuyển sang trung."
+      },
+      {
+        "scene": 2,
+        "title": "Phòng trà tĩnh",
+        "description": "Trung cảnh Thầy ngồi bên bàn trà gỗ, ánh sáng nghiêng qua cửa sổ tre; học trò quỳ phía trước đặt mảnh bát lên khăn.",
+        "visual_style": "Màu nâu gỗ be, tĩnh lặng, tone thiền, bố cục trung cân đối, ánh sáng mềm."
+      },
+      {
+        "scene": 3,
+        "title": "Lời Thầy như gió",
+        "description": "Cận gương mặt Thầy mỉm cười hiền; rèm tre khẽ lay, bụi sáng lơ lửng; máy giữ yên để nhấn câu nói.",
+        "visual_style": "Màu ấm vàng nhạt, cảm xúc sâu, bố cục cận tối giản, nhịp chậm."
+      },
+      {
+        "scene": 4,
+        "title": "Khoảnh khắc buông",
+        "description": "Cận tay học trò thả lỏng cạnh mảnh bát, ánh chiều hắt trên gốm vỡ; hơi thở dài giải tỏa; máy dolly-out rất chậm.",
+        "visual_style": "Màu trung tính ấm, cảm giác nhẹ, tone chấp nhận, bố cục cận sang trung."
+      },
+      {
+        "scene": 5,
+        "title": "Kết trong chuông xa",
+        "description": "Toàn cảnh phòng trà trống, khung tĩnh, mảnh bát nằm yên; âm chuông ngân, ánh sáng dần nhạt, fade-out.",
+        "visual_style": "Màu vàng nhạt, tone thiền vị, bố cục tối giản, kết êm."
+      }
+    ]
+  },
+  {
+    "title": "Hỏi Thầy Một Câu - Bông Hoa Và Cái Nhìn - Tập 3",
+    "hook": "Cảnh không đổi, chỉ có tâm ta đổi.",
+    "alias": "bong-hoa-va-cai-nhin",
+    "tag": ["thiền", "chánh niệm", "tâm an"],
+    "script_text": "Một người tìm đến Thầy, lời kể đầy mùi mệt mỏi rằng gần đây đi đâu cũng thấy phiền não, mọi thứ như phủ một lớp bụi xám, anh chẳng còn thấy điều gì đẹp đẽ, và chính ý nghĩ ấy lại làm anh thêm chán chường. Thầy không vội an ủi, chỉ đưa cho anh một bông hoa đã héo, cánh khô cong, sắc đã tàn, hỏi con thấy gì, anh đáp, một bông hoa sắp tàn. Thầy đặt bông hoa lên bậu cửa sổ nơi ánh nắng đang rọi vào, bụi nhỏ trong không khí bỗng sáng lên lấp lánh, những gân mảnh trên cánh hoa hiện ra tinh tế, Thầy hỏi, bây giờ con thấy gì, anh ngập ngừng, con thấy ánh sáng đẹp. Thầy gật đầu, cảnh không đổi, chỉ tâm con đổi. Người học trò im lặng, anh chợt hiểu rằng nhiều khi ta không cần thay đổi cuộc đời, chỉ cần thay đổi cách nhìn, lau một lớp bụi trên kính và mở một khung cửa cho ánh sáng đi vào. Bông hoa vẫn héo, nhưng nắng làm nó trở nên dịu dàng, như cuộc đời vẫn vậy mà lòng ta đã khác.",
+    "visual_prompts": [
+      {
+        "scene": 1,
+        "title": "Sáng nghiêng qua mái ngói",
+        "description": "Máy toàn cảnh hiên chùa buổi sáng; nắng xiên qua mái ngói; học trò ngồi đối diện Thầy, vẻ trĩu nặng.",
+        "visual_style": "Màu sáng dịu vàng trắng, cảm xúc trầm, tone thiền, bố cục toàn sang trung."
+      },
+      {
+        "scene": 2,
+        "title": "Bông hoa héo",
+        "description": "Cận bông hoa khô trong tay Thầy; máy giữ yên để thấy đường gân; nền mờ là phòng gỗ giản dị.",
+        "visual_style": "Màu trung tính, ánh sáng tự nhiên, bố cục cận tối giản, tĩnh."
+      },
+      {
+        "scene": 3,
+        "title": "Đặt bên cửa sổ",
+        "description": "Trung cảnh Thầy đặt hoa lên bậu cửa, nắng chiếu, bụi lơ lửng lấp lánh; camera dolly-in rất chậm.",
+        "visual_style": "Màu ấm vàng, cảm xúc mở, tone trong trẻo, bố cục trung cân."
+      },
+      {
+        "scene": 4,
+        "title": "Đổi cái nhìn",
+        "description": "Cận biểu cảm người học trò; ánh sáng phản chiếu trong mắt; miệng khẽ mỉm; nền là bông hoa héo sáng lên.",
+        "visual_style": "Màu ấm, cảm giác giác ngộ, bố cục cận với depth-of-field mềm."
+      },
+      {
+        "scene": 5,
+        "title": "Nắng trên cánh hoa",
+        "description": "Cận chi tiết cánh hoa héo trong nắng, khung hình tĩnh; fade-out chậm theo luồng bụi sáng.",
+        "visual_style": "Màu vàng trắng, tone yên bình, bố cục tối giản, nhịp chậm."
+      }
+    ]
+  },
+  {
+    "title": "Hỏi Thầy Một Câu - Ngọn Đèn Trong Đêm - Tập 4",
+    "hook": "Không cần thấy hết con đường, chỉ cần đủ sáng cho một bước đi.",
+    "alias": "ngon-den-trong-dem",
+    "tag": ["thiền", "tỉnh thức", "dũng cảm"],
+    "script_text": "Một học trò thú nhận với Thầy nỗi sợ bóng tối dai dẳng như chiếc bóng theo sau mỗi khi anh phải đi qua con dốc sau chùa vào ban đêm, tâm anh co lại, trí tưởng tượng dệt ra vô vàn điều đáng sợ. Thầy không lý giải dài dòng, chỉ thắp một ngọn đèn nhỏ rồi trao cho anh, bảo hãy mang đèn đi. Anh bước ra hiên, lát sau quay lại nói, ánh sáng này nhỏ quá, con chỉ thấy quanh mình. Thầy mỉm cười, vậy là đủ, con chỉ cần thấy bước kế tiếp, không cần thấy hết con đường. Lời ấy như một mũi kim đâm vỡ lớp sương trong đầu, anh cầm đèn đi vào đêm, nhận ra rằng bóng tối không phải kẻ thù, chỉ là phần đường phía trước chưa được chiếu rọi. Với mỗi bước, vùng sáng nhỏ di chuyển theo, và nỗi sợ tan vào khoảng không như sương gặp nắng. Ngọn đèn vẫn nhỏ, nhưng trong lòng anh vừa thắp thêm một ngọn khác lớn hơn.",
+    "visual_prompts": [
+      {
+        "scene": 1,
+        "title": "Căn phòng đèn dầu",
+        "description": "Trung cảnh nội thất gỗ tối ấm; Thầy và học trò ngồi đối diện; chỉ một đèn dầu le lói; máy giữ yên.",
+        "visual_style": "Màu tối ấm vàng, cảm xúc trầm, tone thân mật, bố cục trung tĩnh."
+      },
+      {
+        "scene": 2,
+        "title": "Thắp đèn",
+        "description": "Cận bàn tay Thầy châm lửa; ngọn lửa nhỏ bừng; ánh sáng phản chiếu trong mắt hiền của Thầy.",
+        "visual_style": "Màu ấm vàng, tinh tế, bố cục cận tối giản, chuyển động rất chậm."
+      },
+      {
+        "scene": 3,
+        "title": "Bước vào đêm",
+        "description": "Toàn cảnh hiên chùa tối; học trò cầm đèn đi ra; vùng sáng nhỏ di động giữa bóng tối; máy pan theo.",
+        "visual_style": "Màu tương phản mạnh, cảm giác cô tịch, tone thiền, bố cục toàn với điểm sáng duy nhất."
+      },
+      {
+        "scene": 4,
+        "title": "Lời Thầy vọng",
+        "description": "Trung cận Thầy ở ngưỡng cửa, nụ cười hiền, ngọn lửa phản chiếu; gió khẽ lay ngọn đèn.",
+        "visual_style": "Màu tối ấm, cảm xúc an ủi, bố cục trung cận, nhịp chậm."
+      },
+      {
+        "scene": 5,
+        "title": "Ánh sáng dẫn đường",
+        "description": "Toàn cảnh con dốc sau chùa, đèn nhỏ di chuyển; màn đêm rộng; khung fade-out khi đèn xa dần.",
+        "visual_style": "Màu trầm, tone hy vọng, bố cục tối giản, khoảng trống lớn."
+      }
+    ]
+  },
+  {
+    "title": "Hỏi Thầy Một Câu - Lá Vàng Và Cội Cây - Tập 5",
+    "hook": "Khi hiểu điều gì thật sự còn lại, ta thôi sợ mất đi.",
+    "alias": "la-vang-va-coi-cay",
+    "tag": ["thiền", "vô thường", "an nhiên"],
+    "script_text": "Một người thú nhận với Thầy nỗi sợ mất mát, rằng những gì anh yêu dường như luôn có ngày rời bỏ, nên càng yêu lại càng thấp thỏm, như giữ nước trong tay. Thầy cúi xuống nhặt một chiếc lá vàng, đặt vào tay anh và bảo giữ đi. Một cơn gió đi qua dễ như một hơi thở, chiếc lá bay khỏi lòng bàn tay, xoay xoay vài vòng rồi nằm xuống nền gạch ở đâu đó. Thầy nói khẽ, con không giữ được lá, nhưng cội cây vẫn ở đó, khi hiểu điều này, con sẽ thôi sợ mất. Người ấy ngước nhìn, cội cây vững chãi in bóng trời, vô số lá khác vẫn đang đậu yên, vài chiếc đã bắt đầu chuyến hành trình riêng. Anh bỗng hiểu rằng hình dạng sẽ thay đổi, mùa sẽ thay đổi, nhưng điều nâng đỡ mọi thay đổi ấy là gốc rễ, là điều ở lại trong tim, là bàn tay buông mà không rơi, là tình thương rộng hơn nỗi sợ. Từ đó, mỗi chiếc lá rơi đều trở thành một lời mời hiền lành để trở về bên gốc rễ của mình.",
+    "visual_prompts": [
+      {
+        "scene": 1,
+        "title": "Sân chùa mùa thu",
+        "description": "Toàn cảnh sân chùa phủ lá vàng; ánh sáng buổi sáng xuyên tán cây; người hỏi đứng trước Thầy.",
+        "visual_style": "Màu vàng nhẹ, cảm xúc hoài niệm, tone thiền, bố cục toàn tĩnh."
+      },
+      {
+        "scene": 2,
+        "title": "Chiếc lá trong tay",
+        "description": "Cận tay Thầy đặt lá vàng lên tay người học trò; ánh nắng lướt qua gân lá; máy giữ yên.",
+        "visual_style": "Màu ấm sáng, tinh tế, bố cục cận tối giản, nhịp chậm."
+      },
+      {
+        "scene": 3,
+        "title": "Lá bay theo gió",
+        "description": "Trung cảnh slow-motion lá rời tay bay xoay trong nắng; nền mờ là hành lang gỗ.",
+        "visual_style": "Màu vàng trắng, cảm giác nhẹ, tone an yên, bố cục trung thoáng."
+      },
+      {
+        "scene": 4,
+        "title": "Lời của Thầy",
+        "description": "Trung cận Thầy nói khẽ, phía sau là thân cây lớn; vài chiếc lá tiếp tục rơi.",
+        "visual_style": "Màu trầm ấm, chiều sâu, bố cục trung cận, ánh sáng dịu."
+      },
+      {
+        "scene": 5,
+        "title": "Nhìn lên cội cây",
+        "description": "Toàn cảnh ngửa máy qua tán cây, ánh sáng xuyên lá; người học trò trong khung dưới nhìn lên; fade-out.",
+        "visual_style": "Màu sáng mềm, tone hy vọng, bố cục toàn mở, kết êm."
+      }
+    ]
+  }
+]

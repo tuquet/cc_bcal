@@ -1,0 +1,47 @@
+{
+  "episode": 7,
+  "title": "Hỏi Thầy Một Câu - Dòng Nước Và Tảng Đá - Tập 7",
+  "total_duration": 120,
+  "scenes": [
+    {
+      "scene": 1,
+      "title": "Con suối trong rừng",
+      "description": "Buổi sáng sớm, ánh nắng xuyên qua tán lá, dòng suối nhỏ uốn quanh những tảng đá phủ rêu. Thầy và học trò đứng bên bờ.",
+      "visual_style": "Tone xanh lam và be sáng, ánh sáng tự nhiên, cảm giác tươi và tĩnh.",
+      "duration": 24,
+      "image_file": "1.png"
+    },
+    {
+      "scene": 2,
+      "title": "Nước gặp đá",
+      "description": "Dòng nước trong trẻo đập nhẹ vào tảng đá, bọt trắng tan ra rồi chảy tiếp, mềm mại nhưng bền bỉ.",
+      "visual_style": "Cận cảnh chậm, ánh sáng lung linh phản chiếu, bố cục đối lập mềm và cứng.",
+      "duration": 24,
+      "image_file": "2.png"
+    },
+    {
+      "scene": 3,
+      "title": "Thầy chỉ dạy",
+      "description": "Thầy nhìn dòng suối, giọng trầm ấm. Người học trò lắng nghe, gió thổi nhẹ qua tán cây, vài chiếc lá rơi xuống nước.",
+      "visual_style": "Tone vàng xanh, ánh sáng tự nhiên, cảm giác sâu và dịu.",
+      "duration": 24,
+      "image_file": "3.png"
+    },
+    {
+      "scene": 4,
+      "title": "Khoảnh khắc hiểu ra",
+      "description": "Người học trò nhìn theo dòng nước uốn quanh tảng đá, gương mặt dần giãn ra, nụ cười nhẹ xuất hiện.",
+      "visual_style": "Ánh sáng ấm, tone trung tính, bố cục tập trung vào biểu cảm tĩnh và an nhiên.",
+      "duration": 24,
+      "image_file": "4.png"
+    },
+    {
+      "scene": 5,
+      "title": "Cảnh kết",
+      "description": "Dòng suối chảy xa, ánh sáng phản chiếu trên mặt nước. Tiếng nước và tiếng gió hòa vào nhau, khung hình fade-out chậm.",
+      "visual_style": "Tone sáng nhẹ, ánh vàng pha xanh, khung hình mở, cảm giác thanh thoát và bình yên.",
+      "duration": 24,
+      "image_file": "5.png"
+    }
+  ]
+}

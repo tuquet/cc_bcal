@@ -1,0 +1,47 @@
+{
+  "episode": 2,
+  "title": "Hỏi Thầy Một Câu - Chiếc Bát Vỡ - Tập 2",
+  "total_duration": 120,
+  "scenes": [
+    {
+      "scene": 1,
+      "title": "Chiều trong sân chùa",
+      "description": "Toàn cảnh sân gạch cũ dưới nắng hoàng hôn, học trò bước nhanh trên lối đá, ôm mảnh bát; máy pan nhẹ theo chuyển động.",
+      "visual_style": "Màu ấm vàng cam, cảm xúc bồi hồi, tone hoài niệm, bố cục toàn chuyển sang trung.",
+      "duration": 24,
+      "image_file": "1.png"
+    },
+    {
+      "scene": 2,
+      "title": "Phòng trà tĩnh",
+      "description": "Trung cảnh Thầy ngồi bên bàn trà gỗ, ánh sáng nghiêng qua cửa sổ tre; học trò quỳ phía trước đặt mảnh bát lên khăn.",
+      "visual_style": "Màu nâu gỗ be, tĩnh lặng, tone thiền, bố cục trung cân đối, ánh sáng mềm.",
+      "duration": 24,
+      "image_file": "2.png"
+    },
+    {
+      "scene": 3,
+      "title": "Lời Thầy như gió",
+      "description": "Cận gương mặt Thầy mỉm cười hiền; rèm tre khẽ lay, bụi sáng lơ lửng; máy giữ yên để nhấn câu nói.",
+      "visual_style": "Màu ấm vàng nhạt, cảm xúc sâu, bố cục cận tối giản, nhịp chậm.",
+      "duration": 24,
+      "image_file": "3.png"
+    },
+    {
+      "scene": 4,
+      "title": "Khoảnh khắc buông",
+      "description": "Cận tay học trò thả lỏng cạnh mảnh bát, ánh chiều hắt trên gốm vỡ; hơi thở dài giải tỏa; máy dolly-out rất chậm.",
+      "visual_style": "Màu trung tính ấm, cảm giác nhẹ, tone chấp nhận, bố cục cận sang trung.",
+      "duration": 24,
+      "image_file": "4.png"
+    },
+    {
+      "scene": 5,
+      "title": "Kết trong chuông xa",
+      "description": "Toàn cảnh phòng trà trống, khung tĩnh, mảnh bát nằm yên; âm chuông ngân, ánh sáng dần nhạt, fade-out.",
+      "visual_style": "Màu vàng nhạt, tone thiền vị, bố cục tối giản, kết êm.",
+      "duration": 24,
+      "image_file": "5.png"
+    }
+  ]
+}

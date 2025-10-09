@@ -1,21 +1,21 @@
 import fs from 'fs';
 import path from 'path';
 
-// Hàm đọc tất cả file JSON từ thư mục scripts
-function loadAllJsonFiles(scriptsDir = 'scrips') {
+// Hàm đọc tất cả file JSON từ thư mục data
+function loadAllJsonFiles(dataDir = 'data') {
   let allData = [];
   
-  if (!fs.existsSync(scriptsDir)) {
-    console.log(`❌ Thư mục ${scriptsDir} không tồn tại`);
+  if (!fs.existsSync(dataDir)) {
+    console.log(`❌ Thư mục ${dataDir} không tồn tại`);
     return allData;
   }
   
-  const files = fs.readdirSync(scriptsDir).filter(file => file.endsWith('.json'));
-  console.log(`📖 Tìm thấy ${files.length} file JSON trong thư mục ${scriptsDir}`);
+  const files = fs.readdirSync(dataDir).filter(file => file.endsWith('.json'));
+  console.log(`📖 Tìm thấy ${files.length} file JSON trong thư mục ${dataDir}`);
   
   files.forEach(file => {
     try {
-      const filePath = path.join(scriptsDir, file);
+      const filePath = path.join(dataDir, file);
       const jsonData = JSON.parse(fs.readFileSync(filePath, 'utf8'));
       
       if (Array.isArray(jsonData)) {
@@ -33,7 +33,7 @@ function loadAllJsonFiles(scriptsDir = 'scrips') {
   return allData;
 }
 
-// Đọc tất cả file JSON từ thư mục scripts
+// Đọc tất cả file JSON từ thư mục data
 const jsonData = loadAllJsonFiles();
 
 // Kiểm tra có dữ liệu không
@@ -65,11 +65,81 @@ jsonData.forEach((item, index) => {
   } else {
     console.log(`📁 Thư mục đã tồn tại: ${folderName}`);
   }
+
+  // Tạo production subfolders
+  const productionFolders = ['audio', 'images', 'output'];
+  productionFolders.forEach(folder => {
+    const subfolderPath = path.join(folderName, folder);
+    if (!fs.existsSync(subfolderPath)) {
+      fs.mkdirSync(subfolderPath, { recursive: true });
+      console.log(`📁 Đã tạo: ${folder}/`);
+    }
+  });
   
   // Tạo file content.json với toàn bộ thông tin của item
   const contentJsonPath = path.join(folderName, 'content.json');
   fs.writeFileSync(contentJsonPath, JSON.stringify(item, null, 2), 'utf8');
   console.log(`📄 Đã tạo file: ${contentJsonPath}`);
+  
+  // Tạo timing.json từ visual_prompts
+  const timingJsonPath = path.join(folderName, 'timing.json');
+  const timingData = {
+    episode: parseInt(episodeNumber),
+    title: item.title,
+    total_duration: item.visual_prompts.length * 24, // 24s per scene
+    scenes: item.visual_prompts.map((prompt, i) => ({
+      scene: i + 1,
+      title: prompt.title,
+      description: prompt.description,
+      visual_style: prompt.visual_style,
+      duration: 24, // seconds
+      image_file: `${i + 1}.png`
+    }))
+  };
+  fs.writeFileSync(timingJsonPath, JSON.stringify(timingData, null, 2), 'utf8');
+  console.log(`⏱️ Đã tạo file: timing.json`);
+
+  // Tạo production checklist
+  const checklistPath = path.join(folderName, 'production-checklist.md');
+  const checklistContent = `# 📋 Production Checklist - ${item.title}
+
+## Assets cần thiết:
+
+### 🎵 Audio
+- [ ] \`audio/voiceover.mp3\` - File audio chính (${Math.round(timingData.total_duration / 60)} phút)
+
+### 🖼️ Images  
+${item.visual_prompts.map((prompt, i) => `- [ ] \`images/${i + 1}.png\` - ${prompt.title}`).join('\n')}
+
+### 📝 Content
+- [x] \`content.json\` - Metadata đầy đủ
+- [x] \`content.txt\` - Script formatted  
+- [x] \`timing.json\` - Timing cho ${item.visual_prompts.length} scenes
+
+## 🎬 Video Generation
+
+### Test Video:
+\`\`\`bash
+npm run video:test ${episodeNumber}
+\`\`\`
+
+### Final Video (Ken Burns):
+\`\`\`bash  
+npm run video:final ${episodeNumber}
+\`\`\`
+
+### Tạo cả hai:
+\`\`\`bash
+npm run video:all ${episodeNumber}
+\`\`\`
+
+## 📊 Timeline
+- Total duration: ~${Math.round(timingData.total_duration / 60)} phút
+- Scenes: ${item.visual_prompts.length}
+- Average per scene: 24 giây
+`;
+  fs.writeFileSync(checklistPath, checklistContent, 'utf8');
+  console.log(`📋 Đã tạo file: production-checklist.md`);
   
   // Tạo file content.txt với script text được định dạng đẹp
   const contentTxtPath = path.join(folderName, 'content.txt');

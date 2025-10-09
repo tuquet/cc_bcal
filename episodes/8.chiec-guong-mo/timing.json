@@ -1,0 +1,47 @@
+{
+  "episode": 8,
+  "title": "Hỏi Thầy Một Câu - Chiếc Gương Mờ - Tập 8",
+  "total_duration": 120,
+  "scenes": [
+    {
+      "scene": 1,
+      "title": "Phòng thiền sáng sớm",
+      "description": "Ánh sáng dịu tràn qua khung cửa tre, bụi bay nhẹ trong không khí. Thầy và học trò ngồi đối diện.",
+      "visual_style": "Tone vàng be, ánh sáng mềm, không khí yên tĩnh.",
+      "duration": 24,
+      "image_file": "1.png"
+    },
+    {
+      "scene": 2,
+      "title": "Chiếc gương mờ bụi",
+      "description": "Cận cảnh gương phủ bụi trong tay học trò, ánh sáng phản chiếu lờ mờ hình bóng anh.",
+      "visual_style": "Tone lạnh nhẹ, ánh sáng dịu, bố cục cận cảnh tối giản.",
+      "duration": 24,
+      "image_file": "2.png"
+    },
+    {
+      "scene": 3,
+      "title": "Lau gương",
+      "description": "Học trò dùng tay áo nhẹ lau bụi, hạt bụi bay lấp lánh trong nắng; camera dolly-in chậm.",
+      "visual_style": "Tone vàng trắng, chuyển động mềm, cảm giác tinh khiết.",
+      "duration": 24,
+      "image_file": "3.png"
+    },
+    {
+      "scene": 4,
+      "title": "Gương sáng",
+      "description": "Gương trong phản chiếu gương mặt anh rõ nét; ánh sáng tràn khung, Thầy khẽ mỉm cười.",
+      "visual_style": "Tone sáng, ánh vàng nhẹ, bố cục trung cận.",
+      "duration": 24,
+      "image_file": "4.png"
+    },
+    {
+      "scene": 5,
+      "title": "Cảnh kết",
+      "description": "Ánh sáng phản chiếu trên gương sáng, khung tĩnh, âm thanh gió và chuông nhẹ dần.",
+      "visual_style": "Tone sáng nhẹ, kết tĩnh, cảm giác thanh sạch và bình yên.",
+      "duration": 24,
+      "image_file": "5.png"
+    }
+  ]
+}
