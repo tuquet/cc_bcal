@@ -13,7 +13,7 @@
     "video:final": "node scripts/video-generator.mjs final",
     "video:all": "node scripts/video-generator.mjs all",
     "video:batch": "node scripts/video-generator.mjs batch",
-    "align:batch": "node scripts/whisperx-batch.mjs",
+  "align:all": "node scripts/whisperx-batch.mjs . --scan-episodes",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

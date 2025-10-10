@@ -19,23 +19,27 @@ node scripts/whisperx-batch.mjs episodes/1.tam-nhu-mat-ho/audio --dry-run
 
 - Scan toàn bộ `episodes/*/audio` (dry-run):
 ```powershell
-node scripts/whisperx-batch.mjs dummy --scan-episodes --dry-run
+npm run align:all -- --dry-run
 ```
 
-- Chạy thực tế, yêu cầu GPU (serial):
+-- Chạy thực tế, yêu cầu GPU (serial):
 ```powershell
-node scripts/whisperx-batch.mjs dummy --scan-episodes --require-gpu
+npm run align:all -- --require-gpu
 ```
 
-- Chạy song song (cẩn thận với GPU trên máy chỉ có 1 GPU):
+-- Chạy song song (cẩn thận với GPU trên máy chỉ có 1 GPU):
 ```powershell
-node scripts/whisperx-batch.mjs dummy --scan-episodes --parallel 2
+npm run align:all -- --parallel 2
 ```
 
-- Nếu muốn ghi đè .srt hiện có:
+-- Nếu muốn ghi đè .srt hiện có:
 ```powershell
-node scripts/whisperx-batch.mjs dummy --scan-episodes --force
+npm run align:all -- --force
 ```
+
+WhisperX JSON output
+- The container aligner now writes a JSON file next to each audio file named `<base>.whisperx.json` (for example `episodes/2.chiec-bat-vo/audio/voiceover.whisperx.json`).
+- The batch script uses this JSON as input to `scripts/write-srt-from-outjson.mjs` to create the `.srt`. The JSON is kept for easy debugging.
 
 PowerShell helper
 - `run-whisperx.ps1` và `run-whisperx-batch.ps1` hỗ trợ tạo host cache (`%USERPROFILE%\.cache`) và chạy container với mount cache để tránh tải model lại.

@@ -102,10 +102,12 @@ function runJob(job){
     console.log('Processing', path.relative(repoRoot, job.mp3));
     if (opts.dryRun) return resolve({ ok: true, job, note: 'dry-run' });
 
-    const userProfile = process.env.USERPROFILE || process.env.HOME || '';
-    const hostCache = path.join(userProfile, '.cache');
-    const containerAudio = '/workspace/' + path.relative(repoRoot, job.mp3).replace(/\\/g, '/');
-    const tmpJson = '/workspace/.out-whisperx-' + job.base + '.json';
+  const userProfile = process.env.USERPROFILE || process.env.HOME || '';
+  const hostCache = path.join(userProfile, '.cache');
+  const containerAudio = '/workspace/' + path.relative(repoRoot, job.mp3).replace(/\\/g, '/');
+  // Write whisperx JSON next to the audio file so it's easy to debug and trace.
+  const hostTmpJson = path.join(path.dirname(job.mp3), job.base + '.whisperx.json');
+  const containerTmpJson = '/workspace/' + path.relative(repoRoot, hostTmpJson).replace(/\\/g, '/');
 
     const dockerArgs = ['run','--rm'];
     if (opts.requireGpu) dockerArgs.push('--gpus','all');
@@ -115,7 +117,7 @@ function runJob(job){
     dockerArgs.push('-e','TRANSFORMERS_CACHE=/root/.cache/huggingface');
     dockerArgs.push('-e','TORCH_HOME=/root/.cache/torch');
     dockerArgs.push('cc_bcal-whisperx');
-    dockerArgs.push('--audio', containerAudio, '--output', tmpJson);
+  dockerArgs.push('--audio', containerAudio, '--output', containerTmpJson);
     if (opts.requireGpu) dockerArgs.push('--require-gpu');
 
   console.log('DEBUG: docker', dockerArgs.join(' '));
@@ -131,26 +133,24 @@ function runJob(job){
         return resolve({ ok:false, job, code });
       }
       // convert json -> srt
-      const hostTmpJson = path.join(repoRoot, '.out-whisperx-' + job.base + '.json');
       if (!fs.existsSync(hostTmpJson)) {
         console.error('Expected json not found for', job.mp3, hostTmpJson);
         return resolve({ ok:false, job, err: 'json missing', expected: hostTmpJson });
       }
       console.log('DEBUG: Converting json -> srt for', hostTmpJson);
-  const nodeProc = spawn(process.execPath, ['scripts/write-srt-from-outjson.mjs', hostTmpJson, path.dirname(job.mp3), job.base], { stdio: 'inherit' });
+      const nodeProc = spawn(process.execPath, ['scripts/write-srt-from-outjson.mjs', hostTmpJson, path.dirname(job.mp3), job.base], { stdio: 'inherit' });
       nodeProc.on('error', (err)=> {
         console.error('Error running write-srt for', hostTmpJson, err && err.message ? err.message : err);
         return resolve({ ok:false, job, err: err && err.message ? err.message : err });
       });
       nodeProc.on('close', (c2)=>{
-        // cleanup
-        try { fs.unlinkSync(hostTmpJson); } catch(e){}
         if (c2 !== 0) {
           console.error('write-srt exited with code', c2, 'for', hostTmpJson);
           return resolve({ ok:false, job, code: c2 });
         }
         console.log('Completed job for', path.relative(repoRoot, job.mp3));
-        return resolve({ ok:true, job });
+        // Keep the .whisperx.json next to the audio for debugging/inspection.
+        return resolve({ ok:true, job, json: hostTmpJson });
       });
     });
   });
