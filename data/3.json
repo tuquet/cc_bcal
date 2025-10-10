@@ -1,0 +1,53 @@
+{
+  "title": "Hỏi Thầy Một Câu - Bông Hoa Và Cái Nhìn - Tập 3",
+  "hook": "Cảnh không đổi, chỉ có tâm ta đổi.",
+  "alias": "bong-hoa-va-cai-nhin",
+  "tag": ["thiền", "chánh niệm", "tâm an"],
+  "visual_prompts": [
+    {
+      "scene": 1,
+      "title": "Sáng nghiêng qua mái ngói",
+      "description": "Máy toàn cảnh hiên chùa buổi sáng; nắng xiên qua mái ngói; học trò ngồi đối diện Thầy, vẻ trĩu nặng.",
+      "visual_style": "Màu sáng dịu vàng trắng, cảm xúc trầm, tone thiền, bố cục toàn sang trung.",
+      "text": "Một người tìm đến Thầy, kể rằng đi đâu cũng thấy phiền não; mọi thứ như phủ một lớp bụi xám khiến anh không thấy điều gì đẹp đẽ.",
+      "start": 0,
+      "end": 15
+    },
+    {
+      "scene": 2,
+      "title": "Bông hoa héo",
+      "description": "Cận bông hoa khô trong tay Thầy; máy giữ yên để thấy đường gân; nền mờ là phòng gỗ giản dị.",
+      "visual_style": "Màu trung tính, ánh sáng tự nhiên, bố cục cận tối giản, tĩnh.",
+      "text": "Thầy đưa cho anh một bông hoa đã héo, cánh khô cong. Thầy hỏi: 'Con thấy gì?' Anh đáp: 'Một bông hoa sắp tàn.'",
+      "start": 15,
+      "end": 35
+    },
+    {
+      "scene": 3,
+      "title": "Đặt bên cửa sổ",
+      "description": "Trung cảnh Thầy đặt hoa lên bậu cửa, nắng chiếu, bụi lơ lửng lấp lánh; camera dolly-in rất chậm.",
+      "visual_style": "Màu ấm vàng, cảm xúc mở, tone trong trẻo, bố cục trung cân.",
+      "text": "Thầy đặt hoa lên bậu cửa sổ; nắng chiếu, bụi trong không khí bỗng sáng lên, những gân mảnh trên cánh hoa hiện ra tinh tế.",
+      "start": 35,
+      "end": 55
+    },
+    {
+      "scene": 4,
+      "title": "Đổi cái nhìn",
+      "description": "Cận biểu cảm người học trò; ánh sáng phản chiếu trong mắt; miệng khẽ mỉm; nền là bông hoa héo sáng lên.",
+      "visual_style": "Màu ấm, cảm giác giác ngộ, bố cục cận với depth-of-field mềm.",
+      "text": "Thầy hỏi: 'Bây giờ con thấy gì?' Anh ngập ngừng: 'Con thấy ánh sáng đẹp.' Thầy gật đầu: 'Cảnh không đổi, chỉ tâm con đổi.'",
+      "start": 55,
+      "end": 75
+    },
+    {
+      "scene": 5,
+      "title": "Nắng trên cánh hoa",
+      "description": "Cận chi tiết cánh hoa héo trong nắng, khung hình tĩnh; fade-out chậm theo luồng bụi sáng.",
+      "visual_style": "Màu vàng trắng, tone yên bình, bố cục tối giản, nhịp chậm.",
+      "text": "Người học trò im lặng; anh nhận ra rằng không cần thay đổi cuộc đời, chỉ cần thay đổi cách nhìn. Bông hoa vẫn héo, nhưng nắng làm nó dịu dàng.",
+      "start": 75,
+      "end": 95
+    }
+  ]
+}

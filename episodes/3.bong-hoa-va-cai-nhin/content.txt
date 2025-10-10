@@ -1,41 +1,19 @@
-TIÊU ĐỀ: Hỏi Thầy Một Câu - Bông Hoa Và Cái Nhìn - Tập 3
+Một người tìm đến Thầy, kể rằng đi đâu cũng thấy phiền não; mọi thứ như phủ một lớp bụi xám khiến anh không thấy điều gì đẹp đẽ.
 
-HOOK: Cảnh không đổi, chỉ có tâm ta đổi.
+Thầy đưa cho anh một bông hoa đã héo, cánh khô cong.
 
-ALIAS: bong-hoa-va-cai-nhin
+Thầy hỏi:
 
-TAGS: thiền, chánh niệm, tâm an
+'Con thấy gì?' Anh đáp:
 
-SCRIPT:
-Một người tìm đến Thầy, lời kể đầy mùi mệt mỏi rằng gần đây đi đâu cũng thấy phiền não, mọi thứ như phủ một lớp bụi xám, anh chẳng còn thấy điều gì đẹp đẽ, và chính ý nghĩ ấy lại làm anh thêm chán chường.
+'Một bông hoa sắp tàn.' Thầy đặt hoa lên bậu cửa sổ; nắng chiếu, bụi trong không khí bỗng sáng lên, những gân mảnh trên cánh hoa hiện ra tinh tế.
 
-Thầy không vội an ủi, chỉ đưa cho anh một bông hoa đã héo, cánh khô cong, sắc đã tàn, hỏi con thấy gì, anh đáp, một bông hoa sắp tàn.
+Thầy hỏi:
 
-Thầy đặt bông hoa lên bậu cửa sổ nơi ánh nắng đang rọi vào, bụi nhỏ trong không khí bỗng sáng lên lấp lánh, những gân mảnh trên cánh hoa hiện ra tinh tế, Thầy hỏi, bây giờ con thấy gì, anh ngập ngừng, con thấy ánh sáng đẹp.
+'Bây giờ con thấy gì?' Anh ngập ngừng:
 
-Thầy gật đầu, cảnh không đổi, chỉ tâm con đổi.
+'Con thấy ánh sáng đẹp.' Thầy gật đầu:
 
-Người học trò im lặng, anh chợt hiểu rằng nhiều khi ta không cần thay đổi cuộc đời, chỉ cần thay đổi cách nhìn, lau một lớp bụi trên kính và mở một khung cửa cho ánh sáng đi vào.
+'Cảnh không đổi, chỉ tâm con đổi.' Người học trò im lặng; anh nhận ra rằng không cần thay đổi cuộc đời, chỉ cần thay đổi cách nhìn.
 
-Bông hoa vẫn héo, nhưng nắng làm nó trở nên dịu dàng, như cuộc đời vẫn vậy mà lòng ta đã khác.
-
-VISUAL PROMPTS:
-Scene 1: Sáng nghiêng qua mái ngói
-  Mô tả: Máy toàn cảnh hiên chùa buổi sáng; nắng xiên qua mái ngói; học trò ngồi đối diện Thầy, vẻ trĩu nặng.
-  Style: Màu sáng dịu vàng trắng, cảm xúc trầm, tone thiền, bố cục toàn sang trung.
-
-Scene 2: Bông hoa héo
-  Mô tả: Cận bông hoa khô trong tay Thầy; máy giữ yên để thấy đường gân; nền mờ là phòng gỗ giản dị.
-  Style: Màu trung tính, ánh sáng tự nhiên, bố cục cận tối giản, tĩnh.
-
-Scene 3: Đặt bên cửa sổ
-  Mô tả: Trung cảnh Thầy đặt hoa lên bậu cửa, nắng chiếu, bụi lơ lửng lấp lánh; camera dolly-in rất chậm.
-  Style: Màu ấm vàng, cảm xúc mở, tone trong trẻo, bố cục trung cân.
-
-Scene 4: Đổi cái nhìn
-  Mô tả: Cận biểu cảm người học trò; ánh sáng phản chiếu trong mắt; miệng khẽ mỉm; nền là bông hoa héo sáng lên.
-  Style: Màu ấm, cảm giác giác ngộ, bố cục cận với depth-of-field mềm.
-
-Scene 5: Nắng trên cánh hoa
-  Mô tả: Cận chi tiết cánh hoa héo trong nắng, khung hình tĩnh; fade-out chậm theo luồng bụi sáng.
-  Style: Màu vàng trắng, tone yên bình, bố cục tối giản, nhịp chậm.
+Bông hoa vẫn héo, nhưng nắng làm nó dịu dàng.

@@ -1,0 +1,53 @@
+{
+  "title": "Hỏi Thầy Một Câu - Dòng Nước Và Tảng Đá - Tập 7",
+  "hook": "Khi không chống lại, nước cũng vượt qua được đá.",
+  "alias": "dong-nuoc-va-tang-da",
+  "tag": ["thiền", "buông bỏ", "nhẫn nại"],
+  "visual_prompts": [
+    {
+      "scene": 1,
+      "title": "Con suối trong rừng",
+      "description": "Ánh nắng xuyên tán lá, dòng suối uốn quanh tảng đá phủ rêu.",
+      "visual_style": "Tone xanh lam và be sáng",
+      "text": "Người học trò than: 'Thưa Thầy, con cố gắng mà vẫn gặp trở ngại như chướng trước mặt.'",
+      "start": 0,
+      "end": 15
+    },
+    {
+      "scene": 2,
+      "title": "Nước gặp đá",
+      "description": "Dòng nước chảy quanh tảng đá, mềm mại nhưng liên tục.",
+      "visual_style": "Cận cảnh chậm, ánh sáng lung linh",
+      "text": "Thầy dẫn anh ra suối; dòng nước chảy quanh tảng đá, nhẹ nhàng mà không dừng lại.",
+      "start": 15,
+      "end": 35
+    },
+    {
+      "scene": 3,
+      "title": "Thầy chỉ dạy",
+      "description": "Thầy nhìn dòng suối, giọng trầm ấm; người học trò lắng nghe.",
+      "visual_style": "Tone vàng xanh, ánh sáng tự nhiên",
+      "text": "Thầy nói: 'Nước không tranh với đá, nó tìm lối khác để đi tiếp. Vì không tranh, nên chẳng bao giờ dừng.'",
+      "start": 35,
+      "end": 55
+    },
+    {
+      "scene": 4,
+      "title": "Khoảnh khắc hiểu ra",
+      "description": "Người học trò nhìn theo dòng nước, gương mặt dần thư giãn.",
+      "visual_style": "Ánh sáng ấm, cảm giác nhẹ nhàng",
+      "text": "Người học trò lặng im, nhận ra sức mạnh ở chỗ mềm dẻo và kiên trì, không phải ở chỗ đối đầu." ,
+      "start": 55,
+      "end": 75
+    },
+    {
+      "scene": 5,
+      "title": "Cảnh kết",
+      "description": "Dòng suối chảy xa, ánh sáng phản chiếu; khung hình fade-out.",
+      "visual_style": "Tone sáng nhẹ, cảm giác thanh thoát",
+      "text": "Tiếng suối róc rách như lời dạy còn ngân mãi trong lòng anh.",
+      "start": 75,
+      "end": 95
+    }
+  ]
+}

@@ -1,43 +1,19 @@
-TIÊU ĐỀ: Hỏi Thầy Một Câu - Chiếc Bát Vỡ - Tập 2
+Chiều muộn, người đệ tử ôm vội vào lòng những mảnh gốm sứ, thở hổn hển gọi Thầy, giọng run run xin lỗi vì đã lỡ làm vỡ chiếc bát quý.
 
-HOOK: Biết rằng mọi thứ rồi sẽ vỡ, ta mới trân trọng khi còn nguyên.
+Thầy nhìn anh, ánh mắt bình yên như mặt hồ sau gió.
 
-ALIAS: chiec-bat-vo
+Thầy nói chậm:
 
-TAGS: thiền, vô thường, buông bỏ
+'Ta đã biết nó vỡ từ ngày con mang nó về.' Người đệ tử sửng sốt:
 
-SCRIPT:
-Chiều muộn, người đệ tử ôm vội vào lòng những mảnh gốm sứ, thở hổn hển gọi Thầy, giọng run run xin lỗi vì đã lỡ làm vỡ chiếc bát mình quý nhất, thứ anh vẫn lau chùi mỗi ngày như một nghi thức giữ gìn bình yên.
+'Sao Thầy biết?' Thầy mỉm cười:
 
-Thầy nhìn anh, ánh mắt bình yên như mặt hồ sau gió, Thầy nói chậm mà rõ, ta đã biết nó vỡ từ ngày con mang nó về.
+'Mọi vật sinh ra đều mang mầm tan vỡ; biết vậy, con sẽ trân trọng từng phút nó còn nguyên.' Gió đi qua hành lang, mùi trà thoảng lên.
 
-Người đệ tử sửng sốt, sao Thầy biết, Thầy mỉm cười, bởi mọi vật sinh ra đều đã mang mầm tan vỡ, biết như thế, con sẽ thương từng phút nó còn nguyên.
+Người đệ tử ngồi, mảnh bát nằm yên trên khăn; tay anh thả lỏng, như thể nắm tay lâu đã mỏi.
 
-Gió đi qua hành lang gỗ, mùi trà thoảng lên, tiếng chuông xa rơi xuống khoảng chiều nhạt nét.
+Anh chợt hiểu:
 
-Người đệ tử ngồi xuống, những mảnh bát nằm yên trên khăn vải thô, tay anh bỗng thả lỏng, như thể nắm tay lâu nay đã mỏi.
+không có bình yên nào đến từ việc siết chặt; bình yên đến khi ta trân trọng mà không buộc ràng.
 
-Anh chợt hiểu, không có bình yên nào đến từ việc nắm giữ, bình yên đến khi ta trân trọng mà không buộc ràng, khi ta ngắm một đóa hoa đang nở dù biết ngày mai nó sẽ tàn, khi ta yêu một người bằng trái tim rộng chứ không phải bằng bàn tay siết chặt.
-
-Trong sự hiểu ấy, nỗi tiếc nuối bỗng nhẹ như hơi thở.
-
-VISUAL PROMPTS:
-Scene 1: Chiều trong sân chùa
-  Mô tả: Toàn cảnh sân gạch cũ dưới nắng hoàng hôn, học trò bước nhanh trên lối đá, ôm mảnh bát; máy pan nhẹ theo chuyển động.
-  Style: Màu ấm vàng cam, cảm xúc bồi hồi, tone hoài niệm, bố cục toàn chuyển sang trung.
-
-Scene 2: Phòng trà tĩnh
-  Mô tả: Trung cảnh Thầy ngồi bên bàn trà gỗ, ánh sáng nghiêng qua cửa sổ tre; học trò quỳ phía trước đặt mảnh bát lên khăn.
-  Style: Màu nâu gỗ be, tĩnh lặng, tone thiền, bố cục trung cân đối, ánh sáng mềm.
-
-Scene 3: Lời Thầy như gió
-  Mô tả: Cận gương mặt Thầy mỉm cười hiền; rèm tre khẽ lay, bụi sáng lơ lửng; máy giữ yên để nhấn câu nói.
-  Style: Màu ấm vàng nhạt, cảm xúc sâu, bố cục cận tối giản, nhịp chậm.
-
-Scene 4: Khoảnh khắc buông
-  Mô tả: Cận tay học trò thả lỏng cạnh mảnh bát, ánh chiều hắt trên gốm vỡ; hơi thở dài giải tỏa; máy dolly-out rất chậm.
-  Style: Màu trung tính ấm, cảm giác nhẹ, tone chấp nhận, bố cục cận sang trung.
-
-Scene 5: Kết trong chuông xa
-  Mô tả: Toàn cảnh phòng trà trống, khung tĩnh, mảnh bát nằm yên; âm chuông ngân, ánh sáng dần nhạt, fade-out.
-  Style: Màu vàng nhạt, tone thiền vị, bố cục tối giản, kết êm.
+Nỗi tiếc bỗng nhẹ như hơi thở.

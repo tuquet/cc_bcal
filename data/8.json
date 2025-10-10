@@ -1,0 +1,53 @@
+{
+  "title": "Hỏi Thầy Một Câu - Chiếc Gương Mờ - Tập 8",
+  "hook": "Tâm không trong, cảnh nào cũng mờ.",
+  "alias": "chiec-guong-mo",
+  "tag": ["thiền", "tâm sáng", "chánh niệm"],
+  "visual_prompts": [
+    {
+      "scene": 1,
+      "title": "Phòng thiền sáng sớm",
+      "description": "Ánh sáng dịu tràn qua khung cửa tre, bụi bay trong không khí.",
+      "visual_style": "Tone vàng be, ánh sáng mềm",
+      "text": "Người học trò than: 'Thưa Thầy, con thấy ai cũng sai, chỉ mình con đúng, nhưng lòng vẫn bất an.'",
+      "start": 0,
+      "end": 15
+    },
+    {
+      "scene": 2,
+      "title": "Chiếc gương mờ bụi",
+      "description": "Cận cảnh gương phủ bụi; hình bóng mờ của anh hiện lên.",
+      "visual_style": "Tone lạnh nhẹ, ánh sáng dịu",
+      "text": "Thầy đưa cho anh một chiếc gương phủ bụi và nói: 'Con lau đi.'",
+      "start": 15,
+      "end": 35
+    },
+    {
+      "scene": 3,
+      "title": "Lau gương",
+      "description": "Học trò lau bụi, hạt bụi bay lấp lánh trong nắng.",
+      "visual_style": "Tone vàng trắng, chuyển động mềm",
+      "text": "Anh lau gương; lớp bụi dần biến mất, gương sáng lên phản chiếu rõ khuôn mặt mình.",
+      "start": 35,
+      "end": 55
+    },
+    {
+      "scene": 4,
+      "title": "Gương sáng",
+      "description": "Gương trong phản chiếu gương mặt anh rõ nét; Thầy mỉm cười.",
+      "visual_style": "Tone sáng, ánh vàng nhẹ",
+      "text": "Thầy hỏi: 'Con thấy gì?' Anh đáp: 'Con thấy chính mình.' Thầy nói: 'Khi gương sáng, con thấy rõ tâm mình.'",
+      "start": 55,
+      "end": 75
+    },
+    {
+      "scene": 5,
+      "title": "Cảnh kết",
+      "description": "Ánh sáng phản chiếu trên gương sáng, khung tĩnh, âm thanh dịu dần.",
+      "visual_style": "Tone sáng nhẹ, cảm giác thanh sạch",
+      "text": "Người học trò cúi đầu, lòng như vừa được rửa sạch; một nụ cười nhẹ nở trên môi.",
+      "start": 75,
+      "end": 95
+    }
+  ]
+}

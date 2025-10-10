@@ -1,59 +1,19 @@
-TIÊU ĐỀ: Hỏi Thầy Một Câu - Tiếng Chuông Sáng Sớm - Tập 6
-
-HOOK: Khi thôi tìm ý nghĩa của tiếng chuông, ta nghe được chính sự tĩnh lặng trong lòng.
-
-ALIAS: tieng-chuong-sang-som
-
-TAGS: thiền, tĩnh tâm, chánh niệm
-
-SCRIPT:
 Một buổi sớm, người học trò hỏi Thầy:
 
 'Thưa Thầy, con ngồi thiền mỗi ngày mà tâm vẫn chưa thấy tánh.
 
-Con phải làm gì để thấy?
+Con phải làm gì để thấy?' Thầy im lặng, ra hiệu cho anh lắng nghe.
 
-Thầy không trả lời, chỉ ra hiệu cho anh lắng nghe.
+Không gian im như hơi thở; rồi tiếng chuông vang lên, ngân dài qua thung lũng.
 
-Không gian im lặng, sương giăng mờ quanh chùa.
+Tiếng chuông ngân, kéo dài; không gian như dừng lại.
 
-Bỗng tiếng chuông vang lên, ngân dài qua thung lũng, nhẹ như hơi thở sáng sớm.
+Sau một lúc, Thầy hỏi:
 
-Một lúc sau, Thầy hỏi:
+'Con nghe gì?' Người học trò đáp:
 
-'Con nghe gì?
+'Tiếng chuông.' Thầy nói:
 
-Người học trò đáp:
+'Khi con còn tìm ý nghĩa, con chưa thật sự nghe.
 
-'Tiếng chuông.'
-
-Thầy mỉm cười:
-
-'Khi con còn tìm ý nghĩa trong tiếng chuông, con chưa thật sự nghe nó.
-
-Khi con chỉ nghe mà không nghĩ, lúc ấy tâm con đã sáng.'
-
-Người học trò lặng yên.
-
-Tiếng chuông vẫn ngân, mà trong lòng anh, mọi thứ trở nên tĩnh lặng và trong suốt như mặt hồ không gợn sóng.
-
-VISUAL PROMPTS:
-Scene 1: Bình minh trong sương
-  Mô tả: Khung cảnh sương mờ phủ quanh ngôi chùa nhỏ trên núi. Người học trò và Thầy ngồi thiền dưới hiên, ánh sáng đầu ngày len qua hàng tre, không gian tĩnh lặng.
-  Style: Tone xanh lam pha vàng nhạt, ánh sáng dịu, cảm giác yên bình và tinh khôi.
-
-Scene 2: Tiếng chuông vang lên
-  Mô tả: Cận cảnh bàn tay Thầy gõ nhẹ vào chiếc chuông đồng, sóng âm lan ra trong không gian sương mờ, gợn nhẹ trong không khí.
-  Style: Tone sáng lạnh, chuyển động chậm, gợi cảm giác lan tỏa và thiền định.
-
-Scene 3: Người học trò lắng nghe
-  Mô tả: Người học trò nhắm mắt, hơi thở chậm, ánh sáng phản chiếu lên gương mặt tĩnh tại. Không gian như ngừng lại.
-  Style: Tone ấm vàng, ánh sáng tự nhiên, bố cục cận cảnh, cảm giác an nhiên.
-
-Scene 4: Lời Thầy
-  Mô tả: Thầy khẽ mỉm cười, giọng trầm và nhẹ. Ánh sáng rọi qua lớp sương, hắt lên gương mặt hiền từ và trầm tĩnh.
-  Style: Tone vàng nhạt, ánh sáng mềm, khung hình trung cận, không khí sâu và tĩnh.
-
-Scene 5: Cảnh kết
-  Mô tả: Tiếng chuông ngân dài, sương tan dần, ánh nắng phủ lên sân chùa. Người học trò cúi đầu, môi khẽ cười, ánh sáng tràn ngập khung hình.
-  Style: Tone vàng trắng, khung hình mở, cảm giác thanh thản, trong trẻo và tĩnh lặng.
+Khi con chỉ nghe mà không nghĩ, tâm con đã sáng.' Tiếng chuông vẫn ngân; trong lòng anh, mọi thứ trở nên tĩnh lặng và trong suốt như mặt hồ không gợn sóng.

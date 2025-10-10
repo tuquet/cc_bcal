@@ -1,0 +1,53 @@
+{
+  "title": "Hỏi Thầy Một Câu - Chiếc Bát Vỡ - Tập 2",
+  "hook": "Biết rằng mọi thứ rồi sẽ vỡ, ta mới trân trọng khi còn nguyên.",
+  "alias": "chiec-bat-vo",
+  "tag": ["thiền", "vô thường", "buông bỏ"],
+  "visual_prompts": [
+    {
+      "scene": 1,
+      "title": "Chiều trong sân chùa",
+      "description": "Toàn cảnh sân gạch cũ dưới nắng hoàng hôn, học trò bước nhanh trên lối đá, ôm mảnh bát; máy pan nhẹ theo chuyển động.",
+      "visual_style": "Màu ấm vàng cam, cảm xúc bồi hồi, tone hoài niệm, bố cục toàn chuyển sang trung.",
+      "text": "Chiều muộn, người đệ tử ôm vội vào lòng những mảnh gốm sứ, thở hổn hển gọi Thầy, giọng run run xin lỗi vì đã lỡ làm vỡ chiếc bát quý.",
+      "start": 0,
+      "end": 20
+    },
+    {
+      "scene": 2,
+      "title": "Phòng trà tĩnh",
+      "description": "Trung cảnh Thầy ngồi bên bàn trà gỗ, ánh sáng nghiêng qua cửa sổ tre; học trò quỳ phía trước đặt mảnh bát lên khăn.",
+      "visual_style": "Màu nâu gỗ be, tĩnh lặng, tone thiền, bố cục trung cân đối, ánh sáng mềm.",
+      "text": "Thầy nhìn anh, ánh mắt bình yên như mặt hồ sau gió. Thầy nói chậm: 'Ta đã biết nó vỡ từ ngày con mang nó về.'",
+      "start": 20,
+      "end": 40
+    },
+    {
+      "scene": 3,
+      "title": "Lời Thầy như gió",
+      "description": "Cận gương mặt Thầy mỉm cười hiền; rèm tre khẽ lay, bụi sáng lơ lửng; máy giữ yên để nhấn câu nói.",
+      "visual_style": "Màu ấm vàng nhạt, cảm xúc sâu, bố cục cận tối giản, nhịp chậm.",
+      "text": "Người đệ tử sửng sốt: 'Sao Thầy biết?' Thầy mỉm cười: 'Mọi vật sinh ra đều mang mầm tan vỡ; biết vậy, con sẽ trân trọng từng phút nó còn nguyên.'",
+      "start": 40,
+      "end": 60
+    },
+    {
+      "scene": 4,
+      "title": "Khoảnh khắc buông",
+      "description": "Cận tay học trò thả lỏng cạnh mảnh bát, ánh chiều hắt trên gốm vỡ; hơi thở dài giải tỏa; máy dolly-out rất chậm.",
+      "visual_style": "Màu trung tính ấm, cảm giác nhẹ, tone chấp nhận, bố cục cận sang trung.",
+      "text": "Gió đi qua hành lang, mùi trà thoảng lên. Người đệ tử ngồi, mảnh bát nằm yên trên khăn; tay anh thả lỏng, như thể nắm tay lâu đã mỏi.",
+      "start": 60,
+      "end": 80
+    },
+    {
+      "scene": 5,
+      "title": "Kết trong chuông xa",
+      "description": "Toàn cảnh phòng trà trống, khung tĩnh, mảnh bát nằm yên; âm chuông ngân, ánh sáng dần nhạt, fade-out.",
+      "visual_style": "Màu vàng nhạt, tone thiền vị, bố cục tối giản, kết êm.",
+      "text": "Anh chợt hiểu: không có bình yên nào đến từ việc siết chặt; bình yên đến khi ta trân trọng mà không buộc ràng. Nỗi tiếc bỗng nhẹ như hơi thở.",
+      "start": 80,
+      "end": 100
+    }
+  ]
+}
