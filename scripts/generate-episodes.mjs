@@ -55,22 +55,6 @@ jsonData.forEach((item, index) => {
 
   fs.writeFileSync(contentTxtPath, txtContent, 'utf8');
   console.log(`📝 Đã tạo file: ${contentTxtPath}`);
-
-  // Tạo file subtitle .str từ visual_prompts
-  if (Array.isArray(item.visual_prompts)) {
-    // secToSRT is imported from ./utils.mjs
-
-    let strContent = '';
-    item.visual_prompts.forEach((seg, idx) => {
-      if (!seg.text) return;
-      strContent += `${idx + 1}\n`;
-      strContent += `${secToSRT(seg.start)} --> ${secToSRT(seg.end)}\n`;
-      strContent += `${seg.text}\n\n`;
-    });
-  const strPath = path.join(folderName, `${item.alias}.srt`);
-    fs.writeFileSync(strPath, strContent.trim(), 'utf8');
-    console.log(`🎬 Đã tạo file subtitle: ${strPath}`);
-  }
 });
 
 console.log('\n🎉 Hoàn thành tạo cấu trúc thư mục và file!');

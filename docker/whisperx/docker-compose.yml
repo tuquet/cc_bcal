@@ -1,0 +1,12 @@
+version: '3.8'
+services:
+  whisperx-aligner:
+    build:
+      context: ../..
+      dockerfile: docker/whisperx/Dockerfile
+    runtime: nvidia
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+    volumes:
+      - ../../:/workspace:cached
+    command: ["--help"]
