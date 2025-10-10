@@ -1,22 +1,28 @@
-# WhisperX Docker (gpu)
+# WhisperX Docker (GPU)
 
-This folder contains the Dockerfile and helper files to build a GPU-capable container that runs the project's `scripts/whisperx_align.py` script.
+Thư mục này chứa `Dockerfile` và các tập trợ giúp để xây dựng một container có hỗ trợ GPU, dùng để chạy script `scripts/whisperx_align.py` của dự án.
 
-Build (run from repo root):
+Cách build (chạy từ thư mục gốc của repo):
 
 ```bash
 docker build -t cc_bcal-whisperx -f docker/whisperx/Dockerfile .
 ```
 
-Run (example):
+Ví dụ lệnh chạy container:
 
 ```bash
 docker run --gpus all --rm -v "$(pwd):/workspace" cc_bcal-whisperx --audio /workspace/episodes/1.tam-nhu-mat-ho/audio/voiceover.mp3 --output /workspace/out-whisperx.json
 ```
 
-Or using docker-compose from this folder:
+Ghi chú:
+- Tùy theo shell trên Windows, bạn có thể thay `$(pwd)` bằng `${PWD}` trong PowerShell khi mount volume.
+- Lệnh trên sẽ chạy script alignment bên trong container; kết quả JSON sẽ được ghi ra `out-whisperx.json` trong thư mục gốc (vì chúng ta mount repo vào `/workspace`).
+
+Hoặc sử dụng docker-compose từ thư mục này:
 
 ```bash
 cd docker/whisperx
 docker compose up --build
 ```
+
+Nếu cần hướng dẫn thêm (ví dụ mount cache Hugging Face để tránh tải lại model, hoặc chạy nhiều audio hàng loạt), xem README chính của repo hoặc sử dụng các script trong thư mục `scripts/`.

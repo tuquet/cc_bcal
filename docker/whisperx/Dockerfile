@@ -8,6 +8,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
  && rm -rf /var/lib/apt/lists/*
 
 RUN ln -s /usr/bin/python3.11 /usr/bin/python || true
+# Ensure `python3` also points to python3.11 so `python3 -m pip` and runtime imports use the
+# same interpreter. This avoids packages being installed for a different python binary.
+RUN ln -sf /usr/bin/python3.11 /usr/bin/python3 || true
 # Ensure pip for python3.11 is available
 RUN python -m pip install --upgrade pip setuptools wheel || python3 -m pip install --upgrade pip setuptools wheel
 

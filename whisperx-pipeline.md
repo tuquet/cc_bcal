@@ -3,7 +3,7 @@
 Tập hợp nhanh các lệnh và cách dùng để chạy pipeline dựa trên Docker + Node mà repo đã cung cấp.
 
 Mục tiêu
-- Dùng Docker image `cc_bcal-whisperx` để chạy Whisper + WhisperX alignment trên audio (.mp3).
+- Dùng Docker image `cc_bcal-whisperx` đã build để chạy Whisper + WhisperX alignment trên audio (.mp3).
 - Dùng Node script `scripts/whisperx-batch.mjs` để chạy batch, scan `episodes/*/audio`, chuyển `.mp3` -> `.srt`.
 
 Chuẩn bị

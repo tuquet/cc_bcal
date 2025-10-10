@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import fs from 'fs';
 import path from 'path';
-import { spawnSync } from 'child_process';
+import { spawn } from 'child_process';
 
 function usage(){
   console.log('Usage: node scripts/whisperx-batch.mjs <audioFolder> [--pattern "*.mp3"] [--require-gpu] [--force] [--dry-run] [--parallel N]');
@@ -96,11 +96,11 @@ if (opts.requireGpu && opts.parallel > 1){
   console.warn('Warning: --require-gpu with parallel>1 may overload a single GPU or cause conflicts. Proceed with caution.');
 }
 
-// Helper to run one job (returns a Promise)
+// Helper to run one job (returns a Promise that always resolves to a result object)
 function runJob(job){
-  return new Promise((resolve, reject)=>{
-    console.log('Processing', job.fname);
-    if (opts.dryRun) return resolve({ ok: true, job });
+  return new Promise((resolve)=>{
+    console.log('Processing', path.relative(repoRoot, job.mp3));
+    if (opts.dryRun) return resolve({ ok: true, job, note: 'dry-run' });
 
     const userProfile = process.env.USERPROFILE || process.env.HOME || '';
     const hostCache = path.join(userProfile, '.cache');
@@ -118,21 +118,39 @@ function runJob(job){
     dockerArgs.push('--audio', containerAudio, '--output', tmpJson);
     if (opts.requireGpu) dockerArgs.push('--require-gpu');
 
-    const spawn = require('child_process').spawn;
-    const proc = spawn('docker', dockerArgs, { stdio: 'inherit' });
-    proc.on('error', (err)=> reject({ ok:false, job, err }));
+  console.log('DEBUG: docker', dockerArgs.join(' '));
+  const proc = spawn('docker', dockerArgs, { stdio: 'inherit' });
+
+    proc.on('error', (err)=> {
+      console.error('Docker spawn error for', job.mp3, err && err.message ? err.message : err);
+      return resolve({ ok:false, job, err: err && err.message ? err.message : err });
+    });
     proc.on('close', (code)=>{
-      if (code !== 0) return reject({ ok:false, job, code });
+      if (code !== 0) {
+        console.error(`Docker exited with code ${code} for ${job.mp3}`);
+        return resolve({ ok:false, job, code });
+      }
       // convert json -> srt
       const hostTmpJson = path.join(repoRoot, '.out-whisperx-' + job.base + '.json');
-      if (!fs.existsSync(hostTmpJson)) return reject({ ok:false, job, err: new Error('json missing') });
-      const nodeProc = spawn(process.execPath, ['scripts/write-srt-from-outjson.mjs', hostTmpJson, path.dirname(job.mp3), job.base], { stdio: 'inherit' });
-      nodeProc.on('error', (err)=> reject({ ok:false, job, err }));
+      if (!fs.existsSync(hostTmpJson)) {
+        console.error('Expected json not found for', job.mp3, hostTmpJson);
+        return resolve({ ok:false, job, err: 'json missing', expected: hostTmpJson });
+      }
+      console.log('DEBUG: Converting json -> srt for', hostTmpJson);
+  const nodeProc = spawn(process.execPath, ['scripts/write-srt-from-outjson.mjs', hostTmpJson, path.dirname(job.mp3), job.base], { stdio: 'inherit' });
+      nodeProc.on('error', (err)=> {
+        console.error('Error running write-srt for', hostTmpJson, err && err.message ? err.message : err);
+        return resolve({ ok:false, job, err: err && err.message ? err.message : err });
+      });
       nodeProc.on('close', (c2)=>{
         // cleanup
         try { fs.unlinkSync(hostTmpJson); } catch(e){}
-        if (c2 !== 0) return reject({ ok:false, job, code: c2 });
-        resolve({ ok:true, job });
+        if (c2 !== 0) {
+          console.error('write-srt exited with code', c2, 'for', hostTmpJson);
+          return resolve({ ok:false, job, code: c2 });
+        }
+        console.log('Completed job for', path.relative(repoRoot, job.mp3));
+        return resolve({ ok:true, job });
       });
     });
   });
@@ -142,24 +160,55 @@ async function runPool(){
   const concurrency = Math.max(1, opts.parallel);
   const queue = work.slice();
   const running = [];
+  const allPromises = [];
+
   while (queue.length || running.length){
     while (running.length < concurrency && queue.length){
       const job = queue.shift();
-      const p = runJob(job).then(r=>{ running.splice(running.indexOf(p),1); return r; }).catch(e=>{ running.splice(running.indexOf(p),1); return e; });
+      const p = runJob(job)
+        .then(r=>{ running.splice(running.indexOf(p),1); return r; })
+        .catch(e=>{ running.splice(running.indexOf(p),1); return { ok:false, job, err: e && e.message ? e.message : e }; });
       running.push(p);
+      allPromises.push(p);
     }
-    // wait any
-    await Promise.race(running);
+    if (running.length) await Promise.race(running);
   }
-  // gather results
-  const results = await Promise.all(running.map(p => p.catch(e=>e)).concat([]));
+
+  // gather results from all started promises and normalize using allSettled to avoid surprises
+  const settled = await Promise.allSettled(allPromises);
+  const results = settled.map(s => {
+    if (s.status === 'fulfilled') return s.value;
+    // s.reason may be an object with job info or an Error
+    const reason = s.reason;
+    if (reason && reason.job) return { ok:false, job: reason.job, err: reason.err || reason.message || String(reason) };
+    return { ok:false, job: null, err: reason && (reason.message || reason) ? (reason.message||String(reason)) : 'unknown' };
+  });
   return results;
 }
 
 (async ()=>{
   try{
     const res = await runPool();
-    console.log('All jobs finished');
+    // summarize results
+    const total = res.length;
+    const successes = res.filter(r => r && r.ok === true).length;
+    const failures = res.filter(r => !r || r.ok === false).length;
+    console.log('\nBatch summary:');
+    console.log(`  total: ${total}`);
+    console.log(`  success: ${successes}`);
+    console.log(`  failed: ${failures}`);
+    if (failures > 0) {
+      console.log('\nFailed jobs details:');
+      for (const r of res){
+        if (!r || r.ok === false){
+          const name = r && r.job && r.job.mp3 ? path.relative(repoRoot, r.job.mp3) : (r && r.job && r.job.fname ? r.job.fname : '<unknown>');
+          const err = r && (r.err || r.error) ? (r.err || r.error) : (r && r.code ? `exit ${r.code}` : JSON.stringify(r));
+          console.log(` - ${name}: ${err}`);
+        }
+      }
+      process.exit(1);
+    }
+    console.log('All jobs finished successfully');
     process.exit(0);
   }catch(e){
     console.error('Error during processing', e);
