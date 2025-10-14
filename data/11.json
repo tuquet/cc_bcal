@@ -1,0 +1,48 @@
+{
+  "id": 11,
+  "meta": {
+    "title": "Lá Rụng Và Vô Thường",
+    "alias": "la-rung-vo-thuong",
+    "hook": "Khi thấy một chiếc lá rơi, ta cũng thấy bản chất vô thường của đời sống.",
+    "series": "Hỏi Thầy Một Câu",
+    "tags": [
+      "thiền",
+      "vô thường",
+      "lá rụng",
+      "tỉnh thức",
+      "chánh niệm"
+    ]
+  },
+  "scenes": [
+    {
+      "title": "Sân chùa mùa thu",
+      "visual": "Những chiếc lá vàng bay trong gió, rơi rụng khắp sân chùa.",
+      "sound": "Tiếng gió nhẹ, tiếng lá xào xạc, nhạc nền trầm ấm.",
+      "narration": "Học trò nhìn lá rơi. Trong lòng dấy lên nỗi buồn khó tả. Anh hỏi: 'Thưa thầy, sao con cứ thấy mọi thứ mất đi. Con thấy sợ vô thường.' Thầy im lặng nhìn một chiếc lá vừa rời cành. Rồi nói: 'Con thấy lá rụng. Nhưng con có thấy cây đang chuẩn bị cho mầm non mới không?'"
+    },
+    {
+      "title": "Ẩn dụ chiếc lá",
+      "visual": "Cận cảnh một chiếc lá vàng xoay tròn trong không khí rồi chạm đất.",
+      "sound": "Tiếng lá khẽ chạm đất, gió thoảng qua.",
+      "narration": "Thầy nói chậm rãi. 'Lá rụng không phải là mất. Nó trở thành đất. Đất nuôi cây. Cây lại sinh lá mới. Vạn vật đổi thay, nhưng chẳng gì mất đi. Con gọi đó là vô thường. Nhưng ta thấy đó là tiếp nối.'"
+    },
+    {
+      "title": "Thực hành quán chiếu",
+      "visual": "Học trò ngồi xếp bằng dưới gốc cây, mắt khép hờ, thở chậm rãi.",
+      "sound": "Nhạc thiền êm dịu, tiếng lá rơi đều.",
+      "narration": "Thầy dặn: 'Con thử ngồi yên. Thở vào và biết mình đang còn sống. Thở ra và biết thân này cũng sẽ thay đổi. Nhận diện vô thường không phải để buồn. Mà để trân quý những gì đang có.'"
+    },
+    {
+      "title": "Khoảnh khắc tỉnh thức",
+      "visual": "Ánh nắng xuyên qua tán lá, chiếu sáng khuôn mặt học trò đang mỉm cười.",
+      "sound": "Tiếng chuông gió ngân vang dịu dàng.",
+      "narration": "Người học trò mở mắt, nhìn một chiếc lá rơi xuống mà lòng bình thản. Anh khẽ thở ra và nói: 'Con hiểu rồi. Mất đi cũng là một phần của tiếp nối. Không có gì biến mất. Chỉ đổi hình dạng.'"
+    },
+    {
+      "title": "Lời dặn dò kết thúc",
+      "visual": "Hai thầy trò cùng đi bộ trên lối nhỏ phủ lá vàng.",
+      "sound": "Tiếng bước chân chậm rãi trên lá khô, nhạc nền sáng nhẹ.",
+      "narration": "Thầy mỉm cười, đặt tay lên vai học trò. 'Nhớ nhé. Khi thấy một chiếc lá rơi. Hãy nhớ mỉm cười. Vì đó là lời nhắc về vô thường. Và cũng là lời nhắc rằng sự sống vẫn tiếp nối không ngừng.'"
+    }
+  ]
+}

@@ -12,9 +12,10 @@ const argv = process.argv.slice(2);
 if (argv.length === 0) usage();
 
 const audioFolder = argv[0];
+
 const opts = {
   pattern: '*.mp3',
-  requireGpu: false,
+  requireGpu: true,
   force: false,
   dryRun: false,
   parallel: 1,
@@ -42,10 +43,10 @@ if (opts.scanEpisodes) {
   }
   const eps = fs.readdirSync(episodesRoot).filter(d=> fs.statSync(path.join(episodesRoot,d)).isDirectory());
   for (const e of eps){
-    const aud = path.join(episodesRoot, e, 'audio');
-    if (fs.existsSync(aud) && fs.statSync(aud).isDirectory()) audioFolders.push(aud);
+    const epFolder = path.join(episodesRoot, e);
+    audioFolders.push(epFolder);
   }
-  if (audioFolders.length === 0){ console.error('No episode audio folders found under episodes/*/audio'); process.exit(4); }
+  if (audioFolders.length === 0){ console.error('No episode folders found under episodes'); process.exit(4); }
 } else {
   const absAudioFolder = path.resolve(repoRoot, audioFolder);
   if (!fs.existsSync(absAudioFolder) || !fs.statSync(absAudioFolder).isDirectory()){
@@ -76,13 +77,14 @@ for (const item of all){
   const folder = item.folder;
   const mp3 = path.join(folder, fname);
   const base = path.basename(fname, '.mp3');
-  const srt = path.join(folder, base + '.srt');
+  const whisperxJson = path.join(folder, base + '.whisperx.json');
+  const srt = path.join(folder, base + '.srt'); // Keep for job object
   if (!fs.existsSync(mp3)){
     console.error('Missing mp3 (unexpected):', mp3);
     process.exit(5);
   }
-  if (fs.existsSync(srt) && !opts.force){
-    console.log('Skipping (srt exists):', path.relative(repoRoot, mp3));
+  if (fs.existsSync(whisperxJson) && !opts.force){
+    console.log('Skipping (whisperx.json exists):', path.relative(repoRoot, mp3));
     continue;
   }
   work.push({ fname, mp3, base, srt });
@@ -117,7 +119,7 @@ function runJob(job){
     dockerArgs.push('-e','TRANSFORMERS_CACHE=/root/.cache/huggingface');
     dockerArgs.push('-e','TORCH_HOME=/root/.cache/torch');
     dockerArgs.push('cc_bcal-whisperx');
-  dockerArgs.push('--audio', containerAudio, '--output', containerTmpJson);
+    dockerArgs.push('--audio', containerAudio, '--output', containerTmpJson);
     if (opts.requireGpu) dockerArgs.push('--require-gpu');
 
   console.log('DEBUG: docker', dockerArgs.join(' '));
@@ -186,6 +188,27 @@ async function runPool(){
   return results;
 }
 
+function runAlignment(processedEpisodes) {
+  return new Promise((resolve, reject) => {
+    console.log('\n--- Starting scene alignment step ---');
+    const args = ['scripts/align-scenes.mjs'];
+    // If we only processed specific episodes, pass them to the alignment script
+    if (processedEpisodes.length > 0) {
+      args.push(...processedEpisodes);
+    }
+
+    const alignProc = spawn('node', args, { stdio: 'inherit' });
+
+    alignProc.on('error', (err) => {
+      console.error('Failed to start alignment script:', err);
+      reject(err);
+    });
+
+    alignProc.on('close', (code) => {
+      code === 0 ? resolve() : reject(new Error(`Alignment script exited with code ${code}`));
+    });
+  });
+}
 (async ()=>{
   try{
     const res = await runPool();
@@ -208,11 +231,19 @@ async function runPool(){
       }
       process.exit(1);
     }
-    console.log('All jobs finished successfully');
+    console.log('\nAll transcription jobs finished successfully.');
+
+    // Determine which episodes were processed to pass to the alignment script
+    const processedEpisodeNames = opts.scanEpisodes
+      ? [...new Set(res.map(r => r.job && path.basename(path.dirname(r.job.mp3))))].filter(Boolean)
+      : [];
+
+    await runAlignment(processedEpisodeNames);
+
+    console.log('\n--- Pipeline finished successfully ---');
     process.exit(0);
   }catch(e){
-    console.error('Error during processing', e);
+    console.error('\nError during pipeline execution:', e.message || e);
     process.exit(20);
   }
 })();
-

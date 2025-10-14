@@ -28,7 +28,7 @@ npm run video:all
 ```
 
 - `npm run align:all`
-  - Chạy `scripts/whisperx-batch.mjs` để scan `episodes/*/audio`, chạy Whisper+WhisperX (thông qua Docker image `cc_bcal-whisperx`) và sinh `.srt` từ output JSON.
+  - Chạy `scripts/whisperx-batch.mjs` để scan `episodes/*`, chạy Whisper+WhisperX (thông qua Docker image `cc_bcal-whisperx`) và sinh `.srt` từ output JSON.
   - Các flag thông dụng (đặt sau `--`):
     - `--dry-run` — chỉ liệt kê files, không chạy Docker.
     - `--force` — ghi đè `.srt` hiện có.
@@ -48,7 +48,7 @@ npm run align:all -- --require-gpu
 
 ## WhisperX JSON
 
-- Aligner sẽ ghi một file JSON cạnh file audio: `<base>.whisperx.json` (ví dụ `voiceover.whisperx.json`).
+- Aligner sẽ ghi một file JSON: `<base>.whisperx.json` (ví dụ `audio.whisperx.json`).
 - Batch script dùng JSON này để sinh `.srt` bằng `scripts/write-srt-from-outjson.mjs`. JSON được giữ lại để debug.
 
 ## Docker
@@ -60,7 +60,7 @@ docker build -t cc_bcal-whisperx -f docker/whisperx/Dockerfile .
 
 - Ví dụ chạy container trực tiếp (mount repo vào `/workspace`):
 ```powershell
-docker run --gpus all --rm -v "${PWD}:/workspace" cc_bcal-whisperx --audio /workspace/episodes/1.tam-nhu-mat-ho/audio/voiceover.mp3 --output /workspace/episodes/1.tam-nhu-mat-ho/audio/voiceover.whisperx.json
+docker run --gpus all --rm -v "${PWD}:/workspace" cc_bcal-whisperx --audio /workspace/episodes/1.tam-nhu-mat-ho/audio.mp3 --output /workspace/episodes/1.tam-nhu-mat-ho/audio.whisperx.json
 ```
 
 ## Ghi chú vận hành

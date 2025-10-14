@@ -11,7 +11,7 @@ docker build -t cc_bcal-whisperx -f docker/whisperx/Dockerfile .
 Ví dụ lệnh chạy container:
 
 ```bash
-docker run --gpus all --rm -v "$(pwd):/workspace" cc_bcal-whisperx --audio /workspace/episodes/1.tam-nhu-mat-ho/audio/voiceover.mp3 --output /workspace/out-whisperx.json
+docker run --gpus all --rm -v "$(pwd):/workspace" cc_bcal-whisperx --audio /workspace/episodes/1.tam-nhu-mat-ho/audio.mp3 --output /workspace/out-whisperx.json
 ```
 
 Ghi chú:
@@ -24,5 +24,3 @@ Hoặc sử dụng docker-compose từ thư mục này:
 cd docker/whisperx
 docker compose up --build
 ```
-
-Nếu cần hướng dẫn thêm (ví dụ mount cache Hugging Face để tránh tải lại model, hoặc chạy nhiều audio hàng loạt), xem README chính của repo hoặc sử dụng các script trong thư mục `scripts/`.
