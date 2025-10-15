@@ -11,15 +11,15 @@ Trước khi chạy pipeline, bạn cần đảm bảo môi trường đã đư�
 - Docker (đã cài đặt và đang chạy)
 
 ### 2. Tạo Môi trường ảo và Cài đặt Thư viện (Khuyến khích)
-Sử dụng môi trường ảo (`.venv`) là một cách tốt nhất để quản lý các gói phụ thuộc cho dự án.
+Sử dụng môi trường ảo (`venv`) là một cách tốt nhất để quản lý các gói phụ thuộc cho dự án.
 
 1.  **Tạo môi trường ảo:** (Chỉ cần làm một lần trong thư mục gốc dự án)
     ```bash
-    python -m venv .venv
+    python -m venv venv
     ```
 2.  **Kích hoạt môi trường ảo:** (Cần làm mỗi khi mở một terminal mới để làm việc với dự án)
     ```bash
-    .\.venv\Scripts\activate
+    .\venv\Scripts\activate
     ```
 3.  **Cài đặt các gói cần thiết từ `requirements.txt`:**
 ```bash
@@ -34,15 +34,13 @@ docker build -t cc_bcal-whisperx -f whisperx/Dockerfile .
 
 ## Quy trình làm việc
 
-Quy trình tạo video từ kịch bản thô bao gồm 3 bước chính. Bạn cần thực hiện các bước này theo đúng thứ tự cho mỗi episode.
+Quy trình tạo video từ kịch bản thô bao gồm 5 bước chính. Bạn cần thực hiện các bước này theo đúng thứ tự cho mỗi project.
 
-### Bước 1: Tạo cấu trúc Episode
+### Bước 1: Tạo cấu trúc Project (`1_generate_episodes.py`)
 
-Sau khi tạo các file kịch bản `.json` trong thư mục `data/`, 
-
-Bước 1: Tạo ra cấu trúc dự án phù hợp nằm trong thư mục `projects/`.
+Sau khi tạo các file kịch bản `.json` trong thư mục `data/`, hãy chạy script sau để tự động tạo cấu trúc thư mục và các file cần thiết trong `projects/`.
 ```bash
-python generate_episodes.py
+python 1_generate_episodes.py
 ```
 
 Bước 2: Tạo ra kịch bản chi tiết cho từng scenes từ cái file audio khi dự án đã chuẩn bị xong.

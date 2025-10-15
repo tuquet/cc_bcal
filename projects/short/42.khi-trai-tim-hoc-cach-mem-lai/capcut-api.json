@@ -20,19 +20,28 @@
       "title": "Câu Hỏi Của Người Học Trò",
       "visual": "Học trò ôm ngực, ánh mắt giận dữ, ngồi trước thầy trong sân chùa đầy lá vàng rơi.",
       "sound": "Tiếng gió thổi xào xạc, nhạc nền trầm buồn.",
-      "narration": "Học trò hỏi. Thưa thầy, con đã bị phản bội, trái tim con giờ chỉ còn sự căm giận. Làm sao con có thể tha thứ được?"
+      "narration": "Học trò hỏi. Thưa thầy, con đã bị phản bội, trái tim con giờ chỉ còn sự căm giận. Làm sao con có thể tha thứ được?",
+      "start": 0,
+      "end": 10,
+      "image": "C:/Users/Admin/Videos/video-studio/projects/short/42.khi-trai-tim-hoc-cach-mem-lai/1.png"
     },
     {
       "title": "Ẩn Dụ Của Thầy",
       "visual": "Thầy nhặt một cục đất sét khô cứng, nhỏ vài giọt nước và nắn nó thành hình tròn mềm mại.",
       "sound": "Âm nhạc ấm áp dần lên, tiếng nước nhỏ giọt vang vọng.",
-      "narration": "Thầy nói. Trái tim con giống như đất sét khô, càng cứng rắn càng dễ vỡ. Khi con để từ bi và tha thứ thấm vào, trái tim sẽ mềm lại, trở nên linh hoạt và có thể tạo ra điều tốt đẹp."
+      "narration": "Thầy nói. Trái tim con giống như đất sét khô, càng cứng rắn càng dễ vỡ. Khi con để từ bi và tha thứ thấm vào, trái tim sẽ mềm lại, trở nên linh hoạt và có thể tạo ra điều tốt đẹp.",
+      "start": 12,
+      "end": 27,
+      "image": "C:/Users/Admin/Videos/video-studio/projects/short/42.khi-trai-tim-hoc-cach-mem-lai/2.png"
     },
     {
       "title": "Sự Tỉnh Thức",
       "visual": "Học trò nhắm mắt, hít một hơi dài, nét mặt giãn ra, đôi mắt mở ra với sự nhẹ nhõm. Thầy ngồi an yên mỉm cười.",
       "sound": "Âm nhạc dâng cao rồi lắng xuống trong sự tĩnh lặng. Tiếng chuông chùa vang vọng xa.",
-      "narration": "Học trò khẽ gật đầu, trong lòng nhẹ nhõm như vừa đặt xuống gánh nặng. Thầy dặn. Khi trái tim học cách mềm lại, con sẽ thấy tha thứ không phải là cho người khác, mà là giải thoát chính mình."
+      "narration": "Học trò khẽ gật đầu, trong lòng nhẹ nhõm như vừa đặt xuống gánh nặng. Thầy dặn. Khi trái tim học cách mềm lại, con sẽ thấy tha thứ không phải là cho người khác, mà là giải thoát chính mình.",
+      "start": 28,
+      "end": 44,
+      "image": "C:/Users/Admin/Videos/video-studio/projects/short/42.khi-trai-tim-hoc-cach-mem-lai/3.png"
     }
   ],
   "generation_params": {
@@ -75,5 +84,6 @@
       "scene_images",
       "fixed_effects"
     ]
-  }
+  },
+  "duration": 44
 }

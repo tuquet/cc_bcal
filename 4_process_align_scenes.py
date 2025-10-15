@@ -8,6 +8,8 @@ import sys
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
+from utils import get_project_path
+
 
 def to_srt_timestamp(sec: float) -> str:
     """Converts seconds to SRT time format HH:MM:SS,ms."""
@@ -219,31 +221,108 @@ def align_episode_scenes(episode_dir: Path):
 
         segments = whisper_data.get('segments', [])
 
-        # Check if timings already exist
-        if all(isinstance(s.get('start'), (int, float)) and isinstance(s.get('end'), (int, float)) for s in script_data.get('scenes', [])):
-            print("  -> Skipping: File already has timing information for all scenes.")
-            return
-
         null_count = 0
         for i, scene in enumerate(script_data.get('scenes', [])):
             start_time, end_time = find_scene_times(scene.get('narration', ''), segments)
-            scene['start'] = start_time
-            scene['end'] = end_time
+            # Round start/end to nearest integer seconds when available, preserve None
+            scene['start'] = int(round(start_time)) if start_time is not None else None
+            scene['end'] = int(round(end_time)) if end_time is not None else None
             if start_time is None or end_time is None:
                 null_count += 1
             
             # Add absolute image path
             image_file = episode_dir / f"{i + 1}.png"
-            scene['image'] = str(image_file.resolve())
+            scene['image'] = str(image_file.resolve().as_posix())
 
-        # Get audio duration with ffprobe
+        # Get audio duration robustly with multiple fallbacks:
+        # 1) imageio_ffmpeg.get_ffprobe_exe(), 2) system 'ffprobe' (PATH),
+        # 3) imageio_ffmpeg.get_ffmpeg_exe() and parse stderr, 4) system 'ffmpeg' and parse stderr
+        duration_obtained = False
+        duration_value = None
+
+        # Helper to run a command and return stdout
+        def _run_cmd(cmd):
+            try:
+                return subprocess.check_output(cmd, text=True, stderr=subprocess.PIPE).strip()
+            except Exception:
+                return None
+
+        # Try imageio_ffmpeg.get_ffprobe_exe()
         try:
-            import ffmpeg_downloader as ffd
-            command = [ffd.ffprobe_path, '-v', 'error', '-show_entries', 'format=duration', '-of', 'default=noprint_wrappers=1:nokey=1', str(audio_path)]
-            duration_str = subprocess.check_output(command, text=True, stderr=subprocess.PIPE).strip()
-            script_data['duration'] = float(duration_str)
-        except (subprocess.CalledProcessError, ValueError) as e:
-            print(f"  -> Warning: Could not get audio duration with ffprobe. Error: {e}", file=sys.stderr)
+            import imageio_ffmpeg
+            ffprobe_path = getattr(imageio_ffmpeg, 'get_ffprobe_exe', None)
+            if callable(ffprobe_path):
+                path = ffprobe_path()
+            else:
+                path = None
+            if path:
+                out = _run_cmd([path, '-v', 'error', '-show_entries', 'format=duration', '-of', 'default=noprint_wrappers=1:nokey=1', str(audio_path)])
+                if out:
+                    duration_value = float(out)
+                    duration_obtained = True
+        except ImportError:
+            path = None
+
+        # Try system ffprobe
+        if not duration_obtained:
+            import shutil
+            sys_ffprobe = shutil.which('ffprobe')
+            if sys_ffprobe:
+                out = _run_cmd([sys_ffprobe, '-v', 'error', '-show_entries', 'format=duration', '-of', 'default=noprint_wrappers=1:nokey=1', str(audio_path)])
+                if out:
+                    try:
+                        duration_value = float(out)
+                        duration_obtained = True
+                    except ValueError:
+                        duration_obtained = False
+
+        # Try imageio_ffmpeg.get_ffmpeg_exe() and parse stderr for Duration
+        if not duration_obtained:
+            try:
+                import imageio_ffmpeg
+                get_ffmpeg = getattr(imageio_ffmpeg, 'get_ffmpeg_exe', None)
+                if callable(get_ffmpeg):
+                    ffmpeg_path = get_ffmpeg()
+                else:
+                    ffmpeg_path = None
+                if ffmpeg_path:
+                    # ffmpeg writes duration info to stderr when probing
+                    proc = subprocess.run([ffmpeg_path, '-i', str(audio_path)], capture_output=True, text=True)
+                    stderr = proc.stderr or ''
+                    m = re.search(r'Duration: (\d+):(\d+):(\d+\.\d+)', stderr)
+                    if m:
+                        h, mm, ss = m.groups()
+                        duration_value = int(h) * 3600 + int(mm) * 60 + float(ss)
+                        duration_obtained = True
+            except ImportError:
+                pass
+
+        # Try system ffmpeg probe
+        if not duration_obtained:
+            import shutil
+            sys_ffmpeg = shutil.which('ffmpeg')
+            if sys_ffmpeg:
+                proc = subprocess.run([sys_ffmpeg, '-i', str(audio_path)], capture_output=True, text=True)
+                stderr = proc.stderr or ''
+                m = re.search(r'Duration: (\d+):(\d+):(\d+\.\d+)', stderr)
+                if m:
+                    h, mm, ss = m.groups()
+                    duration_value = int(h) * 3600 + int(mm) * 60 + float(ss)
+                    duration_obtained = True
+
+        if duration_obtained and duration_value is not None:
+            # Round duration to nearest integer seconds
+            script_data['duration'] = int(round(float(duration_value)))
+            # Ensure the last scene ends exactly at the audio duration
+            scenes = script_data.get('scenes')
+            if isinstance(scenes, list) and len(scenes) > 0:
+                try:
+                    scenes[-1]['end'] = script_data['duration']
+                except Exception:
+                    # If scene structure unexpected, skip silently
+                    pass
+        else:
+            print("  -> Warning: Could not get audio duration (ffprobe/ffmpeg not available).", file=sys.stderr)
 
         with open(script_json_path, 'w', encoding='utf-8') as f:
             json.dump(script_data, f, indent=2, ensure_ascii=False)
@@ -258,83 +337,108 @@ def align_episode_scenes(episode_dir: Path):
 
 def main():
     parser = argparse.ArgumentParser(description="Run WhisperX batch processing and scene alignment.")
-    parser.add_argument('projects', nargs='*', help="Specific episode directory names to process (e.g., '11.la-rung-vo-thuong'). If none, all projects are scanned.")
+    parser.add_argument('script_files', nargs='*', type=Path, help="Path to one or more script JSON files (e.g., 'data/1.json'). If none, all projects are scanned.")
     parser.add_argument('--force', action='store_true', help="Force reprocessing even if output files exist.")
     parser.add_argument('--dry-run', action='store_true', help="List files to be processed without running Docker.")
     parser.add_argument('--parallel', type=int, default=1, help="Number of parallel jobs to run.")
     parser.add_argument('--require-gpu', action='store_true', default=True, help="Run Docker with GPU support (default).")
     parser.add_argument('--no-gpu', dest='require_gpu', action='store_false', help="Run Docker without GPU support.")
-    
+    parser.add_argument('--align-only', action='store_true', help="Only run the scene alignment step, skipping transcription.")
+
     args = parser.parse_args()
 
     repo_root = Path.cwd()
     episodes_root = repo_root / 'projects'
 
     if not episodes_root.is_dir():
-        print(f"Error: 'projects' directory not found at {episodes_root}", file=sys.stderr)
+        print(f"❌ Error: 'projects' directory not found at {episodes_root}", file=sys.stderr)
         sys.exit(1)
 
     target_episode_dirs = []
-    if args.projects:
-        for ep_name in args.projects:
-            ep_dir = episodes_root / ep_name
+    if args.script_files:
+        print("🔍 Processing specific script files...")
+        for script_file in args.script_files:
+            if not script_file.exists():
+                print(f"⚠️ Warning: Script file not found, skipping: {script_file}", file=sys.stderr)
+                continue
+            try:
+                with open(script_file, 'r', encoding='utf-8') as f:
+                    ep_dir = get_project_path(json.load(f))
+            except (json.JSONDecodeError, KeyError) as e:
+                print(f"⚠️ Warning: Could not process script file {script_file}: {e}", file=sys.stderr)
+                continue
+
             if ep_dir.is_dir():
                 target_episode_dirs.append(ep_dir)
             else:
                 print(f"Warning: Specified episode directory not found: {ep_dir}", file=sys.stderr)
     else:
-        target_episode_dirs = [d for d in episodes_root.iterdir() if d.is_dir()]
+        print("🔍 Scanning all project directories in 'projects/'...")
+        # Quét tất cả các thư mục con cấp 2 trong 'projects' (ví dụ: projects/short/..., projects/general/...)
+        target_episode_dirs = [d for d in episodes_root.glob('*/*') if d.is_dir()]
 
     if not target_episode_dirs:
-        print("No episode directories found to process.", file=sys.stderr)
+        print("🤷 No episode directories found to process.", file=sys.stderr)
         sys.exit(0)
 
-    # --- 1. Build WhisperX job list ---
-    work = []
-    for ep_dir in target_episode_dirs:
-        audio_files = list(ep_dir.glob('*.mp3'))
-        if not audio_files:
-            continue
-        
-        mp3_path = audio_files[0]
-        base_name = mp3_path.stem
-        whisperx_json_path = ep_dir / f"{base_name}.whisperx.json"
+    if not args.align_only:
+        # --- 1. Build WhisperX job list ---
+        work = []
+        for ep_dir in target_episode_dirs:
+            audio_files = list(ep_dir.glob('*.mp3'))
+            if not audio_files:
+                continue
+            
+            mp3_path = audio_files[0]
+            base_name = mp3_path.stem
+            whisperx_json_path = ep_dir / f"{base_name}.whisperx.json"
 
-        if whisperx_json_path.exists() and not args.force:
-            print(f"Skipping (output exists): {mp3_path.relative_to(repo_root)}")
-            continue
-        
-        work.append({'mp3': mp3_path, 'whisperx_json': whisperx_json_path, 'dir': ep_dir})
+            # If --force is set, remove existing whisperx JSON and SRT so they will be regenerated
+            if whisperx_json_path.exists() and args.force:
+                try:
+                    whisperx_json_path.unlink()
+                    srt_path = whisperx_json_path.with_suffix('.srt')
+                    if srt_path.exists():
+                        srt_path.unlink()
+                    print(f"⚠️ Removed existing outputs due to --force: {whisperx_json_path.relative_to(repo_root)} and its .srt")
+                except Exception as e:
+                    print(f"  -> Warning: Could not remove existing output files: {e}", file=sys.stderr)
 
-    if not work:
-        print("Nothing to do for transcription.")
-    else:
-        print(f"--- Starting Transcription ({len(work)} files) ---")
-        if args.require_gpu and args.parallel > 1:
-            print("Warning: --require-gpu with parallel > 1 may overload a single GPU.", file=sys.stderr)
+            if whisperx_json_path.exists() and not args.force:
+                print(f"⏩ Skipping transcription (output exists): {mp3_path.relative_to(repo_root)}")
+                continue
 
-        # --- 2. Run WhisperX jobs in parallel ---
-        results = []
-        with ThreadPoolExecutor(max_workers=args.parallel) as executor:
-            futures = {executor.submit(run_whisperx_job, job, args.dry_run, args.require_gpu): job for job in work}
-            for future in as_completed(futures):
-                results.append(future.result())
+            work.append({'mp3': mp3_path, 'whisperx_json': whisperx_json_path, 'dir': ep_dir})
 
-        successes = [r for r in results if r['ok']]
-        failures = [r for r in results if not r['ok']]
+        if not work:
+            print("✅ No new transcriptions needed.")
+        else:
+            print(f"--- Starting Transcription ({len(work)} files) ---")
+            if args.require_gpu and args.parallel > 1:
+                print("Warning: --require-gpu with parallel > 1 may overload a single GPU.", file=sys.stderr)
 
-        print("\n--- Transcription Summary ---")
-        print(f"  Total:   {len(results)}")
-        print(f"  Success: {len(successes)}")
-        print(f"  Failed:  {len(failures)}")
+            # --- 2. Run WhisperX jobs in parallel ---
+            results = []
+            with ThreadPoolExecutor(max_workers=args.parallel) as executor:
+                futures = {executor.submit(run_whisperx_job, job, args.dry_run, args.require_gpu): job for job in work}
+                for future in as_completed(futures):
+                    results.append(future.result())
 
-        if failures:
-            print("\nFailed jobs details:")
-            for res in failures:
-                job_path = res['job']['mp3'].relative_to(repo_root)
-                print(f" - {job_path}: {res.get('error', 'Unknown error')}")
-            # Do not proceed to alignment if transcription failed
-            sys.exit(1)
+            successes = [r for r in results if r['ok']]
+            failures = [r for r in results if not r['ok']]
+
+            print("\n--- Transcription Summary ---")
+            print(f"  Total:   {len(results)}")
+            print(f"  Success: {len(successes)}")
+            print(f"  Failed:  {len(failures)}")
+
+            if failures:
+                print("\nFailed jobs details:")
+                for res in failures:
+                    job_path = res['job']['mp3'].relative_to(repo_root)
+                    print(f" - {job_path}: {res.get('error', 'Unknown error')}")
+                # Do not proceed to alignment if transcription failed
+                sys.exit(1)
 
     # --- 3. Run Scene Alignment ---
     print("\n--- Starting Scene Alignment ---")

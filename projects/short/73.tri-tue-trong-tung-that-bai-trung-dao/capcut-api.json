@@ -1,0 +1,90 @@
+{
+  "id": 73,
+  "meta": {
+    "title": "Trí tuệ trong từng thất bại | Bài học sâu sắc về Trung đạo",
+    "alias": "tri-tue-trong-tung-that-bai-trung-dao",
+    "hook": "Mỗi thất bại có thật sự là dấu chấm hết, hay chỉ là cánh cửa mở ra trí tuệ mới?",
+    "tags": [
+      "trí tuệ",
+      "trung đạo",
+      "thất bại",
+      "chánh niệm",
+      "học từ sai lầm",
+      "giáo lý Phật giáo",
+      "bài học cuộc sống"
+    ],
+    "video_type": "short",
+    "description": "Khám phá cách nhìn nhận thất bại dưới ánh sáng trí tuệ và trung đạo. Câu chuyện truyền cảm hứng giúp bạn biến thất bại thành bậc thang đi lên, thay vì nỗi sợ níu chân mình."
+  },
+  "scenes": [
+    {
+      "title": "Câu hỏi của học trò",
+      "visual": "Học trò ngồi co ro, tay nắm chặt, ánh mắt đầy thất vọng trong căn phòng đơn sơ.",
+      "sound": "Tiếng mưa rơi lách tách ngoài hiên, hòa với tiếng thở gấp gáp.",
+      "narration": "Học trò: Thưa thầy, con đã thất bại thêm một lần nữa. Có phải con quá kém cỏi nên chẳng bao giờ thành công.",
+      "start": 0,
+      "end": 9,
+      "image": "C:/Users/Admin/Videos/video-studio/projects/short/73.tri-tue-trong-tung-that-bai-trung-dao/1.png"
+    },
+    {
+      "title": "Lời dạy của thầy",
+      "visual": "Thầy ngồi yên trên tọa cụ, ánh đèn dầu le lói, giọng điềm tĩnh vang lên.",
+      "sound": "Âm thanh mưa rơi đều, nhịp tim chậm lại, không gian lắng xuống.",
+      "narration": "Thầy: Con có thấy cây tre không. Nó trổ mầm yếu ớt trong nhiều năm dưới đất, nhưng khi đã vươn lên thì thẳng tắp trời xanh. Thất bại cũng vậy, là giai đoạn ươm mầm cho trí tuệ. Đừng vội xem nó là dấu chấm hết. Trung đạo dạy ta: không kiêu khi thành công, không gục ngã khi thất bại.",
+      "start": 10,
+      "end": 33,
+      "image": "C:/Users/Admin/Videos/video-studio/projects/short/73.tri-tue-trong-tung-that-bai-trung-dao/2.png"
+    },
+    {
+      "title": "Sự tỉnh thức",
+      "visual": "Học trò dần ngồi thẳng lưng, ánh mắt sáng hơn, đôi môi khẽ nở nụ cười nhẹ.",
+      "sound": "Tiếng mưa ngớt dần, một khoảng lặng trong trẻo, xa xa tiếng chim hót.",
+      "narration": "Học trò: Con hiểu rồi thầy. Thất bại không xóa đi giá trị của con, mà chỉ chỉ cho con con đường đúng. Thầy: Đúng vậy. Hãy đi từng bước trên con đường trung đạo, và nhớ rằng trí tuệ luôn nở hoa từ chính những vết nứt của đời con.",
+      "start": 34,
+      "end": 54,
+      "image": "C:/Users/Admin/Videos/video-studio/projects/short/73.tri-tue-trong-tung-that-bai-trung-dao/3.png"
+    }
+  ],
+  "generation_params": {
+    "logo": {
+      "path": "C:\\Users\\Admin\\Videos\\video-studio\\assets\\sen.png",
+      "scale": 0.1,
+      "transform_x": 0.9,
+      "transform_y": -0.5
+    },
+    "text_logo": {
+      "text": "Bước Chân An Lạc",
+      "font_size": 12,
+      "font_color": "#FFFFFF",
+      "font_alpha": 0.6,
+      "transform_x": 0,
+      "transform_y": 0,
+      "animation_type": "fly_in_left"
+    },
+    "random_effects": {
+      "max_effects": 10
+    },
+    "scene_images": {
+      "scale": 1.2
+    },
+    "background_layer": {
+      "scale": 2.5,
+      "blur": 3
+    },
+    "fixed_effects": {
+      "effects": [
+        {
+          "effect_type": "Firefly",
+          "track_name": "fixed_effect_2",
+          "params": []
+        }
+      ]
+    },
+    "enabled_modules": [
+      "background_layer",
+      "scene_images",
+      "fixed_effects"
+    ]
+  },
+  "duration": 54
+}

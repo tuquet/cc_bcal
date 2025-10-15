@@ -1,0 +1,91 @@
+{
+  "id": 54,
+  "meta": {
+    "title": "Từ bi biến kẻ thù thành bạn | Bài học về tha thứ và chữa lành tâm hồn",
+    "alias": "tu-bi-bien-ke-thu-thanh-ban-tha-thu-chua-lanh",
+    "hook": "Bạn có bao giờ tự hỏi: liệu từ bi có thể biến kẻ thù thành bạn không?",
+    "tags": [
+      "từ bi",
+      "tha thứ",
+      "chuyển hóa hận thù",
+      "thiền chánh niệm",
+      "giáo lý Phật giáo",
+      "hạnh phúc",
+      "tâm an lạc",
+      "bài học cuộc sống"
+    ],
+    "video_type": "short",
+    "description": "Khám phá sức mạnh của lòng từ bi và tha thứ. Câu chuyện truyền cảm hứng giúp bạn nhận ra cách biến kẻ thù thành bạn, giải thoát khỏi hận thù và tìm thấy bình an nội tâm."
+  },
+  "scenes": [
+    {
+      "title": "Câu hỏi của học trò",
+      "visual": "Học trò ngồi cúi đầu, ánh mắt bất an, khung cảnh tĩnh lặng nơi am cỏ.",
+      "sound": "Tiếng gió thổi nhẹ qua rặng trúc, xa xa vang vọng tiếng chuông chùa.",
+      "narration": "Học trò: Thưa thầy, con cứ thấy oán hận với người làm tổn thương mình. Làm sao con có thể tha thứ cho họ.",
+      "start": 0,
+      "end": 8,
+      "image": "C:/Users/Admin/Videos/video-studio/projects/short/54.tu-bi-bien-ke-thu-thanh-ban-tha-thu-chua-lanh/1.png"
+    },
+    {
+      "title": "Lời dạy của thầy",
+      "visual": "Thầy ngồi bình thản, ánh nắng chiếu qua khung cửa, gương mặt hiền từ.",
+      "sound": "Âm thanh suối róc rách, nhịp tim chậm rãi.",
+      "narration": "Thầy: Con có thấy không, khi ôm một cục than hồng để ném người khác, chính tay con là kẻ bỏng rát. Kẻ thù ngoài kia không nguy hiểm bằng hận thù trong tâm con. Hãy thử thở chậm, nhìn sâu, thấy rằng họ cũng khổ đau như con. Khi con gửi đến họ một niềm thương, chính con được tự do.",
+      "start": 10,
+      "end": 33,
+      "image": "C:/Users/Admin/Videos/video-studio/projects/short/54.tu-bi-bien-ke-thu-thanh-ban-tha-thu-chua-lanh/2.png"
+    },
+    {
+      "title": "Sự tỉnh thức",
+      "visual": "Học trò ngẩng đầu, gương mặt dịu lại, ánh mắt rưng rưng nhưng sáng lên.",
+      "sound": "Tiếng chuông chùa ngân vang, hòa cùng tiếng gió yên bình.",
+      "narration": "Học trò: Con hiểu rồi thầy. Tha thứ không phải cho họ, mà là để tâm con thôi bị giam cầm. Thầy: Đúng vậy. Con hãy nhớ, từ bi không chỉ biến kẻ thù thành bạn, mà còn biến tâm mình thành cánh đồng bình yên.",
+      "start": 34,
+      "end": 53,
+      "image": "C:/Users/Admin/Videos/video-studio/projects/short/54.tu-bi-bien-ke-thu-thanh-ban-tha-thu-chua-lanh/3.png"
+    }
+  ],
+  "generation_params": {
+    "logo": {
+      "path": "C:\\Users\\Admin\\Videos\\video-studio\\assets\\sen.png",
+      "scale": 0.1,
+      "transform_x": 0.9,
+      "transform_y": -0.5
+    },
+    "text_logo": {
+      "text": "Bước Chân An Lạc",
+      "font_size": 12,
+      "font_color": "#FFFFFF",
+      "font_alpha": 0.6,
+      "transform_x": 0,
+      "transform_y": 0,
+      "animation_type": "fly_in_left"
+    },
+    "random_effects": {
+      "max_effects": 10
+    },
+    "scene_images": {
+      "scale": 1.2
+    },
+    "background_layer": {
+      "scale": 2.5,
+      "blur": 3
+    },
+    "fixed_effects": {
+      "effects": [
+        {
+          "effect_type": "Firefly",
+          "track_name": "fixed_effect_2",
+          "params": []
+        }
+      ]
+    },
+    "enabled_modules": [
+      "background_layer",
+      "scene_images",
+      "fixed_effects"
+    ]
+  },
+  "duration": 53
+}

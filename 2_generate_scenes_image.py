@@ -94,7 +94,7 @@ def main(script_path: Path):
 
         # 2. Gửi prompt duy nhất
         scenes_json_string = json.dumps(scenes, ensure_ascii=False, indent=2)
-        prompt = f"tạo ảnh dựa theo JSON scenes sau : {scenes_json_string}"
+        prompt = f"tạo ảnh dựa theo JSON scenes sau: {scenes_json_string} lưu ý: ảnh không chứa text, mọi nhân vật đều đủ 18 tuổi trở lên"
         
         input_box = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, INPUT_BOX_SELECTOR)))
         driver.execute_script("arguments[0].innerText = arguments[1];", input_box, prompt)

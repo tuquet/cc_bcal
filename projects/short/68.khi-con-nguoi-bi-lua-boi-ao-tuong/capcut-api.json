@@ -21,19 +21,28 @@
       "title": "Câu Hỏi Về Sự Thật",
       "visual": "Học trò nhìn vào mặt hồ buổi tối, nơi ánh trăng phản chiếu lung linh, gương mặt hoang mang.",
       "sound": "Tiếng côn trùng đêm, nhạc nền huyền bí nhẹ nhàng.",
-      "narration": "Học trò hỏi. Thưa thầy, vì sao con người luôn chạy theo những điều tưởng thật, để rồi nhận về thất vọng. Có phải con đang sống trong ảo tưởng không."
+      "narration": "Học trò hỏi. Thưa thầy, vì sao con người luôn chạy theo những điều tưởng thật, để rồi nhận về thất vọng. Có phải con đang sống trong ảo tưởng không.",
+      "start": 0,
+      "end": 10,
+      "image": "C:/Users/Admin/Videos/video-studio/projects/short/68.khi-con-nguoi-bi-lua-boi-ao-tuong/1.png"
     },
     {
       "title": "Ẩn Dụ Về Ánh Trăng",
       "visual": "Thầy chỉ tay xuống mặt hồ, nơi ánh trăng in bóng nhưng không thể chạm vào.",
       "sound": "Âm nhạc trầm ấm, tiếng gió thổi nhẹ qua rừng tre.",
-      "narration": "Thầy nói. Con thấy bóng trăng trong nước không. Nó sáng, nó đẹp, nhưng con không thể nắm bắt. Ảo tưởng trong cuộc đời cũng như vậy. Danh vọng, quyền lực hay dục vọng thoáng qua chỉ là bóng hình. Nếu tin nó là thật, con sẽ đau khổ."
+      "narration": "Thầy nói. Con thấy bóng trăng trong nước không. Nó sáng, nó đẹp, nhưng con không thể nắm bắt. Ảo tưởng trong cuộc đời cũng như vậy. Danh vọng, quyền lực hay dục vọng thoáng qua chỉ là bóng hình. Nếu tin nó là thật, con sẽ đau khổ.",
+      "start": 11,
+      "end": 36,
+      "image": "C:/Users/Admin/Videos/video-studio/projects/short/68.khi-con-nguoi-bi-lua-boi-ao-tuong/2.png"
     },
     {
       "title": "Lời Dặn Về Trung Đạo",
       "visual": "Học trò ngẩng đầu nhìn lên bầu trời, thấy vầng trăng thật sáng rực rỡ trên cao. Gương mặt bừng sáng nhận ra chân lý.",
       "sound": "Âm nhạc dâng trào rồi lắng xuống êm đềm, tiếng chuông chùa ngân vang.",
-      "narration": "Học trò khẽ gật đầu, tâm trí bừng tỉnh. Thầy dặn. Đừng chạy theo bóng ảo dưới nước, hãy hướng về mặt trăng thật trên bầu trời. Chỉ khi con bước đi bằng trí tuệ và Trung đạo, con mới không còn bị lừa bởi ảo tưởng."
+      "narration": "Học trò khẽ gật đầu, tâm trí bừng tỉnh. Thầy dặn. Đừng chạy theo bóng ảo dưới nước, hãy hướng về mặt trăng thật trên bầu trời. Chỉ khi con bước đi bằng trí tuệ và Trung đạo, con mới không còn bị lừa bởi ảo tưởng.",
+      "start": 36,
+      "end": 54,
+      "image": "C:/Users/Admin/Videos/video-studio/projects/short/68.khi-con-nguoi-bi-lua-boi-ao-tuong/3.png"
     }
   ],
   "generation_params": {
@@ -76,5 +85,6 @@
       "scene_images",
       "fixed_effects"
     ]
-  }
+  },
+  "duration": 54
 }
