@@ -3,3 +3,4 @@
 chrome-profile/
 __pycache__/
 node_modules/
+logs/

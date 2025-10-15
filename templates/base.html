@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Script Manager{% endblock %}</title>
+    <!-- Tailwind CSS (CDN - for dev) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* small visual background similar to previous layout */
+        body { background-color: #f8fafc; }
+        /* make a wide central container like before */
+        .app-container { max-width: 1600px; }
+    </style>
+</head>
+<body>
+    <header class="bg-slate-800 text-white">
+        <div class="app-container mx-auto px-4 py-3 flex items-center justify-between">
+            <a class="text-xl font-semibold" href="{{ url_for('ui_index') }}">Script Manager</a>
+            <div class="flex items-center space-x-4">
+                <form id="openProjectForm" method="post" action="{{ url_for('ui_open_project_folder') }}" class="hidden"></form>
+                <button onclick="event.preventDefault(); document.getElementById('openProjectForm').submit();" class="text-sm bg-slate-700 hover:bg-slate-600 px-3 py-1 rounded">Mở folder</button>
+                <a href="{{ url_for('ui_settings') }}" class="text-sm bg-slate-700 hover:bg-slate-600 px-3 py-1 rounded">Cấu hình</a>
+            </div>
+        </div>
+    </header>
+    <!-- Settings is a dedicated page now; link available in header -->
+    <main id="app-root" class="app-container mx-auto px-4 py-6">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="mb-4">
+                        <div class="rounded-md px-4 py-3 text-sm {% if category == 'success' %}bg-green-100 text-green-800{% elif category == 'error' or category == 'danger' %}bg-red-100 text-red-800{% else %}bg-slate-100 text-slate-800{% endif %}">
+                            {{ message }}
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </main>
+    <!-- Minimal client JS (no framework) -->
+    <script>
+      function qs(selector, root) { return (root || document).querySelector(selector); }
+      function qsa(selector, root) { return Array.from((root || document).querySelectorAll(selector)); }
+
+      function toggleAll(checked) {
+          qsa('.row-checkbox').forEach(cb => { cb.checked = checked; });
+      }
+
+      function anyChecked() {
+          return qsa('.row-checkbox').some(cb => cb.checked);
+      }
+
+      function init() {
+          const selectAll = qs('#select-all');
+          const bulkForm = qs('#bulk-form');
+
+          if (selectAll) {
+              selectAll.addEventListener('change', function () {
+                  toggleAll(this.checked);
+              });
+          }
+
+          // Keep row-checkbox clicks in sync with select-all checkbox
+          qsa('.row-checkbox').forEach(cb => cb.addEventListener('change', function () {
+              const all = qsa('.row-checkbox');
+              const checkedCount = all.filter(x => x.checked).length;
+              if (selectAll) selectAll.checked = (checkedCount === all.length && all.length > 0);
+          }));
+
+          // Prevent submitting bulk form with no selection
+          if (bulkForm) {
+              bulkForm.addEventListener('submit', function (ev) {
+                  if (!anyChecked()) {
+                      ev.preventDefault();
+                      alert('Vui lòng chọn ít nhất một kịch bản trước khi áp dụng thay đổi.');
+                  }
+              });
+          }
+      }
+
+      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+      else init();
+    </script>
+    <script src="{{ url_for('static', filename='js/generate-images.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/transcribe.js') }}"></script>
+</body>
+</html>

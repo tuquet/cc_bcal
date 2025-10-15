@@ -23,6 +23,11 @@ def main():
     p.add_argument('--audio', required=True)
     p.add_argument('--output', required=False)
     p.add_argument('--require-gpu', action='store_true', help='Fail fast if a CUDA GPU is not available')
+    p.add_argument('--whisper-model', default='small', help='Whisper model to use (tiny, base, small, medium, large)')
+    p.add_argument('--fp16', action='store_true', help='Use FP16 (half) precision when running on CUDA')
+    p.add_argument('--use-faster', action='store_true', help='Use faster-whisper for transcription if available')
+    p.add_argument('--faster-model', default=None, help='Model name/path for faster-whisper (defaults to whisper-model)')
+    p.add_argument('--faster-compute-type', default='float16', help='Compute type for faster-whisper (float16|int8_float16|int8)')
     args = p.parse_args()
 
     audio_path = args.audio
@@ -70,8 +75,67 @@ def main():
         sys.exit(2)
 
     try:
-        model = whisper.load_model('small')
-        result = model.transcribe(audio_path)
+        # detect torch and device early so we can load whisper model onto the right device
+        try:
+            import torch
+            cuda_available = torch.cuda.is_available() and torch.cuda.device_count() > 0
+            device = torch.device('cuda:0') if cuda_available else torch.device('cpu')
+        except Exception:
+            cuda_available = False
+            device = None
+
+        # Load whisper model and move to device if possible
+        model = whisper.load_model(args.whisper_model)
+        try:
+            if device is not None and str(device).startswith('cuda'):
+                try:
+                    model.to(device)
+                except Exception:
+                    pass
+                if args.fp16 and cuda_available:
+                    try:
+                        model.half()
+                    except Exception:
+                        pass
+
+        except Exception:
+            pass
+
+        # Transcription: either use faster-whisper (if requested) or whisper
+        result = None
+        if args.use_faster:
+            try:
+                from faster_whisper import WhisperModel
+                fw_model_name = args.faster_model if args.faster_model else args.whisper_model
+                compute_type = args.faster_compute_type or 'float16'
+                print(f"[whisperx_align] using faster-whisper model={fw_model_name} compute_type={compute_type}")
+                model_f = WhisperModel(fw_model_name, device=str(device) if device is not None else 'cpu', compute_type=compute_type)
+                segments = []
+                for segment in model_f.transcribe(audio_path, beam_size=5):
+                    # faster-whisper yields segment tuples (start, end, text)
+                    try:
+                        start = float(segment[0])
+                        end = float(segment[1])
+                        text = str(segment[2]).strip()
+                        segments.append({"start": start, "end": end, "text": text})
+                    except Exception:
+                        continue
+                result = { 'segments': segments, 'language': None }
+            except Exception as e:
+                print('[whisperx_align] faster-whisper not available or failed, falling back to whisper:', e)
+                result = model.transcribe(audio_path)
+        else:
+            # Use autocast when available for FP16 inference
+            try:
+                if device is not None and str(device).startswith('cuda') and args.fp16:
+                    import torch
+                    with torch.cuda.amp.autocast():
+                        result = model.transcribe(audio_path)
+                else:
+                    result = model.transcribe(audio_path)
+            except Exception:
+                # fallback to simple call
+                result = model.transcribe(audio_path)
 
         audio_load = whisperx.load_audio(audio_path)
         if isinstance(audio_load, (tuple, list)):
@@ -128,6 +192,27 @@ def main():
                 model_a.to(device)
             except Exception:
                 pass
+        except Exception:
+            pass
+
+        # If running on CUDA and user requested fp16, attempt to convert models to half precision
+        try:
+            if args.fp16 and cuda_available:
+                try:
+                    # Convert whisper model to fp16 if possible
+                    try:
+                        model.to(device)
+                        model.half()
+                    except Exception:
+                        pass
+                    # Convert align model to fp16 if possible
+                    try:
+                        model_a.to(device)
+                        model_a.half()
+                    except Exception:
+                        pass
+                except Exception:
+                    pass
         except Exception:
             pass
 

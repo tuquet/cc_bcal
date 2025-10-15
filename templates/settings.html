@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Cấu hình{% endblock %}
+
+{% block content %}
+<div class="bg-white shadow rounded p-4">
+  <h2 class="text-lg font-medium mb-4">Cấu hình</h2>
+  <form method="post" action="{{ url_for('ui_settings') }}">
+    <div class="mb-4">
+      <label for="projectFolder" class="block text-sm font-medium text-slate-700">Project folder</label>
+      <input id="projectFolder" name="project_folder" class="mt-1 block w-full border rounded px-2 py-1" type="text" placeholder="Ví dụ: projects/" value="{{ config.project_folder or '' }}">
+      <p class="text-xs text-slate-500 mt-1">Đường dẫn tương đối so với thư mục dự án (ví dụ: projects/)</p>
+    </div>
+    <div>
+      <button type="submit" class="px-3 py-2 bg-sky-600 text-white rounded">Lưu</button>
+    </div>
+  </form>
+</div>
+{% endblock %}
