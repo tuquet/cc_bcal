@@ -19,15 +19,15 @@ RUN python -m pip install --upgrade pip setuptools wheel || python3 -m pip insta
 RUN python -m pip install --no-cache-dir "torch==2.8.0+cu129" torchvision torchaudio --index-url https://download.pytorch.org/whl/cu129
 
 # Copy requirements and project into the image. requirements.txt lives under docker/whisperx in the repo.
-COPY docker/whisperx/requirements.txt /tmp/requirements.txt
+COPY whisperx/requirements.txt /tmp/requirements.txt
 RUN python -m pip install --no-cache-dir -r /tmp/requirements.txt
 
 WORKDIR /workspace
 # Copy only the alignment tooling and runtime entrypoint to keep the image small.
 # Audio files and episode assets should be mounted at runtime from the host.
-COPY docker/whisperx /workspace/docker/whisperx
+COPY whisperx /workspace/whisperx
 
-# Make entrypoint executable (entrypoint lives at docker/whisperx/docker-entrypoint.sh in the repo)
-RUN chmod +x /workspace/docker/whisperx/docker-entrypoint.sh
+# Make entrypoint executable (entrypoint lives at whisperx/docker-entrypoint.sh in the repo)
+RUN chmod +x /workspace/whisperx/docker-entrypoint.sh
 
-ENTRYPOINT ["/workspace/docker/whisperx/docker-entrypoint.sh"]
+ENTRYPOINT ["/workspace/whisperx/docker-entrypoint.sh"]

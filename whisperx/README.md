@@ -5,7 +5,7 @@ Thư mục này chứa `Dockerfile` và các tập trợ giúp để xây dựng
 Cách build (chạy từ thư mục gốc của repo):
 
 ```bash
-docker build -t cc_bcal-whisperx -f docker/whisperx/Dockerfile .
+docker build -t cc_bcal-whisperx -f whisperx/Dockerfile .
 ```
 
 Ví dụ lệnh chạy container:

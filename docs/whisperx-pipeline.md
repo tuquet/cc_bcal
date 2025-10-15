@@ -57,6 +57,6 @@ File liên quan
 - `scripts/whisperx-batch.mjs` — Node batch runner (scan, parallel, dry-run, force, require-gpu)
 - `scripts/write-srt-from-outjson.mjs` — chuyển out-whisperx.json -> .srt
 - `run-whisperx.ps1`, `run-whisperx-batch.ps1` — helper PowerShell để mount host cache và chạy container
-- `docker/whisperx/whisperx_align.py` — Python aligner used inside container
+- `whisperx/whisperx_align.py` — Python aligner used inside container
 
 Nếu muốn, tôi sẽ commit các thay đổi và tạo 1 commit message rõ ràng (đã sẵn sàng để commit).

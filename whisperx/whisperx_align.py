@@ -5,7 +5,7 @@ If whisperx is available, this script will transcribe and return JSON segments w
 If required packages are missing it will exit with code 2 and print a helpful message.
 
 Usage:
-  python docker/whisperx/scripts/whisperx_align.py --audio path/to/audio.mp3 --output out.json
+  python whisperx/scripts/whisperx_align.py --audio path/to/audio.mp3 --output out.json
 
 Output (stdout): JSON object { "segments": [ {"start": float, "end": float, "text": str}, ... ] }
 """

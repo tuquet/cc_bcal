@@ -30,8 +30,8 @@ fi
 
 # Resolve aligner script location. Priority:
 # 1) ALIGNER_PATH env var (if set and file exists)
-# 2) /workspace/docker/whisperx/whisperx_align.py
-# 3) /workspace/docker/whisperx/scripts/whisperx_align.py
+# 2) /workspace/whisperx/whisperx_align.py
+# 3) /workspace/whisperx/scripts/whisperx_align.py
 # 4) /workspace/whisperx_align.py
 # 5) fail with helpful message
 
@@ -56,8 +56,8 @@ if [ -z "${ALIGNER:-}" ]; then
   # Prefer explicit whisperx_align.py if present
   if [ -f /workspace/whisperx_align.py ]; then
     ALIGNER=/workspace/whisperx_align.py
-  elif [ -f /workspace/docker/whisperx/whisperx_align.py ]; then
-    ALIGNER=/workspace/docker/whisperx/whisperx_align.py
+  elif [ -f /workspace/whisperx/whisperx_align.py ]; then
+    ALIGNER=/workspace/whisperx/whisperx_align.py
   else
     # Find any whisperx-related python file in /workspace (non-recursive)
     for f in /workspace/*whisperx*.py; do

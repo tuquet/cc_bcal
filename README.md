@@ -1,61 +1,46 @@
-# Dự án Buoc Chan An Lac — Scripts quick reference
+# Dự án Buoc Chan An Lac — Hướng dẫn sử dụng Pipeline
 
-Tệp này tóm tắt các script hữu ích trong `package.json` để chạy các phần chính của pipeline (tạo episode, render video, chạy Whisper/WhisperX aligner).
+Dự án này sử dụng một chuỗi các script Python để tự động hóa quy trình tạo video từ kịch bản thô.
 
-Mọi ví dụ dưới đây dùng PowerShell (Windows). Khi gọi npm script và muốn truyền flag tới script Node, đặt `--` sau tên script.
+## Cài đặt ban đầu
 
-## Scripts chính
+Trước khi chạy pipeline, bạn cần đảm bảo môi trường đã được thiết lập đúng cách.
 
-- `npm run generate`
-  - Chạy `scripts/generate-episodes.mjs` để tạo/cập nhật metadata cho episodes.
-  - Ví dụ:
+### 1. Yêu cầu hệ thống
+- Python 3.7+
+- Docker (đã cài đặt và đang chạy)
+
+### 2. Tạo Môi trường ảo và Cài đặt Thư viện (Khuyến khích)
+Sử dụng môi trường ảo (`.venv`) là một cách tốt nhất để quản lý các gói phụ thuộc cho dự án.
+
+1.  **Tạo môi trường ảo:** (Chỉ cần làm một lần trong thư mục gốc dự án)
+    ```powershell
+    python -m venv .venv
+    ```
+2.  **Kích hoạt môi trường ảo:** (Cần làm mỗi khi mở một terminal mới để làm việc với dự án)
+    ```powershell
+    .\.venv\Scripts\activate
+    ```
+3.  **Cài đặt các gói cần thiết từ `requirements.txt`:**
 ```powershell
-npm run generate
+pip install -r requirements.txt
 ```
 
-- `npm run video`
-  - Chạy `scripts/video-generator.mjs` để build video cho một episode theo cấu hình mặc định.
-  - Ví dụ:
+### 3. Build Docker Image (Quan trọng)
+Bước nhận dạng giọng nói (Alignment) yêu cầu một Docker image tùy chỉnh. Hãy build image này một lần bằng lệnh sau từ thư mục gốc của dự án:
 ```powershell
-npm run video
+docker build -t cc_bcal-whisperx -f whisperx/Dockerfile .
 ```
 
-- `npm run video:test` / `npm run video:final` / `npm run video:all` / `npm run video:batch`
-  - Các chế độ của `video-generator.mjs` cho test, final hoặc batch rendering.
-  - Ví dụ (render tất cả):
+## Quy trình làm việc
+
+Quy trình tạo video từ kịch bản thô bao gồm 3 bước chính. Bạn cần thực hiện các bước này theo đúng thứ tự cho mỗi episode.
+
+### Bước 1: Tạo cấu trúc Episode
+
+Sau khi tạo các file kịch bản `.json` trong thư mục `data/`, hãy chạy script sau để tự động tạo cấu trúc thư mục và các file cần thiết trong `episodes/`.
 ```powershell
-npm run video:all
-```
-
-- `npm run align:all`
-  - Chạy `scripts/whisperx-batch.mjs` để scan `episodes/*`, chạy Whisper+WhisperX (thông qua Docker image `cc_bcal-whisperx`) và sinh `.srt` từ output JSON.
-  - Các flag thông dụng (đặt sau `--`):
-    - `--dry-run` — chỉ liệt kê files, không chạy Docker.
-    - `--force` — ghi đè `.srt` hiện có.
-    - `--require-gpu` — yêu cầu chạy với GPU (Docker sẽ thêm `--gpus all`).
-    - `--parallel N` — chạy N job song song (cẩn thận với GPU/VRAM).
-  - Ví dụ:
-```powershell
-# dry-run (liệt kê)
-npm run align:all -- --dry-run
-
-# chạy thực tế, ghi đè nếu cần
-npm run align:all -- --force
-
-# chạy yêu cầu GPU
-npm run align:all -- --require-gpu
-```
-
-## WhisperX JSON
-
-- Aligner sẽ ghi một file JSON: `<base>.whisperx.json` (ví dụ `audio.whisperx.json`).
-- Batch script dùng JSON này để sinh `.srt` bằng `scripts/write-srt-from-outjson.mjs`. JSON được giữ lại để debug.
-
-## Docker
-
-- Build image aligner (từ gốc repo):
-```powershell
-docker build -t cc_bcal-whisperx -f docker/whisperx/Dockerfile .
+python generate_episodes.py
 ```
 
 - Ví dụ chạy container trực tiếp (mount repo vào `/workspace`):

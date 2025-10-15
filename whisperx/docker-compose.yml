@@ -3,7 +3,7 @@ services:
   whisperx-aligner:
     build:
       context: ../..
-      dockerfile: docker/whisperx/Dockerfile
+      dockerfile: whisperx/Dockerfile
     runtime: nvidia
     environment:
       - NVIDIA_VISIBLE_DEVICES=all
