@@ -5,7 +5,7 @@ echo "WhisperX aligner container started. Args: $@"
 
 # If user passed no args, drop to an interactive shell
 if [ "$#" -eq 0 ]; then
-  echo "No args passed. To run alignment: docker run --gpus all -v \"/host/path/to/repo:/workspace\" image --audio /workspace/episodes/..../audio.mp3 --output /workspace/out.json"
+  echo "No args passed. To run alignment: docker run --gpus all -v \"/host/path/to/repo:/workspace\" image --audio /workspace/projects/..../audio.mp3 --output /workspace/out.json"
   exec bash
 fi
 

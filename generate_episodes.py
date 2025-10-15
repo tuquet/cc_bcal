@@ -3,14 +3,16 @@ import json
 import sys
 from pathlib import Path
 
+from utils import get_project_path
+
 def main():
     """
     Sets up episode directories and files from raw data JSONs.
-    This script replaces `setup-episodes.mjs`.
+    This script replaces `setup-projects.mjs`.
     """
     repo_root = Path(__file__).parent
     data_dir = repo_root / "data"
-    episodes_dir = repo_root / "episodes"
+    episodes_dir = repo_root / "projects"
     template_path = repo_root / "assets" / "video-template.json"
 
     # 1. Load all raw data JSON files
@@ -30,7 +32,7 @@ def main():
         print(f"❌ Lỗi khi đọc file video-template.json: {e}", file=sys.stderr)
         sys.exit(1)
 
-    # 3. Create the main episodes directory
+    # 3. Create the main projects directory
     if not episodes_dir.exists():
         episodes_dir.mkdir(parents=True)
         print(f"📁 Đã tạo thư mục chung: {episodes_dir}")
@@ -40,8 +42,7 @@ def main():
         with open(json_file, 'r', encoding='utf-8') as f:
             item = json.load(f)
 
-        folder_name = f"{item.get('id')}.{item.get('meta', {}).get('alias', 'untitled')}"
-        episode_path = episodes_dir / folder_name
+        episode_path = get_project_path(item, repo_root)
 
         # Create episode directory
         # Use exist_ok=True to avoid race conditions and simplify code

@@ -311,7 +311,7 @@ class CapCutGenerator:
 
 def main():
     parser = argparse.ArgumentParser(description="Generate a CapCut video draft from an episode directory.")
-    parser.add_argument("episode_dir", type=Path, help="Path to the episode directory (e.g., 'episodes/11.la-rung-vo-thuong').")
+    parser.add_argument("episode_dir", type=Path, help="Path to the episode directory (e.g., 'projects/11.la-rung-vo-thuong').")
     parser.add_argument("--ratio", type=str, default="9:16", choices=["9:16", "16:9"], help="Video aspect ratio (default: 9:16).")
 
     args = parser.parse_args()
@@ -338,8 +338,8 @@ Mở terminal (PowerShell, Command Prompt, v.v.) trong thư mục gốc của d�
 thực thi lệnh sau:
 
 1. Chạy cho một episode cụ thể (tỉ lệ 9:16 mặc định):
-   python scripts/render_video.py episodes/11.la-rung-vo-thuong
+   python scripts/render_video.py projects/11.la-rung-vo-thuong
 
 2. Chạy với tỉ lệ khác (16:9):
-   python scripts/render_video.py episodes/11.la-rung-vo-thuong --ratio 16:9
+   python scripts/render_video.py projects/11.la-rung-vo-thuong --ratio 16:9
 """

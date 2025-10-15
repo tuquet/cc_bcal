@@ -1,5 +1,5 @@
-*.mp3
-*.mp4
-*.png
+.env
+.venv/
+chrome-profile/
+__pycache__/
 node_modules/
-.venv**

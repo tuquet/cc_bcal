@@ -4,7 +4,14 @@
     "title": "Khi Tất Cả Đều Thay Đổi, Ta Còn Bám Víu Vào Điều Gì? | Lời Dạy Về Vô Thường",
     "alias": "khi-tat-ca-deu-thay-doi-ta-con-bam-viu-vao-dieu-gi-vo-thuong",
     "hook": "Một buổi chiều, khi tất cả xung quanh đang đổi thay, một người học trò đầy lo âu đã hỏi thầy: Ta còn có thể bám víu vào điều gì?",
-    "tags": ["vô thường", "khổ", "chánh niệm", "triết lý sống", "giải thoát", "hạnh phúc nội tâm"],
+    "tags": [
+      "vô thường",
+      "khổ",
+      "chánh niệm",
+      "triết lý sống",
+      "giải thoát",
+      "hạnh phúc nội tâm"
+    ],
     "video_type": "short",
     "description": "Trong cuộc sống, mọi thứ đều thay đổi không ngừng: người thân rời xa, tuổi trẻ phai tàn, và những điều ta từng bám víu cũng dần trôi qua. Nhưng liệu ta có thực sự cần phải bám víu vào điều gì? Thầy đã dạy rằng, thay vì bám víu, ta hãy học cách hiện diện và trân trọng từng khoảnh khắc, để tìm thấy bình an trong sự vô thường của cuộc đời."
   },
@@ -27,5 +34,46 @@
       "sound": "Âm nhạc dâng lên rồi lắng xuống trong sự tĩnh lặng, tiếng chuông ngân vang trong chiều.",
       "narration": "Học trò khẽ gật đầu, tâm hồn nhẹ nhõm như vừa buông xuống một gánh nặng. Thầy dặn. Không có gì để bám víu, nhưng cũng không cần phải bám víu. Bình an đến khi con biết thở, biết sống trọn vẹn trong từng phút giây, và để mọi đổi thay trở thành người bạn đồng hành."
     }
-  ]
+  ],
+  "generation_params": {
+    "logo": {
+      "path": "C:\\Users\\Admin\\Videos\\video-studio\\assets\\sen.png",
+      "scale": 0.1,
+      "transform_x": 0.9,
+      "transform_y": -0.5
+    },
+    "text_logo": {
+      "text": "Bước Chân An Lạc",
+      "font_size": 12,
+      "font_color": "#FFFFFF",
+      "font_alpha": 0.6,
+      "transform_x": 0,
+      "transform_y": 0,
+      "animation_type": "fly_in_left"
+    },
+    "random_effects": {
+      "max_effects": 10
+    },
+    "scene_images": {
+      "scale": 1.2
+    },
+    "background_layer": {
+      "scale": 2.5,
+      "blur": 3
+    },
+    "fixed_effects": {
+      "effects": [
+        {
+          "effect_type": "Firefly",
+          "track_name": "fixed_effect_2",
+          "params": []
+        }
+      ]
+    },
+    "enabled_modules": [
+      "background_layer",
+      "scene_images",
+      "fixed_effects"
+    ]
+  }
 }

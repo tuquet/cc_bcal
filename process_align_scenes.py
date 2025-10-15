@@ -258,7 +258,7 @@ def align_episode_scenes(episode_dir: Path):
 
 def main():
     parser = argparse.ArgumentParser(description="Run WhisperX batch processing and scene alignment.")
-    parser.add_argument('episodes', nargs='*', help="Specific episode directory names to process (e.g., '11.la-rung-vo-thuong'). If none, all episodes are scanned.")
+    parser.add_argument('projects', nargs='*', help="Specific episode directory names to process (e.g., '11.la-rung-vo-thuong'). If none, all projects are scanned.")
     parser.add_argument('--force', action='store_true', help="Force reprocessing even if output files exist.")
     parser.add_argument('--dry-run', action='store_true', help="List files to be processed without running Docker.")
     parser.add_argument('--parallel', type=int, default=1, help="Number of parallel jobs to run.")
@@ -268,15 +268,15 @@ def main():
     args = parser.parse_args()
 
     repo_root = Path.cwd()
-    episodes_root = repo_root / 'episodes'
+    episodes_root = repo_root / 'projects'
 
     if not episodes_root.is_dir():
-        print(f"Error: 'episodes' directory not found at {episodes_root}", file=sys.stderr)
+        print(f"Error: 'projects' directory not found at {episodes_root}", file=sys.stderr)
         sys.exit(1)
 
     target_episode_dirs = []
-    if args.episodes:
-        for ep_name in args.episodes:
+    if args.projects:
+        for ep_name in args.projects:
             ep_dir = episodes_root / ep_name
             if ep_dir.is_dir():
                 target_episode_dirs.append(ep_dir)
@@ -338,7 +338,7 @@ def main():
 
     # --- 3. Run Scene Alignment ---
     print("\n--- Starting Scene Alignment ---")
-    # Align all episodes that were targeted, regardless of whether they were transcribed in this run
+    # Align all projects that were targeted, regardless of whether they were transcribed in this run
     for ep_dir in target_episode_dirs:
         align_episode_scenes(ep_dir)
 

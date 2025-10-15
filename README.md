@@ -40,7 +40,7 @@ Quy trình tạo video từ kịch bản thô bao gồm 3 bước chính. Bạn 
 
 Sau khi tạo các file kịch bản `.json` trong thư mục `data/`, 
 
-Bước 1: Tạo ra cấu trúc dự án phù hợp nằm trong thư mục `episodes/`.
+Bước 1: Tạo ra cấu trúc dự án phù hợp nằm trong thư mục `projects/`.
 ```bash
 python generate_episodes.py
 ```

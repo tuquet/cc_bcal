@@ -1,0 +1,79 @@
+{
+  "id": 42,
+  "meta": {
+    "title": "Khi Trái Tim Học Cách Mềm Lại | Bài Học Về Từ Bi Và Tha Thứ",
+    "alias": "khi-trai-tim-hoc-cach-mem-lai",
+    "hook": "Một trái tim cứng rắn có thể bảo vệ ta khỏi tổn thương, nhưng chỉ một trái tim mềm lại mới thật sự chữa lành vết thương.",
+    "tags": [
+      "từ bi",
+      "tha thứ",
+      "chữa lành",
+      "phật pháp",
+      "tỉnh thức",
+      "hạnh phúc nội tâm"
+    ],
+    "video_type": "short",
+    "description": "Cuộc sống đôi khi khiến ta khép chặt trái tim vì tổn thương và giận dữ. Nhưng chính khi học cách mềm lại, ta mới tìm thấy sức mạnh thật sự của từ bi và tha thứ. Câu chuyện giữa thầy và trò này sẽ dẫn dắt bạn đến bài học sâu sắc: một trái tim mềm không yếu đuối, mà chính là nơi khởi nguồn của bình an và hạnh phúc."
+  },
+  "scenes": [
+    {
+      "title": "Câu Hỏi Của Người Học Trò",
+      "visual": "Học trò ôm ngực, ánh mắt giận dữ, ngồi trước thầy trong sân chùa đầy lá vàng rơi.",
+      "sound": "Tiếng gió thổi xào xạc, nhạc nền trầm buồn.",
+      "narration": "Học trò hỏi. Thưa thầy, con đã bị phản bội, trái tim con giờ chỉ còn sự căm giận. Làm sao con có thể tha thứ được?"
+    },
+    {
+      "title": "Ẩn Dụ Của Thầy",
+      "visual": "Thầy nhặt một cục đất sét khô cứng, nhỏ vài giọt nước và nắn nó thành hình tròn mềm mại.",
+      "sound": "Âm nhạc ấm áp dần lên, tiếng nước nhỏ giọt vang vọng.",
+      "narration": "Thầy nói. Trái tim con giống như đất sét khô, càng cứng rắn càng dễ vỡ. Khi con để từ bi và tha thứ thấm vào, trái tim sẽ mềm lại, trở nên linh hoạt và có thể tạo ra điều tốt đẹp."
+    },
+    {
+      "title": "Sự Tỉnh Thức",
+      "visual": "Học trò nhắm mắt, hít một hơi dài, nét mặt giãn ra, đôi mắt mở ra với sự nhẹ nhõm. Thầy ngồi an yên mỉm cười.",
+      "sound": "Âm nhạc dâng cao rồi lắng xuống trong sự tĩnh lặng. Tiếng chuông chùa vang vọng xa.",
+      "narration": "Học trò khẽ gật đầu, trong lòng nhẹ nhõm như vừa đặt xuống gánh nặng. Thầy dặn. Khi trái tim học cách mềm lại, con sẽ thấy tha thứ không phải là cho người khác, mà là giải thoát chính mình."
+    }
+  ],
+  "generation_params": {
+    "logo": {
+      "path": "C:\\Users\\Admin\\Videos\\video-studio\\assets\\sen.png",
+      "scale": 0.1,
+      "transform_x": 0.9,
+      "transform_y": -0.5
+    },
+    "text_logo": {
+      "text": "Bước Chân An Lạc",
+      "font_size": 12,
+      "font_color": "#FFFFFF",
+      "font_alpha": 0.6,
+      "transform_x": 0,
+      "transform_y": 0,
+      "animation_type": "fly_in_left"
+    },
+    "random_effects": {
+      "max_effects": 10
+    },
+    "scene_images": {
+      "scale": 1.2
+    },
+    "background_layer": {
+      "scale": 2.5,
+      "blur": 3
+    },
+    "fixed_effects": {
+      "effects": [
+        {
+          "effect_type": "Firefly",
+          "track_name": "fixed_effect_2",
+          "params": []
+        }
+      ]
+    },
+    "enabled_modules": [
+      "background_layer",
+      "scene_images",
+      "fixed_effects"
+    ]
+  }
+}

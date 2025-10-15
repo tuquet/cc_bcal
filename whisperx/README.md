@@ -11,7 +11,7 @@ docker build -t cc_bcal-whisperx -f whisperx/Dockerfile .
 Ví dụ lệnh chạy container:
 
 ```bash
-docker run --gpus all --rm -v "$(pwd):/workspace" cc_bcal-whisperx --audio /workspace/episodes/1.tam-nhu-mat-ho/audio.mp3 --output /workspace/out-whisperx.json
+docker run --gpus all --rm -v "$(pwd):/workspace" cc_bcal-whisperx --audio /workspace/projects/1.tam-nhu-mat-ho/audio.mp3 --output /workspace/out-whisperx.json
 ```
 
 Ghi chú:
