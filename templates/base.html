@@ -6,26 +6,30 @@
     <title>{% block title %}Script Manager{% endblock %}</title>
     <!-- Tailwind CSS (CDN - for dev) -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Cabin:ital,wght@0,400..700;1,400..700&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:ital,wght@0,100..900;1,100..900&family=Sriracha&display=swap" rel="stylesheet">
     <style>
         /* small visual background similar to previous layout */
-        body { background-color: #f8fafc; }
-        /* make a wide central container like before */
-        .app-container { max-width: 1600px; }
+        html { font-size: 1rem } 
+        body { background-color: #f8fafc; font-family: "Be Vietnam Pro", sans-serif; font-weight: 400; font-style: normal; }
     </style>
 </head>
 <body>
     <header class="bg-slate-800 text-white">
-        <div class="app-container mx-auto px-4 py-3 flex items-center justify-between">
+        <!-- Use Tailwind classes for container -->
+        <div class="max-w-[1800px] mx-auto px-4 py-3 flex items-center justify-between">
             <a class="text-xl font-semibold" href="{{ url_for('ui_index') }}">Script Manager</a>
-            <div class="flex items-center space-x-4">
-                <form id="openProjectForm" method="post" action="{{ url_for('ui_open_project_folder') }}" class="hidden"></form>
-                <button onclick="event.preventDefault(); document.getElementById('openProjectForm').submit();" class="text-sm bg-slate-700 hover:bg-slate-600 px-3 py-1 rounded">Mở folder</button>
+            <div class="flex items-center gap-4">
+                <form id="openProjectForm" method="post" action="{{ url_for('ui_open_project_folder') }}"></form>
+                <button id="open-project-folder-btn" class="text-sm bg-slate-700 hover:bg-slate-600 px-3 py-1 rounded">Mở folder</button>
                 <a href="{{ url_for('ui_settings') }}" class="text-sm bg-slate-700 hover:bg-slate-600 px-3 py-1 rounded">Cấu hình</a>
             </div>
         </div>
     </header>
     <!-- Settings is a dedicated page now; link available in header -->
-    <main id="app-root" class="app-container mx-auto px-4 py-6">
+    <!-- Use Tailwind classes for container -->
+    <main id="app-root" class="max-w-[1800px] mx-auto px-4 py-6">
         {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
                 {% for category, message in messages %}
@@ -39,50 +43,8 @@
         {% endwith %}
         {% block content %}{% endblock %}
     </main>
-    <!-- Minimal client JS (no framework) -->
-    <script>
-      function qs(selector, root) { return (root || document).querySelector(selector); }
-      function qsa(selector, root) { return Array.from((root || document).querySelectorAll(selector)); }
-
-      function toggleAll(checked) {
-          qsa('.row-checkbox').forEach(cb => { cb.checked = checked; });
-      }
-
-      function anyChecked() {
-          return qsa('.row-checkbox').some(cb => cb.checked);
-      }
-
-      function init() {
-          const selectAll = qs('#select-all');
-          const bulkForm = qs('#bulk-form');
-
-          if (selectAll) {
-              selectAll.addEventListener('change', function () {
-                  toggleAll(this.checked);
-              });
-          }
-
-          // Keep row-checkbox clicks in sync with select-all checkbox
-          qsa('.row-checkbox').forEach(cb => cb.addEventListener('change', function () {
-              const all = qsa('.row-checkbox');
-              const checkedCount = all.filter(x => x.checked).length;
-              if (selectAll) selectAll.checked = (checkedCount === all.length && all.length > 0);
-          }));
-
-          // Prevent submitting bulk form with no selection
-          if (bulkForm) {
-              bulkForm.addEventListener('submit', function (ev) {
-                  if (!anyChecked()) {
-                      ev.preventDefault();
-                      alert('Vui lòng chọn ít nhất một kịch bản trước khi áp dụng thay đổi.');
-                  }
-              });
-          }
-      }
-
-      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
-      else init();
-    </script>
+    <!-- Main application script -->
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
     <script src="{{ url_for('static', filename='js/generate-images.js') }}"></script>
     <script src="{{ url_for('static', filename='js/transcribe.js') }}"></script>
 </body>

@@ -4,7 +4,7 @@ Phiên bản API-friendly của trình tạo ảnh tự động (Gemini). File n
 xuất ra hàm generate_images(...) để có thể gọi từ một API (ví dụ: main.py).
 
 Tính năng:
-- generate_images(script_path, output_dir=None, headless=True, chrome_exe=None, user_data_dir=None, timeout=240)
+- generate_images(script_path, output_dir=None, headless=False, chrome_exe=None, user_data_dir=None, timeout=240)
   trả về dict {'ok': True, 'images': n, 'paths': [...] } hoặc {'ok': False, 'error': '...'}
 
 Giữ CLI entrypoint để chạy trực tiếp từ dòng lệnh.
@@ -35,7 +35,7 @@ GENERATED_IMAGE_SELECTOR = "img.image.loaded"
 def generate_images(
     script_path: Path,
     output_dir: Optional[Path] = None,
-    headless: bool = True,
+    headless: bool = False,
     chrome_exe: Optional[str] = None,
     user_data_dir: Optional[Path] = None,
     timeout: int = 240,

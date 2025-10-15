@@ -1,123 +1,62 @@
 {% extends 'base.html' %}
+{% from 'macros.html' import status_badge, asset_status_badge %}
 
 {% block title %}Danh Sách Kịch Bản{% endblock %}
 
 {% block content %}
-<div class="flex items-center justify-between mb-6">
+<div class="flex items-center justify-between mb-4">
     <h1 class="text-2xl font-semibold">Danh Sách Kịch Bản</h1>
-    <div class="flex gap-2">
-        <a href="{{ url_for('ui_create_script') }}" class="bg-sky-600 text-white px-3 py-2 rounded hover:bg-sky-500">Thêm Kịch Bản Mới</a>
-    </div>
+    <a href="{{ url_for('ui_create_script') }}" class="inline-block px-4 py-2 bg-sky-600 text-white rounded text-sm font-medium hover:bg-sky-700">Thêm Kịch Bản Mới</a>
 </div>
 
-<div class="bg-white shadow rounded">
-    <div class="p-4">
-        <form id="bulk-form" action="{{ url_for('ui_bulk_update_status') }}" method="POST">
-            <div class="mb-3 flex items-center gap-3">
-                <div class="flex items-center gap-2">
-                    <input id="select-all" class="h-4 w-4" type="checkbox">
-                    <label for="select-all" class="text-sm">Select all</label>
-                </div>
-                <select name="new_status" class="border rounded px-2 py-1 text-sm">
-                    <option value="prepared">prepared</option>
-                    <option value="new">new</option>
-                    <option value="failed">failed</option>
-                    <option value="finish">finish</option>
-                </select>
-                <button type="submit" class="bg-sky-600 text-white text-sm px-3 py-1 rounded">Apply</button>
-            </div>
-
-            <div class="overflow-x-auto overflow-visible">
-                <table class="min-w-full text-sm">
-                    <thead class="text-left text-slate-600 border-b">
-                        <tr>
-                            <th class="py-2"></th>
-                            <th class="py-2">ID</th>
-                            <th class="py-2">Tiêu đề</th>
-                            <th class="py-2">Trạng thái</th>
-                            <th class="py-2">Audio</th>
-                            <th class="py-2">Images</th>
-                            <th class="py-2">Transcript</th>
-                            <th class="py-2">Cập nhật lần cuối</th>
-                            <th class="py-2">Hành động</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for script in scripts %}
-                        <tr class="border-b hover:bg-slate-50">
-                            <td class="py-2"><input class="row-checkbox h-4 w-4" type="checkbox" name="ids" value="{{ script.id }}"></td>
-                            <td class="py-2">{{ script.id }}</td>
-                            <td class="py-2">{{ script.title }}</td>
-                            <td class="py-2">
-                                {% if script.status == 'finish' %}
-                                    <span class="inline-block px-2 py-1 rounded bg-sky-600 text-white text-xs">finish</span>
-                                {% elif script.status == 'prepared' %}
-                                    <span class="inline-block px-2 py-1 rounded bg-green-600 text-white text-xs">prepared</span>
-                                {% elif script.status == 'new' %}
-                                    <span class="inline-block px-2 py-1 rounded bg-slate-400 text-white text-xs">new</span>
-                                {% elif script.status == 'failed' %}
-                                    <span class="inline-block px-2 py-1 rounded bg-red-600 text-white text-xs">failed</span>
-                                {% else %}
-                                    <span class="inline-block px-2 py-1 rounded bg-slate-400 text-white text-xs">{{ script.status }}</span>
-                                {% endif %}
-                            </td>
-                            <td class="py-2">
-                                {% if script.audio_status == 'present' %}
-                                    <span class="inline-block px-2 py-1 rounded bg-green-600 text-white text-xs">present</span>
-                                {% elif script.audio_status == 'missing' %}
-                                    <span class="inline-block px-2 py-1 rounded bg-red-600 text-white text-xs">missing</span>
-                                {% else %}
-                                    <span class="inline-block px-2 py-1 rounded bg-slate-300 text-slate-800 text-xs">-</span>
-                                {% endif %}
-                            </td>
-                            <td class="py-2">
-                                {% if script.images_status == 'ok' %}
-                                    <span class="inline-block px-2 py-1 rounded bg-green-600 text-white text-xs">ok</span>
-                                {% elif script.images_status == 'partial' %}
-                                    <span class="inline-block px-2 py-1 rounded bg-yellow-400 text-slate-800 text-xs">partial</span>
-                                {% elif script.images_status == 'missing' %}
-                                    <span class="inline-block px-2 py-1 rounded bg-red-600 text-white text-xs">missing</span>
-                                {% else %}
-                                    <span class="inline-block px-2 py-1 rounded bg-slate-300 text-slate-800 text-xs">-</span>
-                                {% endif %}
-                            </td>
-                            <td class="py-2">
-                                {% if script.transcript_status == 'present' %}
-                                    <span class="inline-block px-2 py-1 rounded bg-green-600 text-white text-xs">present</span>
-                                {% else %}
-                                    <span class="inline-block px-2 py-1 rounded bg-red-600 text-white text-xs">missing</span>
-                                {% endif %}
-                            </td>
-                            <td class="py-2">{{ script.updated_at.strftime('%Y-%m-%d %H:%M') }}</td>
-                            <td class="py-2">
-                                <a href="{{ url_for('ui_edit_script', script_id=script.id) }}" class="text-sm bg-yellow-400 text-slate-800 px-2 py-1 rounded">Sửa</a>
-                                <form action="{{ url_for('ui_delete_script', script_id=script.id) }}" method="POST" class="inline" onsubmit="return confirm('Bạn có chắc muốn xóa kịch bản này?');">
-                                    <button type="submit" class="text-sm bg-red-500 text-white px-2 py-1 rounded">Xóa</button>
-                                </form>
-                                <!-- Actions dropdown -->
-                                <div class="relative inline-block text-left">
-                                    <button type="button" class="action-toggle text-sm bg-slate-200 px-2 py-1 rounded" aria-expanded="false">Hành động ▾</button>
-                                    <div class="action-menu absolute right-0 mt-2 w-40 origin-top-right bg-white border rounded shadow-lg hidden z-50" style="min-width: 10rem;">
-                                        <div class="py-1">
-                                            <button type="button" class="action-item w-full text-left px-3 py-2 text-sm" data-action="generate_images" data-script-json-path="{{ script.script_json_path }}">Tạo ảnh</button>
-                                            <button type="button" class="action-item w-full text-left px-3 py-2 text-sm" data-action="transcribe" data-script-json-path="{{ script.script_json_path }}">Transcript</button>
-                                            <button type="button" class="action-item w-full text-left px-3 py-2 text-sm" data-action="generate_capcut" data-script-json-path="{{ script.script_json_path }}">Tạo CapCut</button>
-                                            <button type="button" class="action-item w-full text-left px-3 py-2 text-sm" data-action="open_folder" data-script-json-path="{{ script.script_json_path }}">Mở thư mục</button>
-                                            <div class="border-t mt-1"></div>
-                                            <a href="{{ url_for('ui_edit_script', script_id=script.id) }}" class="block px-3 py-2 text-sm">Sửa</a>
-                                            <form action="{{ url_for('ui_delete_script', script_id=script.id) }}" method="POST" class="px-3 py-2">
-                                                <button type="submit" class="text-sm text-red-600">Xóa</button>
-                                            </form>
-                                        </div>
-                                    </div>
+<div class="bg-white shadow-md rounded-lg overflow-hidden">
+    <div class="overflow-x-auto">
+        <form id="bulk-form" method="post" action="{{ url_for('ui_bulk_update_status') }}">
+            <table class="w-full text-sm text-left text-slate-600">
+                <thead class="text-xs text-slate-700 uppercase bg-slate-100">
+                    <tr>
+                        <th scope="col" class="p-4">
+                            <input type="checkbox" id="select-all" class="w-4 h-4 text-sky-600 bg-slate-100 border-slate-300 rounded focus:ring-sky-500">
+                        </th>
+                        <th scope="col" class="px-4 py-3">ID</th>
+                        <th scope="col" class="px-4 py-3">Tiêu đề</th>
+                        <th scope="col" class="px-4 py-3">Trạng thái</th>
+                        <th scope="col" class="px-4 py-3">Audio</th>
+                        <th scope="col" class="px-4 py-3">Images</th>
+                        <th scope="col" class="px-4 py-3">Transcript</th>
+                        <th scope="col" class="px-4 py-3">Cập nhật</th>
+                        <th scope="col" class="px-4 py-3">Hành động</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for script in scripts %}
+                    <tr class="bg-white border-b hover:bg-slate-50">
+                        <td class="w-4 p-4">
+                            <input type="checkbox" name="ids" value="{{ script.id }}" class="row-checkbox w-4 h-4 text-sky-600 bg-slate-100 border-slate-300 rounded focus:ring-sky-500">
+                        </td>
+                        <td class="px-4 py-2 font-medium text-slate-900">{{ script.id }}</td>
+                        <td class="px-4 py-2">{{ script.title }}</td>
+                        <td class="px-4 py-2">{{ status_badge(script.status) }}</td>
+                        <td class="px-4 py-2">{{ asset_status_badge(script.audio_status) }}</td>
+                        <td class="px-4 py-2">{{ asset_status_badge(script.images_status) }}</td>
+                        <td class="px-4 py-2">{{ asset_status_badge(script.transcript_status) }}</td>
+                        <td class="px-4 py-2 text-slate-500 whitespace-nowrap">{{ script.updated_at.strftime('%d-%m-%Y %H:%M') }}</td>
+                        <td class="px-4 py-2">
+                            <div class="relative">
+                                <button type="button" class="action-toggle text-sm bg-slate-200 hover:bg-slate-300 px-3 py-1 rounded">Hành động</button>
+                                <div class="action-menu hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-10">
+                                    <a href="{{ url_for('ui_edit_script', script_id=script.id) }}" class="block w-full text-left px-3 py-2 text-sm text-slate-700 hover:bg-slate-100">Sửa</a>
+                                    <button type="button" class="action-item w-full text-left px-3 py-2 text-sm" data-action="open_folder" data-script-json-path="{{ script.script_json_path }}">Mở thư mục</button>
+                                    <button type="button" class="action-item w-full text-left px-3 py-2 text-sm" data-action="generate_images" data-script-json-path="{{ script.script_json_path }}">Tạo ảnh</button>
+                                    <button type="button" class="action-item w-full text-left px-3 py-2 text-sm" data-action="transcribe" data-script-json-path="{{ script.script_json_path }}">Tách lời</button>
+                                    <button type="button" class="action-item w-full text-left px-3 py-2 text-sm" data-action="generate_capcut" data-script-json-path="{{ script.script_json_path }}">Tạo video</button>
                                 </div>
-                                <div class="inline ml-2 text-sm script-gen-status" data-script-id="{{ script.id }}"></div>
-                            </td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </form>
     </div>
 </div>

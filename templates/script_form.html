@@ -18,7 +18,7 @@
 
         <div class="mb-4">
             <label for="status" class="block text-sm font-medium text-slate-700">Trạng thái</label>
-            <select class="mt-1 block w-48 border rounded px-2 py-1" id="status" name="status">
+            <select class="mt-1 block w-48 border rounded px-2 py-1 text-sm" id="status" name="status">
                 {% set statuses = ['new', 'generating', 'completed', 'error'] %}
                 {% for s in statuses %}
                     <option value="{{ s }}" {% if script and script.status == s %}selected{% endif %}>{{ s }}</option>

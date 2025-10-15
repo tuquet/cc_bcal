@@ -47,7 +47,7 @@ def _run_generate_images(script_path_str: str, job_id: str):
         result = generate_images(
             Path(script_path_str),
             output_dir=out_dir,
-            headless=job_opts.get('headless', True),
+            headless=job_opts.get('headless', False),
             chrome_exe=job_opts.get('chrome_exe'),
             user_data_dir=Path(job_opts['user_data_dir']) if job_opts.get('user_data_dir') else None,
             timeout=job_opts.get('timeout', 240),
@@ -329,7 +329,7 @@ def api_generate_images():
 
     # Accept optional generation options
     opts = {
-        'headless': bool(payload.get('headless', True)),
+        'headless': bool(payload.get('headless', False)),
         'chrome_exe': payload.get('chrome_exe'),
         'out_dir': payload.get('out_dir'),
         'user_data_dir': payload.get('user_data_dir'),
