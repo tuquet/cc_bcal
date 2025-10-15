@@ -1,6 +1,7 @@
-# Dự án Buoc Chan An Lac — Hướng dẫn sử dụng Pipeline
+# Hướng dẫn sử dụng Pipeline
 
 Dự án này sử dụng một chuỗi các script Python để tự động hóa quy trình tạo video từ kịch bản thô.
+https://docs.google.com/spreadsheets/d/1fX-4yWSzuetkaQQY6Nvh7FdP2vkcWI6G/edit?gid=1417908852#gid=1417908852
 
 ## Cài đặt ban đầu
 
