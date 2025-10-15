@@ -5,7 +5,7 @@ Khai thác các chủ đề sâu sắc như: *Vô thường, Buông bỏ, Tâm a
 
 ## 2. Yêu cầu kịch bản
 - **Giọng văn**: Truyền cảm, gần gũi, gợi tò mò; dẫn dắt người nghe đi từ băn khoăn đến khoảnh khắc nhận ra và vỡ òa.  
-- **Định dạng**: JSON, gồm 5 - 12 scenes.  
+- **Định dạng**: JSON, gồm 4 - 5 scenes phù hợp short video
 
 ## 3. Nhân vật & Giọng điệu
 - **Học trò**: Đặt *một câu hỏi duy nhất, cốt lõi* xuyên suốt kịch bản.  
@@ -70,7 +70,7 @@ Khai thác các chủ đề sâu sắc như: *Vô thường, Buông bỏ, Tâm a
       "title": "Sân chùa mùa thu",
       "visual": "Những chiếc lá vàng bay trong gió, rơi rụng khắp sân chùa.",
       "sound": "Tiếng gió nhẹ, tiếng lá xào xạc, nhạc nền trầm ấm.",
-      "narration": "Học trò nói. Con thấy lá rơi mà lòng buồn vô hạn."
+      "narration": "Học trò nói. Con thấy lá rơi mà lòng buồn vô hạn.",
     }
   ]
 }
