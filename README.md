@@ -14,21 +14,21 @@ Trước khi chạy pipeline, bạn cần đảm bảo môi trường đã đư�
 Sử dụng môi trường ảo (`.venv`) là một cách tốt nhất để quản lý các gói phụ thuộc cho dự án.
 
 1.  **Tạo môi trường ảo:** (Chỉ cần làm một lần trong thư mục gốc dự án)
-    ```powershell
+    ```bash
     python -m venv .venv
     ```
 2.  **Kích hoạt môi trường ảo:** (Cần làm mỗi khi mở một terminal mới để làm việc với dự án)
-    ```powershell
+    ```bash
     .\.venv\Scripts\activate
     ```
 3.  **Cài đặt các gói cần thiết từ `requirements.txt`:**
-```powershell
+```bash
 pip install -r requirements.txt
 ```
 
 ### 3. Build Docker Image (Quan trọng)
 Bước nhận dạng giọng nói (Alignment) yêu cầu một Docker image tùy chỉnh. Hãy build image này một lần bằng lệnh sau từ thư mục gốc của dự án:
-```powershell
+```bash
 docker build -t cc_bcal-whisperx -f whisperx/Dockerfile .
 ```
 
@@ -38,24 +38,20 @@ Quy trình tạo video từ kịch bản thô bao gồm 3 bước chính. Bạn 
 
 ### Bước 1: Tạo cấu trúc Episode
 
-Sau khi tạo các file kịch bản `.json` trong thư mục `data/`, hãy chạy script sau để tự động tạo cấu trúc thư mục và các file cần thiết trong `episodes/`.
-```powershell
+Sau khi tạo các file kịch bản `.json` trong thư mục `data/`, 
+
+Bước 1: Tạo ra cấu trúc dự án phù hợp nằm trong thư mục `episodes/`.
+```bash
 python generate_episodes.py
 ```
 
-- Ví dụ chạy container trực tiếp (mount repo vào `/workspace`):
-```powershell
-docker run --gpus all --rm -v "${PWD}:/workspace" cc_bcal-whisperx --audio /workspace/episodes/1.tam-nhu-mat-ho/audio.mp3 --output /workspace/episodes/1.tam-nhu-mat-ho/audio.whisperx.json
+Bước 2: Tạo ra kịch bản chi tiết cho từng scenes từ cái file audio khi dự án đã chuẩn bị xong.
+
+```bash
+python process_align_episodes.py 13.sinh-lao-benh-tu-la-ban-chat-tu-nhien
 ```
 
-## Ghi chú vận hành
-
-- Lần chạy đầu sẽ tải model (nặng) — mount cache host (`%USERPROFILE%\.cache`) để tái sử dụng.
-- Nếu dùng GPU, đảm bảo Docker Desktop/WSL2 đã bật GPU support hoặc cài NVIDIA container toolkit.
-- Batch mặc định skip audio đã có `.srt` — dùng `--force` để ghi đè.
-
-## Tài liệu thêm
-- Xem `whisperx-pipeline.md` trong repo để có hướng dẫn nhanh và các mẹo vận hành chi tiết.
-
----
-Tệp này chỉ là tóm tắt nhanh các lệnh thường dùng. Muốn mình mở rộng thành phần hướng dẫn chi tiết (ví dụ PowerShell helper scripts, CI snippets), nói mình biết thông tin bạn muốn bổ sung.
+Bước 3: Tạo ra template video capcut sử dụng CapCut API services tại localhost:9001
+```bash
+python process_video_draft.py 13.sinh-lao-benh-tu-la-ban-chat-tu-nhien
+```
