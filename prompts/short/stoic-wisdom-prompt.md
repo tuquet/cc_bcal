@@ -44,7 +44,6 @@ Khai thác các nguyên tắc cốt lõi của Chủ nghĩa Khắc kỷ (Stoicis
     "title": "string",
     "alias": "string",
     "hook": "string",
-    "series": "Stoic Wisdom",
     "tags": "string[]",
     "video_type": "short"
   },

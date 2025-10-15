@@ -42,7 +42,6 @@ Khai thác những câu chuyện đáng kinh ngạc trong thế giới tự nhi�
     "title": "string",
     "alias": "string",
     "hook": "string",
-    "series": "Secrets of the Wild",
     "tags": "string[]",
     "video_type": "short"
   },

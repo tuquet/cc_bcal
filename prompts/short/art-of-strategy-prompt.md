@@ -37,7 +37,6 @@ Khai thác các nguyên tắc chiến lược kinh điển như: *Tấn công m�
     "title": "string",
     "alias": "string",
     "hook": "string",
-    "series": "The Art of Strategy",
     "tags": "string[]",
     "video_type": "short",
   },

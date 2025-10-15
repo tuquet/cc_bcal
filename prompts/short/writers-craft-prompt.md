@@ -43,7 +43,6 @@ Khai thác các khía cạnh của nghệ thuật viết lách và kể chuyện
     "title": "string",
     "alias": "string",
     "hook": "string",
-    "series": "Writer's Craft",
     "tags": "string[]",
     "video_type": "short"
   },

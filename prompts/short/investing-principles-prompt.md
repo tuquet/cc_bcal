@@ -44,7 +44,6 @@ Khai thác các nguyên tắc cốt lõi trong đầu tư và tài chính cá nh
     "title": "string",
     "alias": "string",
     "hook": "string",
-    "series": "Investing Principles",
     "tags": "string[]",
     "video_type": "short"
   },

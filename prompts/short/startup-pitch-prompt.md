@@ -44,7 +44,6 @@ Khai thác các chủ đề thực tế trong thế giới khởi nghiệp như:
     "title": "string",
     "alias": "string",
     "hook": "string",
-    "series": "Startup Pitch",
     "tags": "string[]",
     "video_type": "short"
   },

@@ -42,7 +42,6 @@ Khai thác các chủ đề khoa học viễn tưởng và tương lai học nh�
     "title": "string",
     "alias": "string",
     "hook": "string",
-    "series": "Visions of the Future",
     "tags": "string[]",
     "video_type": "short"
   },

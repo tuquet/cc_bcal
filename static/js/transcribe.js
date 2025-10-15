@@ -32,12 +32,78 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // Dropdown toggle
+  function closeAllActionMenus() {
+    document.querySelectorAll('.action-menu').forEach(function(m) {
+      // if menu was moved to body, move it back to its original parent container
+      const placeholder = m._placeholder;
+      if (placeholder && placeholder.parentNode) {
+        placeholder.parentNode.replaceChild(m, placeholder);
+        delete m._placeholder;
+      }
+      m.classList.add('hidden');
+      const btn = m.parentElement ? m.parentElement.querySelector('.action-toggle') : null;
+      if (btn) btn.setAttribute('aria-expanded', 'false');
+    });
+  }
+
   document.querySelectorAll('.action-toggle').forEach(function(toggle) {
     toggle.addEventListener('click', function (ev) {
+      ev.stopPropagation();
       const menu = toggle.parentElement.querySelector('.action-menu');
       if (!menu) return;
-      menu.classList.toggle('hidden');
+      const isHidden = menu.classList.contains('hidden');
+      // close others
+      closeAllActionMenus();
+      if (isHidden) {
+        // detach menu to body to avoid clipping by overflow
+        const btnRect = toggle.getBoundingClientRect();
+        // create a placeholder to restore later
+        const ph = document.createElement('div');
+        ph.style.display = 'none';
+        menu.parentNode.replaceChild(ph, menu);
+        document.body.appendChild(menu);
+
+        // prepare menu for measurement
+        menu.style.position = 'absolute';
+        menu.style.visibility = 'hidden';
+        menu.classList.remove('hidden');
+
+        // measure
+        const mWidth = menu.offsetWidth;
+        const mHeight = menu.offsetHeight;
+
+        // compute left so right edges align with button's right
+        let left = btnRect.right + window.scrollX - mWidth;
+        let top = btnRect.bottom + window.scrollY + 6; // small gap
+
+        // clamp to viewport
+        const pad = 8;
+        const vw = window.innerWidth;
+        const vh = window.innerHeight;
+        if (left < pad) left = btnRect.left + window.scrollX;
+        if (left + mWidth > vw - pad) left = Math.max(pad, vw - mWidth - pad) + window.scrollX;
+        if (top + mHeight > window.scrollY + vh - pad) {
+          // open upwards if there's no space below
+          top = btnRect.top + window.scrollY - mHeight - 6;
+        }
+
+        menu.style.left = left + 'px';
+        menu.style.top = top + 'px';
+        menu.style.zIndex = 99999;
+        menu.style.visibility = 'visible';
+        menu._placeholder = ph;
+        toggle.setAttribute('aria-expanded', 'true');
+      } else {
+        // will be closed by closeAllActionMenus
+        menu.classList.add('hidden');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
     });
+  });
+
+  // Close menus when clicking outside
+  document.addEventListener('click', function () {
+    closeAllActionMenus();
   });
 
   // Delegate action-item clicks
@@ -81,11 +147,34 @@ document.addEventListener('DOMContentLoaded', function () {
           }
         }
         else if (action === 'open_folder') {
-          resp = await postJSON('/api/open_folder', { script_json_path: path });
+          const sid = item.getAttribute('data-script-id');
+          // First try the dedicated script-folder API which resolves based on DB/script_data
+          try {
+            const scriptResp = await postJSON('/api/open_script_folder', { script_id: sid });
+            if (scriptResp && scriptResp.ok && scriptResp.folder) {
+              // request server to open the folder (server-side open avoids browser file:// restrictions)
+              const openResp = await postJSON('/api/open_folder', { folder: scriptResp.folder });
+              if (openResp && openResp.ok) {
+                statusElem.textContent = 'opened: ' + openResp.folder;
+                return;
+              } else if (openResp && openResp.error) {
+                statusElem.textContent = 'error: ' + openResp.error;
+                return;
+              }
+            }
+          } catch (e) {
+            // ignore and fallback to previous resolution
+          }
+
+          // fallback: call the open_folder endpoint which attempts various resolutions server-side
+          resp = await postJSON('/api/open_folder', { script_json_path: path, script_id: sid });
           if (resp.ok) {
             statusElem.textContent = 'opened: ' + resp.folder;
           } else if (resp.error) {
             statusElem.textContent = 'error: ' + resp.error;
+            if (resp.tried) {
+              statusElem.textContent += ' (tried: ' + resp.tried.join(', ') + ')';
+            }
           } else {
             statusElem.textContent = JSON.stringify(resp);
           }

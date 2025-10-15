@@ -42,7 +42,6 @@ Khai thác các chủ đề lịch sử hấp dẫn như: _Những hiểu lầm 
     "title": "string",
     "alias": "string",
     "hook": "string",
-    "series": "History Uncovered",
     "tags": "string[]",
     "video_type": "short"
   },

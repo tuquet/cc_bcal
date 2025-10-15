@@ -44,7 +44,6 @@ Khai thác các khía cạnh của tư duy logic và suy luận như: _Suy luậ
     "title": "string",
     "alias": "string",
     "hook": "string",
-    "series": "The Detective's Mind",
     "tags": "string[]",
     "video_type": "short"
   },

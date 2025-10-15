@@ -42,7 +42,6 @@ Khai thác các câu chuyện và nhân vật từ thần thoại thế giới n
     "title": "string",
     "alias": "string",
     "hook": "string",
-    "series": "Mythology Unveiled",
     "tags": "string[]",
     "video_type": "short"
   },

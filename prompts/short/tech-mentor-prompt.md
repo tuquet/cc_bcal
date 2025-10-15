@@ -43,7 +43,6 @@ Khai thác các chủ đề thực tế trong ngành công nghệ như: _Hội c
     "title": "string",
     "alias": "string",
     "hook": "string",
-    "series": "Tech Mentor",
     "tags": "string[]",
     "video_type": "short"
   },
