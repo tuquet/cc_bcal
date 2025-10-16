@@ -1,6 +1,7 @@
 import os
-from app import create_app, db
+from app import create_app
 from app.tasks import init_tasks
+from app.extensions import db
 
 # Create the Flask app instance using the application factory
 # It will load the config based on FLASK_CONFIG or default to 'development'
@@ -14,7 +15,8 @@ init_tasks(app)
 def make_shell_context():
     """Provides a shell context for `flask shell` command."""
     from app.models.script import Script
-    return {'db': db, 'Script': Script}
+    from app.models.prompt import Prompt
+    return {'db': db, 'Script': Script, 'Prompt': Prompt}
 
 @app.cli.command('create-db')
 def create_db_command():

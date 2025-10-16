@@ -1,56 +1,113 @@
-# Hướng dẫn sử dụng Pipeline
+# Nexo API
 
-Dự án này sử dụng một chuỗi các script Python để tự động hóa quy trình tạo video từ kịch bản thô.
-https://docs.google.com/spreadsheets/d/1fX-4yWSzuetkaQQY6Nvh7FdP2vkcWI6G/edit?gid=1417908852#gid=1417908852
+A Flask-based API backend for a video creation pipeline, managing scripts, assets, background jobs, and generating video projects for CapCut.
 
-## Cài đặt ban đầu
+## Features
 
-Trước khi chạy pipeline, bạn cần đảm bảo môi trường đã được thiết lập đúng cách.
+- **RESTful API**: Manage scripts, prompts, and background jobs.
+- **Structured Logging**: Using `structlog` for machine-readable logs (JSON in production).
+- **Database Migrations**: Using `Flask-Migrate` to manage database schema changes.
+- **Background Tasks**: A Redis-based queue system to handle long-running tasks like video transcription, image generation, and video processing.
+- **API Documentation**: Automatic Swagger UI generation with `Flasgger`.
 
-### 1. Yêu cầu hệ thống
-- Python 3.7+
-- Docker (đã cài đặt và đang chạy)
+## Prerequisites
 
-### 2. Tạo Môi trường ảo và Cài đặt Thư viện (Khuyến khích)
-Sử dụng môi trường ảo (`venv`) là một cách tốt nhất để quản lý các gói phụ thuộc cho dự án.
+Before you begin, ensure you have the following installed:
 
-1.  **Tạo môi trường ảo:** (Chỉ cần làm một lần trong thư mục gốc dự án)
-    ```bash
-    python -m venv venv
-    ```
-2.  **Kích hoạt môi trường ảo:** (Cần làm mỗi khi mở một terminal mới để làm việc với dự án)
-    ```bash
-    .\venv\Scripts\activate
-    ```
-3.  **Cài đặt các gói cần thiết từ `requirements.txt`:**
+- **Python 3.10+**
+- **Redis**: Required for the background task queue.
+- **FFmpeg**: Required by `whisperx` for audio processing. Make sure it's installed and available in your system's PATH.
+
+## 1. Setup
+
+Follow these steps to get your development environment set up.
+
+### a. Clone the Repository
+
+```bash
+git clone <your-repository-url>
+cd nexo-api
+```
+
+### b. Create and Activate a Virtual Environment
+
+It's highly recommended to use a virtual environment to manage project dependencies.
+
+```bash
+# For Windows
+python -m venv .venv
+.venv\Scripts\activate
+
+# For macOS/Linux
+python3 -m venv .venv
+source .venv/bin/activate
+```
+
+### c. Install Dependencies
+
+Install all required Python packages from `requirements.txt`.
+
 ```bash
 pip install -r requirements.txt
 ```
 
-### 3. Build Docker Image (Quan trọng)
-Bước nhận dạng giọng nói (Alignment) yêu cầu một Docker image tùy chỉnh. Hãy build image này một lần bằng lệnh sau từ thư mục gốc của dự án:
-```bash
-docker build -t cc_bcal-whisperx -f whisperx/Dockerfile .
+## 2. Configuration
+
+The application uses environment variables for configuration, which are loaded from `.env` files.
+
+### a. Flask Environment
+
+The project includes a `.flaskenv` file which is automatically loaded by Flask. It sets essential variables for the Flask CLI:
+
+```ini
+# .flaskenv
+FLASK_APP=run.py
+FLASK_DEBUG=1
 ```
 
-## Quy trình làm việc
+### b. Application Settings
 
-Quy trình tạo video từ kịch bản thô bao gồm 5 bước chính. Bạn cần thực hiện các bước này theo đúng thứ tự cho mỗi project.
+Create a `settings.json` file in the project root to configure the main project folder.
 
-### Bước 1: Tạo cấu trúc Project (`1_generate_episodes.py`)
-
-Sau khi tạo các file kịch bản `.json` trong thư mục `data/`, hãy chạy script sau để tự động tạo cấu trúc thư mục và các file cần thiết trong `projects/`.
-```bash
-python 1_generate_episodes.py
+```json
+// settings.json
+{
+  "project_folder": "C:\\Path\\To\\Your\\Video\\Projects"
+}
 ```
 
-Bước 2: Tạo ra kịch bản chi tiết cho từng scenes từ cái file audio khi dự án đã chuẩn bị xong.
+## 3. Database Setup
+
+The project uses `Flask-Migrate` to handle database schema migrations.
+
+1.  **Initialize the migration repository** (run this only the first time):
+    ```bash
+    python -m flask db init
+    ```
+2.  **Generate a migration script** whenever you change your models (`app/models/*.py`):
+    ```bash
+    python -m flask db migrate -m "Your descriptive message about the changes"
+    ```
+3.  **Apply the migration** to update the database:
+    ```bash
+    python -m flask db upgrade
+    ```
+
+## 4. Running the Application
+
+To start the Flask development server, run:
 
 ```bash
-python process_align_episodes.py 13.sinh-lao-benh-tu-la-ban-chat-tu-nhien
+python run.py
 ```
 
-Bước 3: Tạo ra template video capcut sử dụng CapCut API services tại localhost:9001
-```bash
-python process_video_draft.py 13.sinh-lao-benh-tu-la-ban-chat-tu-nhien
+You will see output similar to this:
+
 ```
+✅ Logging configured in development (console) mode with level: INFO
+🚀 API docs available at: http://127.0.0.1:5000/api/docs/
+ * Running on http://127.0.0.1:5000
+```
+
+- The API server is running at `http://127.0.0.1:5000`.
+- The interactive API documentation (Swagger UI) is available at `http://127.0.0.1:5000/api/docs/`.

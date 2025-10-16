@@ -1,6 +1,7 @@
 from flask import Flask
 from config import config
 from .extensions import db, cache
+from flask_migrate import Migrate
 from flasgger import Flasgger
 from .logging_config import configure_logging
 import os
@@ -24,7 +25,8 @@ def create_app(config_name=None):
     # Initialize extensions
     db.init_app(app)
     cache.init_app(app)
-    Flasgger(app)  # Khởi tạo Flasgger
+    Migrate(app, db)
+    Flasgger(app)  # Initialize Flasgger
 
     # Register API blueprints
     from .api.v1.routes import api_v1 as api_v1_blueprint

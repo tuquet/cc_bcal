@@ -9,12 +9,16 @@
   "cSpell.words": [
     "capcut",
     "dotenv",
+    "Flasgger",
+    "flaskenv",
     "numpy",
     "structlog",
     "torchaudio",
     "torchinfo",
     "torchvision",
     "tqdm",
+    "uiversion",
+    "venv",
     "whisperx"
   ]
 }

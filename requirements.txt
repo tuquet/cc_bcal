@@ -3,12 +3,13 @@
 waitress
 
 requests
-ffmpeg-downloader
+python-dotenv
 python-dotenv
 Flask
 Flask-SQLAlchemy
 Flask-Caching
 Flask-Cors
+Flask-Migrate
 flasgger
 redis
 structlog
