@@ -16,7 +16,8 @@ def make_shell_context():
     """Provides a shell context for `flask shell` command."""
     from app.models.script import Script
     from app.models.prompt import Prompt
-    return {'db': db, 'Script': Script, 'Prompt': Prompt}
+    from app.models.setting import Setting
+    return {'db': db, 'Script': Script, 'Prompt': Prompt, 'Setting': Setting}
 
 @app.cli.command('create-db')
 def create_db_command():

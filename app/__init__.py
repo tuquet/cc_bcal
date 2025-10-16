@@ -28,8 +28,13 @@ def create_app(config_name=None):
     Migrate(app, db)
     Flasgger(app)  # Initialize Flasgger
 
-    # Register API blueprints
-    from .api.v1.routes import api_v1 as api_v1_blueprint
-    app.register_blueprint(api_v1_blueprint, url_prefix='/api/v1')
+    with app.app_context():
+        # Load settings from the database after the app and db are initialized
+        from .settings import settings
+        settings.load()
+
+        # Register the master v1 API blueprint
+        from .api.v1 import api_v1
+        app.register_blueprint(api_v1, url_prefix='/api/v1')
 
     return app

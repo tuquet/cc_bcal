@@ -9,32 +9,23 @@ import subprocess
 
 # Imports from the new structure
 from app.extensions import db
+from app.settings import settings
+from app.services.setting_service import get_all_settings_as_dict, update_settings
 from app.models.script import Script
 
 
 # --- Config/Settings Helpers ---
 
-def _get_settings_path() -> Path:
-    """Returns the absolute path to the settings.json file."""
-    # current_app.root_path is the 'app' directory, so its parent is the project root.
-    return current_app.root_path.parent / 'settings.json'
-
 def load_config() -> dict:
-    """Loads the UI settings from settings.json."""
-    try:
-        p = _get_settings_path()
-        if p.exists():
-            with p.open('r', encoding='utf-8') as f:
-                return json.load(f)
-    except Exception:
-        pass
-    return {}
+    """DEPRECATED: Use the `settings` object from `app.settings` instead."""
+    return get_all_settings_as_dict()
 
 def save_config(cfg: dict):
-    """Saves the UI settings to settings.json."""
-    p = _get_settings_path()
-    with p.open('w', encoding='utf-8') as f:
-        json.dump(cfg, f, indent=2, ensure_ascii=False)
+    """Saves a dictionary of settings to the database."""
+    update_settings(cfg)
+    db.session.commit()
+    # Reload the global settings object after saving
+    settings.load()
 
 # --- Project Path Helper ---
 
@@ -45,8 +36,7 @@ def get_project_path(script_data: Dict[str, Any], root_dir: Path = None) -> Path
     if root_dir is None:
         root_dir = current_app.root_path.parent
 
-    cfg = load_config()
-    proj_folder = cfg.get('project_folder')
+    proj_folder = settings.PROJECT_FOLDER
 
     if proj_folder:
         proj_path = Path(proj_folder)
@@ -245,5 +235,3 @@ def generator_run_once():
                 processed_count += 1
             except Exception as e:
                 current_app.logger.exception(f"Generator run: Failed to process script id={script.id}. Error: {e}")
-        db.session.commit()
-        current_app.logger.info(f"Generator run: Finished. Processed {processed_count} scripts.")
