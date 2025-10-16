@@ -118,7 +118,7 @@ def generate_images(
         wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, INPUT_BOX_SELECTOR)))
         print("✅ Trang sẵn sàng. Bắt đầu gửi prompt...")
 
-        scenes_json_string = json.dumps(scenes, ensure_ascii=False, indent=2)
+        scenes_json_string = json.dumps(scenes, ensure_ascii=False, separators=(',', ':'))
         prompt = (
             f"tạo ảnh dựa theo JSON scenes sau: {scenes_json_string} "
             "lưu ý: ảnh không chứa text, mọi nhân vật đều đủ 18 tuổi trở lên"
@@ -222,4 +222,3 @@ def _cli_main():
 
 if __name__ == '__main__':
     _cli_main()
-

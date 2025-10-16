@@ -1,6 +1,0 @@
-git+https://github.com/openai/whisper.git@main
-git+https://github.com/m-bain/whisperx.git@main
-ffmpeg-python
-numpy==2.0.2
-tqdm
-torchinfo

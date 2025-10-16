@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 import argparse
-from utils import get_project_path
 import json
 import re
 import subprocess
@@ -14,6 +13,10 @@ from pathlib import Path
 from typing import Any, Dict, Optional
 
 import requests
+
+# --- Tích hợp Script Manager ---
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+sys.path.append(str(PROJECT_ROOT))
 
 # --- Cấu hình ---
 # Port cho API của CapCut. Script gốc dùng 9001, bạn có thể thay đổi nếu cần.
@@ -72,12 +75,12 @@ def call_api(endpoint: str, payload: Dict[str, Any]) -> Dict[str, Any]:
 class CapCutGenerator:
     """Lớp quản lý việc tạo video CapCut, tương đương với script Node.js."""
 
-    def __init__(self, episode_dir: Path, ratio: str = "9:16"):
-        self.episode_dir = episode_dir.resolve()
+    def __init__(self, project_folder: Path, script_data: Dict[str, Any], ratio: str = "9:16"):
+        self.episode_dir = project_folder.resolve()
         self.ratio = ratio
         self.file_server: Optional[FileServerThread] = None
         self.draft_id: Optional[str] = None
-        self.script_data: Optional[Dict[str, Any]] = None
+        self.script_data: Dict[str, Any] = script_data
     # store total audio duration in seconds (server API expects seconds)
         self.total_audio_duration_s = 0.0
         self.width = 0
@@ -97,16 +100,13 @@ class CapCutGenerator:
         if not self.episode_dir.is_dir():
             raise FileNotFoundError(f"❌ Thư mục episode không tồn tại: {self.episode_dir}")
 
-        script_json_path = self.episode_dir / "capcut-api.json"
-        self.audio_path = self.episode_dir / "audio.mp3"
-
-        if not script_json_path.exists():
-            raise FileNotFoundError(f"❌ Không tìm thấy file capcut-api.json trong: {self.episode_dir}")
+        # Tìm file audio linh hoạt hơn
+        audio_candidates = list(self.episode_dir.glob('audio.*'))
+        if not audio_candidates:
+             raise FileNotFoundError(f"❌ Không tìm thấy file audio (audio.mp3, audio.wav, etc.) trong: {self.episode_dir}")
+        self.audio_path = audio_candidates[0]
         if not self.audio_path.exists():
-            raise FileNotFoundError(f"❌ Không tìm thấy file audio.mp3 trong: {self.episode_dir}")
-
-        with open(script_json_path, 'r', encoding='utf-8') as f:
-            self.script_data = json.load(f)
+            raise FileNotFoundError(f"❌ Không tìm thấy file audio tại: {self.audio_path}")
 
         # Prefer the actual audio file duration (probe) so visuals match audio exactly.
         probed = self._probe_audio_duration(self.audio_path)
@@ -122,6 +122,22 @@ class CapCutGenerator:
             "16:9": {"width": 1920, "height": 1080},
         }
         self.width, self.height = dimensions.get(self.ratio, dimensions["16:9"]).values()
+
+        # --- Hợp nhất video-template.json ---
+        # Đường dẫn chính xác đến file template, dựa trên PROJECT_ROOT
+        template_path = PROJECT_ROOT / 'static' / 'video-template.json'
+        if template_path.exists():
+            print(f"🔎 Tìm thấy video-template.json tại: {template_path}")
+            with open(template_path, 'r', encoding='utf-8') as f:
+                template_data = json.load(f)
+            
+            # Hợp nhất 'generation_params'
+            # Dữ liệu trong script_data sẽ ghi đè lên template nếu có xung đột
+            # Sử dụng deep merge để hợp nhất các dictionary con
+            merged_params = self._deep_merge(template_data, self.script_data.get("generation_params", {}))
+            self.script_data["generation_params"] = merged_params
+        else:
+            print(f"⚠️ Không tìm thấy file video-template.json tại: {template_path}")
 
     def _probe_audio_duration(self, audio_path: Path) -> Optional[float]:
         """Try multiple methods to get duration (seconds) of audio file.
@@ -179,6 +195,16 @@ class CapCutGenerator:
 
         return None
 
+    def _deep_merge(self, base: dict, new: dict) -> dict:
+        """Hợp nhất hai dictionary một cách đệ quy."""
+        merged = base.copy()
+        for key, value in new.items():
+            if isinstance(value, dict) and key in merged and isinstance(merged[key], dict):
+                merged[key] = self._deep_merge(merged[key], value)
+            else:
+                merged[key] = value
+        return merged
+
     def _run_if_enabled(self, module_name: str, action, *args, **kwargs):
         """Helper để chạy một action nếu module được bật."""
         enabled_modules = self.script_data.get("generation_params", {}).get("enabled_modules", [])
@@ -229,7 +255,6 @@ class CapCutGenerator:
         except Exception as e:
             print("\n💥💥💥 PIPELINE THẤT BẠI! 💥💥💥", file=sys.stderr)
             print(f"Đã xảy ra lỗi trong quá trình thực thi: {e}", file=sys.stderr)
-            sys.exit(1)
         finally:
             if self.file_server:
                 self.file_server.stop()
@@ -399,24 +424,20 @@ class CapCutGenerator:
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Generate a CapCut video draft from an episode directory.")
-    parser.add_argument("script_file", type=Path, help="Path to the script JSON file (e.g., 'data/1.json').")
+    parser = argparse.ArgumentParser(description="Tạo video nháp CapCut từ một thư mục project.")
+    parser.add_argument("project_folder", type=Path, help="Đường dẫn đến thư mục project chứa capcut-api.json và các tài sản.")
     parser.add_argument("--ratio", type=str, default="9:16", choices=["9:16", "16:9"], help="Video aspect ratio (default: 9:16).")
 
     args = parser.parse_args()
 
-    if not args.script_file.exists():
-        print(f"❌ Lỗi: File kịch bản không tồn tại: {args.script_file}", file=sys.stderr)
+    if not args.project_folder.is_dir():
+        print(f"❌ Lỗi: Thư mục project không tồn tại: {args.project_folder}", file=sys.stderr)
         sys.exit(1)
 
-    with open(args.script_file, 'r', encoding='utf-8') as f:
-        script_data = json.load(f)
-
-    project_path = get_project_path(script_data)
-
-    generator = CapCutGenerator(project_path, args.ratio)
+    generator = CapCutGenerator(args.project_folder, ratio=args.ratio)
     generator.run()
 
 
 if __name__ == "__main__":
+    # This allows the script to be run standalone, but also imported from other modules.
     main()

@@ -1,12 +1,26 @@
+--extra-index-url https://download.pytorch.org/whl/cu121
+
+waitress
+
 requests
 ffmpeg-downloader
 python-dotenv
 Flask
 Flask-SQLAlchemy
+Flask-Caching
+Flask-Cors
+flasgger
+redis
+structlog
+
+# Pin PyTorch versions to ensure compatibility and avoid conflicts
+torch==2.3.1
+torchaudio==2.3.1
+torchvision==0.18.1
 
 # WhisperX / transcription deps (merged from whisperx/requirements.txt)
 git+https://github.com/openai/whisper.git@main
-git+https://github.com/m-bain/whisperx.git@main
+whisperx==3.1.1
 ffmpeg-python
 numpy==2.0.2
 tqdm
