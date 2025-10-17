@@ -1,81 +1,86 @@
 from flask import request, jsonify, Blueprint, current_app
 from app.extensions import db
+from app.models.prompt import Prompt
 from app.services import prompt_service
 
-prompts_bp = Blueprint('prompts', __name__)
+prompts_bp = Blueprint("prompts", __name__)
 
-@prompts_bp.route('/prompts', methods=['GET'])
+
+def _ok(data, status=200):
+    return jsonify({"code": 0, "data": data}), status
+
+
+def _err(msg, status=400):
+    return jsonify({"code": 1, "error": str(msg)}), status
+
+def _serialize_prompt(p: "Prompt"):
+    return {
+        "id": p.id,
+        "name": p.name,
+        "content": p.content,
+    }
+
+
+@prompts_bp.route("/prompts", methods=["GET"])
 def api_get_prompts():
-    """Get all available prompts.
-    This endpoint returns a list of all prompt templates stored on the server.
-    The results are cached for performance.
-    ---
-    tags:
-      - Prompts
-    responses:
-      200:
-        description: A JSON object where keys are filenames and values are the prompt content.
-        schema:
-          type: object
-          additionalProperties:
-            type: string
-          example:
-            prompt1.md: "This is the content of the first prompt."
-            prompt2.md: "Content of the second prompt."
-    """
-    return jsonify(prompt_service.get_all_prompts())
-
-@prompts_bp.route('/save_prompt', methods=['POST'])
-def api_save_prompt():
-    """Create or update a prompt.
-    If the filename exists, it updates the content. Otherwise, it creates a new prompt.
-    ---
-    tags:
-      - Prompts
-    parameters:
-      - in: body
-        name: body
-        required: true
-        schema:
-          type: object
-          properties:
-            name:
-              type: string
-              description: The unique name for the prompt (e.g., 'my-prompt.md').
-            content:
-              type: string
-              description: The full markdown content of the prompt.
-    responses:
-      200:
-        description: Prompt saved successfully.
-    """
-    payload = request.get_json() or {}
-    name = payload.get('name')
-    content = payload.get('content')
-
     try:
-        prompt_service.save_prompt(name=name, content=content)
-        return jsonify({'ok': True, 'message': f'Prompt "{name}" has been saved.'})
+        return _ok(prompt_service.get_all_prompts())
+    except Exception as e:
+        current_app.logger.exception(e)
+        return _err(e, 500)
+
+
+@prompts_bp.route("/prompts", methods=["POST"])
+def api_save_prompt():
+    payload = request.get_json() or {}
+    try:
+        saved = prompt_service.save_prompt(
+            name=payload.get("name"), content=payload.get("content")
+        )
+        return _serialize_prompt(saved), 201
     except ValueError as e:
-        return jsonify({'error': str(e)}), 400
+        return _err(e, 400)
     except Exception as e:
         db.session.rollback()
-        current_app.logger.error(f"Could not save prompt '{name}' to database: {e}")
-        return jsonify({'error': str(e)}), 500
+        current_app.logger.exception(e)
+        return _err(e, 500)
 
-@prompts_bp.route('/prompts/<int:prompt_id>', methods=['DELETE'])
-def delete_prompt(prompt_id):
-    """Delete a prompt by its ID.
-    ---
-    tags:
-      - Prompts
-    parameters:
-      - name: prompt_id
-        in: path
-        type: integer
-        required: true
-    responses:
-      200:
-        description: Prompt deleted successfully.
-    """
-    return prompt_service.delete_prompt_by_id(prompt_id)
+
+@prompts_bp.route("/prompts/<int:prompt_id>", methods=["PUT"])
+def api_update_prompt(prompt_id):
+    payload = request.get_json() or {}
+    try:
+        updated = prompt_service.update_prompt_by_id(
+            prompt_id, payload.get("name"), payload.get("content")
+        )
+        if not updated:
+            return _err("Prompt not found", 404)
+        return _ok({"id": updated.id, "name": updated.name, "content": updated.content})
+    except ValueError as e:
+        return _err(e, 400)
+    except Exception as e:
+        db.session.rollback()
+        current_app.logger.exception(e)
+        return _err(e, 500)
+
+
+@prompts_bp.route("/prompts/<int:prompt_id>", methods=["DELETE"])
+def api_delete_prompt(prompt_id):
+    try:
+        res = prompt_service.delete_prompt_by_id(prompt_id)
+        # handle various service return shapes (id, dict with id, True, or a Flask response)
+        if hasattr(res, "status_code"):
+            return res
+        if isinstance(res, dict) and res.get("id"):
+            deleted_id = res["id"]
+        elif isinstance(res, int):
+            deleted_id = res
+        elif res is True:
+            deleted_id = prompt_id
+        else:
+            deleted_id = prompt_id
+        return _ok({"id": deleted_id})
+    except Exception as e:
+        db.session.rollback()
+        current_app.logger.exception(e)
+        return _err(e, 500)

@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_cors import CORS
 from config import config
 from .extensions import db, cache
 from flask_migrate import Migrate
@@ -39,5 +40,14 @@ def create_app(config_name=None):
         # Register the master v1 API blueprint
         from .api.v1 import api_v1
         app.register_blueprint(api_v1, url_prefix='/api/v1')
+
+    # Configure CORS for API endpoints and set secure Referrer-Policy
+    CORS(app, resources={r"/api/*": {"origins": "*"}}, supports_credentials=True)
+
+    @app.after_request
+    def set_security_headers(response):
+        # Set Referrer-Policy as requested
+        response.headers['Referrer-Policy'] = 'strict-origin-when-cross-origin'
+        return response
 
     return app

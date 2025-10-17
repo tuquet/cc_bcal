@@ -8,3 +8,10 @@ class Prompt(db.Model):
 
     def __repr__(self):
         return f'<Prompt {self.name}>'
+    
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "content": self.content,
+        }
