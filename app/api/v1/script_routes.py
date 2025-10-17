@@ -1,6 +1,7 @@
 from flask import request, jsonify, Blueprint, current_app
 from app.extensions import db
 from app.models.script import Script
+from app.api.pagination import paginate_query
 
 scripts_bp = Blueprint('scripts', __name__)
 
@@ -53,8 +54,23 @@ def get_scripts():
           items:
             $ref: '#/definitions/Script'
     """
-    scripts = Script.query.order_by(Script.updated_at.desc()).all()
-    return jsonify([s.to_dict() for s in scripts])
+    include_narration = request.args.get('include_narration', 'false').lower() in ('1', 'true', 'yes')
+
+    def _serialize(s: Script):
+        d = s.to_dict()
+        if include_narration:
+            d['full_narration_text'] = s.full_narration_text
+        return d
+
+    resp = paginate_query(
+        Script.query,
+        Script,
+        request.args,
+        serialize=_serialize,
+        default_sort='updated_at',
+    allowed_sort_fields={'id', 'updated_at', 'created_at', 'title', 'alias', 'status', 'duration'},
+    )
+    return jsonify(resp)
 
 @scripts_bp.route('/scripts/<int:script_id>', methods=['GET'])
 def get_script(script_id):
@@ -76,7 +92,11 @@ def get_script(script_id):
     script = db.session.get(Script, script_id)
     if not script:
         return jsonify({"error": "Script not found"}), 404
-    return jsonify(script.to_dict())
+    include_narration = request.args.get('include_narration', 'false').lower() in ('1', 'true', 'yes')
+    data = script.to_dict()
+    if include_narration:
+        data['full_narration_text'] = script.full_narration_text
+    return jsonify(data)
 
 @scripts_bp.route('/scripts/<int:script_id>', methods=['PUT'])
 def update_script(script_id):

@@ -45,7 +45,7 @@
 
 ### 5. Kỹ thuật & Tối ưu TTS
 
-* Mỗi câu thoại là một object trong mảng `lines`, không gộp nhiều câu.
+* Mỗi câu thoại là một object trong mảng `dialogues`, không gộp nhiều câu.
 * Mỗi câu kết thúc bằng dấu chấm.
 * `role` chỉ được dùng: `"student"`, `"teacher"`, `"narrator"`.
 
@@ -78,7 +78,7 @@
       "title": "string",
       "visual": "string",
       "sound": "string",
-      "lines": [
+      "dialogues": [
         {
           "role": "student | teacher | narrator",
           "text": "string"

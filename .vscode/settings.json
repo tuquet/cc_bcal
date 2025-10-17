@@ -12,6 +12,7 @@
     "Flasgger",
     "flaskenv",
     "numpy",
+    "onupdate",
     "structlog",
     "torchaudio",
     "torchinfo",

@@ -65,12 +65,12 @@ def asset_check_once():
     """Check audio and images for all scripts and update statuses."""
     project_root = current_app.root_path.parent
     summary = { 'checked': 0, 'skipped': 0, 'audio_present': 0, 'audio_missing': 0, 'images_ok': 0, 'images_partial': 0, 'images_missing': 0, 'changed': 0 }
-    lines = []
+    dialogues = []
     scripts = Script.query.order_by(Script.id).all()
     for s in scripts:
         if getattr(s, 'status', None) == 'finish':
             summary['skipped'] += 1
-            lines.append(f"id={s.id} alias={s.alias} | SKIPPED (status=finish)")
+            dialogues.append(f"id={s.id} alias={s.alias} | SKIPPED (status=finish)")
             continue
         summary['checked'] += 1
         changed = False
@@ -178,7 +178,7 @@ def asset_check_once():
 
             display = _safe_display(episode_path)
             ma = matched_rel if 'matched_rel' in locals() and matched_rel else '-'
-            lines.append(f"id={s.id} alias={s.alias} | audio={audio_status} audio_path={ma} images={images_status} (imgs={img_count} scenes={scenes_count}) path={display}")
+            dialogues.append(f"id={s.id} alias={s.alias} | audio={audio_status} audio_path={ma} images={images_status} (imgs={img_count} scenes={scenes_count}) path={display}")
 
             if changed:
                 summary['changed'] += 1
@@ -186,7 +186,7 @@ def asset_check_once():
 
         except Exception as e:
             current_app.logger.exception(f"Error checking assets for script id={s.id}: {e}")
-            lines.append(f"id={s.id} alias={s.alias} | ERROR: {e}")
+            dialogues.append(f"id={s.id} alias={s.alias} | ERROR: {e}")
 
     # Log the summary and details using the application logger
     current_app.logger.info(
@@ -196,7 +196,7 @@ def asset_check_once():
             "summary": summary
         }
     )
-    for line in lines:
+    for line in dialogues:
         current_app.logger.info(line, extra={"type": "asset_check_detail"})
 
     return summary
@@ -219,7 +219,7 @@ def generator_run_once():
                 episode_path.mkdir(parents=True, exist_ok=True)
 
                 content_txt_path = episode_path / "content.txt"
-                script_texts = [line.get('text', '') for scene in script.scenes for line in scene.get('lines', []) if line.get('text')]
+                script_texts = [line.get('text', '') for scene in script.scenes for line in scene.get('dialogues', []) if line.get('text')]
                 txt_content = "\n\n".join(script_texts)
                 content_txt_path.write_text(txt_content, encoding='utf-8')
 
@@ -227,8 +227,8 @@ def generator_run_once():
                 script_json_path.write_text(json.dumps(script.script_data, indent=2, ensure_ascii=False), encoding='utf-8')
 
                 tts_json_path = episode_path / "content.json"
-                all_lines = [line for scene in script.scenes for line in scene.get('lines', [])]
-                tts_json_path.write_text(json.dumps(all_lines, indent=2, ensure_ascii=False), encoding='utf-8')
+                all_dialogues = [line for scene in script.scenes for line in scene.get('dialogues', [])]
+                tts_json_path.write_text(json.dumps(all_dialogues, indent=2, ensure_ascii=False), encoding='utf-8')
 
                 script.status = 'prepared'
                 db.session.add(script)

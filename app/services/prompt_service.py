@@ -66,3 +66,11 @@ def delete_prompt_by_id(prompt_id: int):
     db.session.commit()
     cache.delete("all_prompts")
     return jsonify({"message": "Prompt deleted successfully."})
+
+
+def get_prompt_by_id(prompt_id: int):
+    """Retrieve a single prompt by ID and return a dict or None if not found."""
+    prompt = db.session.get(Prompt, prompt_id)
+    if not prompt:
+        return None
+    return {"id": prompt.id, "name": prompt.name, "content": prompt.content}

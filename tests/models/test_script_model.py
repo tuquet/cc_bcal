@@ -25,7 +25,7 @@ class TestScriptModel:
             s = Script()
             payload = {
                 'meta': {'title': 'T', 'alias': 't'},
-                'scenes': [[{'lines': [{'text': 'hello'}]}]],
+                'scenes': [[{'dialogues': [{'text': 'hello'}]}]],
                 'duration': 12.5,
                 'audio_status': 'done',
                 'images_status': 'pending',
@@ -50,12 +50,12 @@ class TestScriptModel:
             s.title = 'N'
             s.alias = 'n'
             s.scenes = [
-                {'lines': [{'text': 'first line'}, {'text': ''}]},
-                {'lines': [{'text': 'second line'}]}
+                {'dialogues': [{'text': 'first line'}, {'text': ''}]},
+                {'dialogues': [{'text': 'second line'}]}
             ]
             db.session.add(s)
             db.session.commit()
 
-            text = s.full_narration_text
+            text = s.full_text
             assert 'first line' in text
             assert 'second line' in text

@@ -5,6 +5,7 @@ from flask import current_app
 
 # Corrected import to work within the application factory structure
 from ..extensions import db
+from ..types.status_types import ScriptStatus, AssetStatus
 
 class Script(db.Model):
     __tablename__ = 'scripts'
@@ -12,11 +13,13 @@ class Script(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     title = db.Column(db.String(255), nullable=False)
     alias = db.Column(db.String(255), unique=True, nullable=False)
-    status = db.Column(db.String(50), nullable=False, default='new')
+    status = db.Column(db.String(50), nullable=False, default=ScriptStatus.NEW.value)
     duration = db.Column(db.Float, nullable=True)
     audio_status = db.Column(db.String(50), nullable=True)
     images_status = db.Column(db.String(50), nullable=True)
     transcript_status = db.Column(db.String(50), nullable=True)
+    # Persisted flag to indicate whether the project folder exists (avoids repeated filesystem checks)
+    has_folder = db.Column(db.Boolean, nullable=False, default=False)
 
     _meta = db.Column('meta', db.Text, nullable=False)
     _scenes = db.Column('scenes', db.Text, nullable=False)
@@ -29,7 +32,7 @@ class Script(db.Model):
         """Returns a dictionary representation of the script for API responses."""
         updated_str = self.updated_at.strftime('%Y-%m-%d %H:%M') if self.updated_at else None
         created_str = self.created_at.strftime('%Y-%m-%d %H:%M') if self.created_at else None
-        return {
+        data = {
             'id': self.id,
             'title': self.title,
             'alias': self.alias,
@@ -38,9 +41,20 @@ class Script(db.Model):
             'audio_status': self.audio_status,
             'images_status': self.images_status,
             'transcript_status': self.transcript_status,
+            'meta': self.meta,
+            'scenes': self.scenes,
+            'generation_params': self.generation_params,
             'created_at': created_str,
             'updated_at': updated_str,
         }
+
+        # Use the persisted DB flag only to avoid expensive per-request filesystem checks.
+        # A background reconciliation job should be used to update this flag when needed.
+        try:
+            data['has_folder'] = bool(getattr(self, 'has_folder', False))
+        except Exception:
+            data['has_folder'] = False
+        return data
 
     @property
     def script_data(self):
@@ -127,13 +141,33 @@ class Script(db.Model):
     def project_path(self) -> str:
         return self._derived_paths['project_folder']
 
+    # Convenience properties that return Enum values instead of raw strings
+    @property
+    def status_enum(self) -> ScriptStatus:
+        try:
+            return ScriptStatus(self.status)
+        except ValueError:
+            return ScriptStatus.NEW
+
+    @property
+    def audio_status_enum(self) -> AssetStatus | None:
+        return AssetStatus(self.audio_status) if self.audio_status else None
+
+    @property
+    def images_status_enum(self) -> AssetStatus | None:
+        return AssetStatus(self.images_status) if self.images_status else None
+
+    @property
+    def transcript_status_enum(self) -> AssetStatus | None:
+        return AssetStatus(self.transcript_status) if self.transcript_status else None
+
     @property
     def script_json_path(self) -> str:
         return self._derived_paths['script_json_path']
 
     @property
-    def full_narration_text(self) -> str:
-        narration_parts = [line.get('text', '') for scene in self.scenes for line in scene.get('lines', []) if line.get('text')]
+    def full_text(self) -> str:
+        narration_parts = [line.get('text', '') for scene in self.scenes for line in scene.get('dialogues', []) if line.get('text')]
         return "\n\n".join(narration_parts)
 
     def __repr__(self):
