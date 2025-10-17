@@ -30,8 +30,11 @@ def create_app(config_name=None):
 
     with app.app_context():
         # Load settings from the database after the app and db are initialized
-        from .settings import settings
-        settings.load()
+        # but skip loading when running tests to avoid querying tables
+        # before the test fixtures create them.
+        if not app.config.get("TESTING", False):
+            from .settings import settings
+            settings.load()
 
         # Register the master v1 API blueprint
         from .api.v1 import api_v1
