@@ -27,19 +27,42 @@ def create_app(config_name=None):
     db.init_app(app)
     cache.init_app(app)
     Migrate(app, db)
-    Flasgger(app)  # Initialize Flasgger
 
     with app.app_context():
         # Load settings from the database after the app and db are initialized
         # but skip loading when running tests to avoid querying tables
-        # before the test fixtures create them.
-        if not app.config.get("TESTING", False):
+        # before the test fixtures create them. Also allow an explicit
+        # opt-out (SKIP_SETTINGS_LOAD) to make CLI operations like
+        # `flask db migrate`/`flask db init` work on a fresh clone.
+        skip_settings = app.config.get("TESTING", False) or os.getenv('SKIP_SETTINGS_LOAD') == '1'
+        if not skip_settings:
             from .settings import settings
-            settings.load()
+            try:
+                settings.load()
+            except Exception as e:
+                # Do not abort app creation if the DB/tables aren't present yet
+                # (common when the developer just cloned the repo). Log a warning
+                # and continue so migration commands can run.
+                import logging
+                logging.getLogger(__name__).warning(
+                    "settings.load() skipped due to error (DB may not be ready): %s", e
+                )
 
         # Register the master v1 API blueprint
         from .api.v1 import api_v1
         app.register_blueprint(api_v1, url_prefix='/api/v1')
+
+        # After blueprints are registered, inject swagger extras (e.g. pagination)
+        try:
+            from .api.swagger_helpers import apply_swagger_extras
+
+            apply_swagger_extras(app)
+        except Exception:
+            # Non-fatal: if helpers fail, continue and Flasgger will still work
+            pass
+
+    # Initialize Flasgger after blueprints are registered and docs injected
+    Flasgger(app)  # Initialize Flasgger
 
     # Configure CORS for API endpoints and set secure Referrer-Policy
     CORS(app, resources={r"/api/*": {"origins": "*"}}, supports_credentials=True)

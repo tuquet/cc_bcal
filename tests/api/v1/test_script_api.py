@@ -5,7 +5,7 @@ def test_create_get_update_delete_script(client):
     # Create script
     payload = {
         'meta': {'title': 'S', 'alias': 's'},
-        'scenes': [],
+        'acts': [],
     }
     resp = client.post('/api/v1/scripts', json=payload)
     assert resp.status_code == 201
@@ -25,7 +25,7 @@ def test_create_get_update_delete_script(client):
     assert s['alias'] == 's'
 
     # Update
-    update_payload = {'meta': {'title': 'S2', 'alias': 's'}, 'scenes': []}
+    update_payload = {'meta': {'title': 'S2', 'alias': 's'}, 'acts': []}
     resp = client.put(f'/api/v1/scripts/{sid}', json=update_payload)
     assert resp.status_code == 200
     updated = resp.get_json()

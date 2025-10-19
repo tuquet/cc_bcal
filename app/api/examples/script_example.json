@@ -1,0 +1,159 @@
+{
+  "genre": ["Thiền", "Tâm lý"],
+  "title": "Bài học về sự trở về với hiện tại qua chén trà của Thiền Sư",
+  "alias": "chen-tra-cua-hien-tai",
+  "logline": "Một người trẻ mệt mỏi lên núi tìm kiếm 'cái đích' cuộc đời, nhưng chỉ tìm thấy sự tĩnh lặng qua bài học về hơi thở và chén trà của một Thiền Sư.",
+  "tone": "Thanh tịnh, sâu lắng, truyền cảm hứng.",
+  "notes": "Không khí: Thanh tịnh, nhẹ nhàng, sâu lắng. Màu sắc: Ưu tiên tông màu trầm, lạnh (xanh, xám) ở đầu phim, chuyển dần sang tông ấm, sáng (vàng, xanh lá) khi nhân vật tìm thấy sự bình an. Âm thanh: Hạn chế lời thoại, ưu tiên âm thanh tự nhiên (tiếng suối, gió, chim hót) và nhạc cụ truyền thống (đàn tranh, sáo trúc, chuông ngân) để tạo cảm giác thiền định, không dùng nhạc dồn dập.",
+  "setting": {
+    "location": "Đỉnh núi Thanh Tịnh (một nơi hẻo lánh, có tầm nhìn rộng, nhiều cây xanh, rêu phong).",
+    "time": "Sáng sớm đến sáng rõ, khoảng 5:30 AM - 6:45 AM."
+  },
+  "themes": [
+    "An trú trong hiện tại (Mindfulness)",
+    "Bản chất của Hạnh phúc (The Nature of Happiness)",
+    "Ý nghĩa của Dừng lại (The Meaning of Stillness)",
+    "Sự trở về với Bản thể (Return to Self)"
+  ],
+  "characters": [
+    {
+      "description": "Một Thiền Sư có tuổi, khoảng 60. Khuôn mặt nhân từ, ánh mắt sâu thẳm, cử chỉ chậm rãi, thâm trầm. Đại diện cho sự Tĩnh Lặng và Trí Tuệ.",
+      "name": "Mặc Đức",
+      "role": "Nhân vật chính, người dẫn dắt triết lý (Mentor)"
+    },
+    {
+      "description": "Một chàng trai trẻ, khoảng 25 tuổi. Mặc trang phục đời thường, có vẻ mệt mỏi, căng thẳng. Đại diện cho sự Xao Động và Khát Vọng của đời sống hiện đại.",
+      "name": "An",
+      "role": "Nhân vật chính, người trải nghiệm (Protagonist)"
+    },
+    {
+      "description": "Giọng kể chuyện (voice-over) trầm ấm, có tính triết lý, dùng để nhấn mạnh thông điệp của phim.",
+      "name": "Kể chuyện",
+      "role": "Người dẫn chuyện (Narrator)"
+    }
+  ],
+  "acts": [
+    {
+      "act_number": 1,
+      "scenes": [
+        {
+          "action": "THIỀN SƯ MẶC ĐỨC (60 tuổi) ngồi kiết già trên tảng đá phẳng, mắt khép hờ. Hơi thở đều đặn. Mặt trời bắt đầu mọc, những tia nắng đầu tiên xuyên qua kẽ lá, chiếu nhẹ lên khuôn mặt ông. Cận cảnh một giọt sương đọng trên lá cây, lung linh rồi rơi xuống.",
+          "audio_style": "Tiếng suối chảy róc rách, tiếng chim hót xa xăm. Nhạc nền: Đệm một âm thanh chuông ngân (Tibetan Singing Bowl) kéo dài.",
+          "visual_style": "Bình minh trên núi, sương mờ bao phủ thung lũng, ánh sáng vàng ấm.",
+          "dialogues": [
+            {
+              "character": "Kể chuyện (giọng trầm, ấm, chậm rãi)",
+              "line": "Buổi sáng không phải là sự bắt đầu của một ngày, mà là sự trở về với khoảnh khắc này. Nơi mọi thứ đều đã sẵn có."
+            }
+          ],
+          "location": "Đỉnh núi Thanh Tịnh, ngoài trời.",
+          "scene_number": 1,
+          "time": "Sáng sớm (5:30 AM)"
+        },
+        {
+          "action": "NGƯỜI TRẺ AN (25 tuổi) bước đến gần, giày thể thao của cậu dẫm nhẹ lên lớp rêu mỏng. Cậu đứng từ xa quan sát Thiền Sư. Khuôn mặt cậu lộ vẻ căng thẳng, mệt mỏi.",
+          "audio_style": "Tiếng gió nhẹ lùa qua rặng tre. Nhạc nền: Vẫn giữ âm thanh chuông ngân nhẹ, thêm chút nhạc cụ sáo trúc buồn man mác.",
+          "visual_style": "Con đường mòn lát đá rêu phong dẫn lên đỉnh núi.",
+          "dialogues": [
+            {
+              "character": "Kể chuyện",
+              "line": "Cậu đến, mang theo gánh nặng của 'cái tôi' và 'sự phải làm'. Trái tim cậu như một dòng sông, nhưng đầy rác rưởi của quá khứ và lo âu về tương lai."
+            }
+          ],
+          "location": "Đỉnh núi Thanh Tịnh, ngoài trời.",
+          "scene_number": 2,
+          "time": "Sáng sớm (5:45 AM)"
+        }
+      ],
+      "summary": "Hồi 1 giới thiệu bối cảnh thanh tịnh của đỉnh núi và hai nhân vật đối lập: Thiền Sư Mặc Đức tĩnh lặng trong thiền định, đại diện cho sự An trú; và Người Trẻ An đầy mệt mỏi, đại diện cho sự Xao động của đời sống hiện đại. Khai mở chủ đề về Sự trở về với Hiện tại."
+    },
+    {
+      "act_number": 2,
+      "scenes": [
+        {
+          "action": "An tiến lại gần, cúi đầu chào. Mặc Đức mở mắt, ánh mắt hiền từ và sâu thẳm. An bắt đầu nói, giọng cậu run rẩy và dồn dập.",
+          "audio_style": "Tiếng suối nhỏ giọt, tiếng lá cây xào xạc. Nhạc nền: Nhẹ dần, chỉ còn tiếng đệm đàn tranh trầm lắng.",
+          "visual_style": "Cận cảnh Thiền Sư và An. Ánh sáng đã rõ hơn, màu xanh của cây cối nổi bật.",
+          "dialogues": [
+            {
+              "character": "An",
+              "line": "Thưa Sư Phụ, con đã chạy, chạy mãi. Con chạy theo thành công, theo tiền bạc, theo những kỳ vọng. Nhưng con càng chạy, con càng thấy trống rỗng và mệt mỏi. Con không tìm thấy 'cái đích' của mình."
+            },
+            {
+              "character": "Mặc Đức",
+              "line": "(Giọng chậm rãi, như tiếng chuông ngân) 'Cái đích' nằm ở đâu, khi con cứ mải miết nhìn về phía trước? Con có thấy mây không?"
+            }
+          ],
+          "location": "Đỉnh núi Thanh Tịnh, ngoài trời.",
+          "scene_number": 3,
+          "time": "Sáng (6:00 AM)"
+        },
+        {
+          "action": "An ngước nhìn bầu trời. Một đám mây trắng trôi chậm rãi. Mặc Đức nhẹ nhàng chỉ tay xuống tảng đá nơi ông đang ngồi.",
+          "audio_style": "Im lặng tuyệt đối trong 3 giây. Sau đó là tiếng chuông gió khẽ kêu.",
+          "visual_style": "Toàn cảnh bầu trời và đám mây trắng lớn, sau đó chuyển xuống cận cảnh tảng đá rêu phong.",
+          "dialogues": [
+            {
+              "character": "An",
+              "line": "Mây đang trôi đi, Sư Phụ."
+            },
+            {
+              "character": "Mặc Đức",
+              "line": "Đúng vậy. Mây không vội vã. Nó chỉ 'là'. Con cũng vậy, An. Con không cần phải 'trở thành' ai đó. Chỉ cần 'là' chính mình. Vấn đề của con không phải là không tìm thấy con đường, mà là không chịu dừng lại trên con đường đang đi."
+            },
+            {
+              "character": "An",
+              "line": "(Lặng người) Dừng lại... Con sợ dừng lại. Dừng lại là tụt hậu."
+            }
+          ],
+          "location": "Đỉnh núi Thanh Tịnh, ngoài trời.",
+          "scene_number": 4,
+          "time": "Sáng (6:15 AM)"
+        }
+      ],
+      "summary": "Hồi 2 là cuộc đối thoại giữa An và Thiền Sư Mặc Đức. An bày tỏ sự bế tắc và mệt mỏi trong cuộc sống xô bồ. Thiền Sư đưa ra triết lý về sự 'Là' (Being) thay vì 'Trở thành' (Becoming), sử dụng hình ảnh Mây trôi như một ẩn dụ. Đỉnh điểm mâu thuẫn là nỗi sợ 'dừng lại' của An."
+    },
+    {
+      "act_number": 3,
+      "scenes": [
+        {
+          "action": "Mặc Đức lấy từ trong áo ra một chén trà gốm mộc mạc và rót cho An. An nhận chén trà bằng hai tay, chén trà ấm nóng. Mặc Đức khẽ mỉm cười, ánh mắt đầy sự thấu hiểu.",
+          "audio_style": "Tiếng rót trà róc rách. Tiếng nhấp trà nhẹ. Nhạc nền: Một nốt nhạc piano duy nhất, ngân dài, thanh thoát.",
+          "visual_style": "Cận cảnh hai bàn tay cầm chén trà gốm. Hơi nóng bốc lên nhẹ nhàng.",
+          "dialogues": [
+            {
+              "character": "Mặc Đức",
+              "line": "Con đã uống trà này như thế nào? Con có thấy nó ấm, có thấy nó thơm? Hay con đang nghĩ về công việc ngày mai?"
+            },
+            {
+              "character": "An",
+              "line": "(Hít một hơi sâu, nhấp trà) Con... con thấy ấm. Con thấy vị đắng, sau đó là ngọt."
+            },
+            {
+              "character": "Mặc Đức",
+              "line": "Trong chén trà có cả thế giới. Trong một hơi thở cũng có cả vũ trụ. Hãy mang hơi thở này, sự tĩnh lặng này, về nơi con sống. Đừng tìm kiếm sự thanh tịnh ở đỉnh núi, vì chính tâm con là đỉnh núi."
+            }
+          ],
+          "location": "Đỉnh núi Thanh Tịnh, ngoài trời.",
+          "scene_number": 5,
+          "time": "Sáng (6:30 AM)"
+        },
+        {
+          "action": "An đặt chén trà xuống, cúi lạy Thiền Sư thật sâu. Cậu đứng dậy, bước đi. Lần này, bước chân cậu chậm rãi và vững vàng hơn. Cận cảnh khuôn mặt An, đã không còn vẻ căng thẳng như lúc đầu.",
+          "audio_style": "Tiếng bước chân đều đặn trên đường đất. Nhạc nền: Chuông ngân trở lại, kết hợp với nhạc cụ hơi truyền thống (tiêu/sáo).",
+          "visual_style": "An đi xuống núi, quay lưng lại phía mặt trời đã lên cao. Cảnh quay tập trung vào bóng đổ của cậu, dài và vững chãi.",
+          "dialogues": [
+            {
+              "character": "Kể chuyện",
+              "line": "Cái đích không phải là nơi để đến, mà là cách ta đi. Con đường không kết thúc ở đỉnh núi, nó bắt đầu từ hơi thở đầu tiên của mỗi buổi sáng."
+            }
+          ],
+          "location": "Con đường mòn xuống núi.",
+          "scene_number": 6,
+          "time": "Sáng (6:45 AM)"
+        }
+      ],
+      "summary": "Hồi 3 là sự giải quyết. Qua hành động uống trà trong chánh niệm, An nhận ra sự thanh tịnh nằm ở khoảnh khắc hiện tại và bên trong chính mình, không phải là mục tiêu bên ngoài. An rời đi với tâm thế vững chãi, mang theo triết lý thiền vào cuộc sống. Kết thúc mở, nhấn mạnh hành trình bên trong vừa mới bắt đầu."
+    }
+  ]
+}

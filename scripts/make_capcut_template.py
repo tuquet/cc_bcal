@@ -131,11 +131,11 @@ class CapCutGenerator:
             with open(template_path, 'r', encoding='utf-8') as f:
                 template_data = json.load(f)
             
-            # Hợp nhất 'generation_params'
+            # Hợp nhất 'builder_configs'
             # Dữ liệu trong script_data sẽ ghi đè lên template nếu có xung đột
             # Sử dụng deep merge để hợp nhất các dictionary con
-            merged_params = self._deep_merge(template_data, self.script_data.get("generation_params", {}))
-            self.script_data["generation_params"] = merged_params
+            merged_params = self._deep_merge(template_data, self.script_data.get("builder_configs", {}))
+            self.script_data["builder_configs"] = merged_params
         else:
             print(f"⚠️ Không tìm thấy file video-template.json tại: {template_path}")
 
@@ -207,7 +207,7 @@ class CapCutGenerator:
 
     def _run_if_enabled(self, module_name: str, action, *args, **kwargs):
         """Helper để chạy một action nếu module được bật."""
-        enabled_modules = self.script_data.get("generation_params", {}).get("enabled_modules", [])
+        enabled_modules = self.script_data.get("builder_configs", {}).get("enabled_modules", [])
         if module_name in enabled_modules:
             action(*args, **kwargs)
         else:
@@ -276,8 +276,12 @@ class CapCutGenerator:
         call_api("/add_audio", payload)
 
     def add_background_layer(self):
-        params = self.script_data.get("generation_params", {}).get("background_layer", {})
-        scenes = self.script_data.get("scenes", [])
+        params = self.script_data.get("builder_configs", {}).get("background_layer", {})
+        # derive scenes from acts only; do not support top-level 'scenes'
+        acts = self.script_data.get("acts") or []
+        scenes = []
+        for act in acts:
+            scenes.extend(act.get("scenes") or [])
         if not scenes or not scenes[0].get("image"):
             print("⏩ Skipping background layer: No scenes or first scene has no image.")
             return
@@ -296,8 +300,12 @@ class CapCutGenerator:
         })
 
     def add_image_scenes(self):
-        params = self.script_data.get("generation_params", {}).get("scene_images", {})
-        scenes = self.script_data.get("scenes", [])
+        params = self.script_data.get("builder_configs", {}).get("scene_images", {})
+        # derive scenes from acts only
+        acts = self.script_data.get("acts") or []
+        scenes = []
+        for act in acts:
+            scenes.extend(act.get("scenes") or [])
         
         # Logic "stretch" thời gian giống hệt script Node.js
         valid_scenes = [s for s in scenes if s.get("start") is not None and s.get("end") is not None]
@@ -329,7 +337,7 @@ class CapCutGenerator:
             current_time_s += new_duration_s
 
     def add_logo(self):
-        params = self.script_data.get("generation_params", {}).get("logo", {})
+        params = self.script_data.get("builder_configs", {}).get("logo", {})
         logo_path = params.get("path")
         if not logo_path or not Path(logo_path).is_file():
             print(f"⚠️ Logo file not found, skipping: {logo_path}")
@@ -349,7 +357,7 @@ class CapCutGenerator:
         })
 
     def add_text_logo(self):
-        params = self.script_data.get("generation_params", {}).get("text_logo", {})
+        params = self.script_data.get("builder_configs", {}).get("text_logo", {})
         if not params.get("text"):
             print("⏩ Skipping text logo: 'text' property is missing.")
             return
@@ -369,7 +377,7 @@ class CapCutGenerator:
         })
 
     def add_fixed_effects(self):
-        effects = self.script_data.get("generation_params", {}).get("fixed_effects", {}).get("effects", [])
+        effects = self.script_data.get("builder_configs", {}).get("fixed_effects", {}).get("effects", [])
         for effect in effects:
             if not effect.get("effect_type"):
                 continue

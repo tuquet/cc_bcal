@@ -65,9 +65,13 @@ def generate_images(
     except Exception as e:
         return {"ok": False, "error": f"Không thể đọc file kịch bản: {e}"}
 
-    scenes = script_data.get("scenes", [])
+    # Derive scenes from acts only. Top-level 'scenes' key is no longer supported.
+    acts = script_data.get("acts") or []
+    scenes = []
+    for act in acts:
+        scenes.extend(act.get("scenes") or [])
     if not scenes:
-        return {"ok": False, "error": "Không tìm thấy 'scenes' trong file kịch bản."}
+        return {"ok": False, "error": "Không tìm thấy scenes trong file kịch bản (derived from acts)."}
 
     # Determine output dir
     if output_dir:

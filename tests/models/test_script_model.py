@@ -1,3 +1,4 @@
+import json
 from app.models.script import Script
 from app import db
 from datetime import datetime
@@ -10,8 +11,8 @@ class TestScriptModel:
             s = Script()
             s.title = 'My Script'
             s.alias = 'my-script'
-            s.meta = {'title': 'My Script', 'alias': 'my-script'}
-            s.scenes = []
+            # Use flattened fields
+            s.acts = '[]'
             db.session.add(s)
             db.session.commit()
 
@@ -25,34 +26,30 @@ class TestScriptModel:
             s = Script()
             payload = {
                 'meta': {'title': 'T', 'alias': 't'},
-                'scenes': [[{'dialogues': [{'text': 'hello'}]}]],
+                'acts': [[{'dialogues': [{'text': 'hello'}]}]],
                 'duration': 12.5,
                 'audio_status': 'done',
                 'images_status': 'pending',
                 'transcript_status': None,
-                'generation_params': {'x': 1}
+                'builder_configs': {'x': 1}
             }
-            s.script_data = payload
+            # Simulate service behavior: populate flattened fields
+            s.acts = '[[{"dialogues": [{"text": "hello"}]]]]'
+            s.builder_configs = json.dumps({'x': 1})
             db.session.add(s)
             db.session.commit()
+            # verify flattened values
+            assert s.acts_parsed
+            assert s.builder_configs_parsed and s.builder_configs_parsed['x'] == 1
 
-            # getter
-            data = s.script_data
-            assert data['meta']['title'] == 'T'
-            assert data['duration'] == 12.5
-            assert data['generation_params']['x'] == 1
-
-    def test_full_narration_text(self, app):
+    def test_full_text(self, app):
         with app.app_context():
             s = Script()
-            s.meta = {'title': 'N', 'alias': 'n'}
+            # title and alias are non-nullable columns; ensure they're set
             # title and alias are non-nullable columns; ensure they're set
             s.title = 'N'
             s.alias = 'n'
-            s.scenes = [
-                {'dialogues': [{'text': 'first line'}, {'text': ''}]},
-                {'dialogues': [{'text': 'second line'}]}
-            ]
+            s.acts = '[{"act_number":1,"scenes":[{"dialogues":[{"text":"first line"},{"text":""}]},{"dialogues":[{"text":"second line"}]}]}]'
             db.session.add(s)
             db.session.commit()
 

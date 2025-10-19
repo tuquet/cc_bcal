@@ -111,3 +111,38 @@ You will see output similar to this:
 
 - The API server is running at `http://127.0.0.1:5000`.
 - The interactive API documentation (Swagger UI) is available at `http://127.0.0.1:5000/api/docs/`.
+
+## 5. Seed dữ liệu (CLI)
+
+Dự án có các lệnh Flask CLI để seed dữ liệu mẫu (prompts, scripts). Các lệnh này thuận tiện để khởi tạo dữ liệu demo hoặc trong môi trường phát triển.
+
+- `flask seed-prompts`
+    - Mục đích: nạp các prompt từ thư mục ví dụ (`app/api/examples`) hoặc từ thư mục tuỳ chọn.
+    - Tuỳ chọn:
+        - `--prompts-dir <path>`: thư mục chứa file `.json` (với keys `name`/`content`) hoặc file văn bản `.md` (tên file -> `name`, nội dung -> `content`).
+        - `--create-tables`: nếu bật, sẽ gọi `db.create_all()` để tạo bảng nếu chưa tồn tại.
+    - Ví dụ:
+
+```powershell
+$env:FLASK_APP='run.py'
+flask seed-prompts --create-tables
+# hoặc chỉ định thư mục
+flask seed-prompts --prompts-dir D:\path\to\prompts
+```
+
+- `flask seed-scripts`
+    - Mục đích: nạp các script mẫu từ file `.json` trong một thư mục (mặc định `app/api/examples`).
+    - Tuỳ chọn:
+        - `--scripts-dir <path>`: thư mục chứa file `.json` mô tả script.
+        - `--create-tables`: tương tự, tạo bảng nếu cần.
+    - Ví dụ:
+
+```powershell
+$env:FLASK_APP='run.py'
+flask seed-scripts --create-tables
+# hoặc
+flask seed-scripts --scripts-dir D:\path\to\examples
+```
+
+Ghi chú:
+- `--create-tables` an toàn khi gọi trên hầu hết DB dev (nó gọi `db.create_all()`); nếu bạn muốn tránh gọi tạo bảng khi không cần, tôi có thể cập nhật seeder để kiểm tra tồn tại bảng trước khi gọi `create_all()`.

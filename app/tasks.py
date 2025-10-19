@@ -18,7 +18,7 @@ log = structlog.get_logger()
 
 
 def reconcile_has_folder(app, batch_size: int = 50):
-    """Scan a limited number of scripts with has_folder == False and update the DB
+    """Scan a limited number of scripts with is_has_folder == False and update the DB
     if their project folder exists on disk. This keeps per-request latency low while
     ensuring eventual consistency.
 
@@ -33,7 +33,7 @@ def reconcile_has_folder(app, batch_size: int = 50):
             # Query a small batch of scripts that are missing the folder flag
             candidates = (
                 _db.session.query(Script)
-                .filter(Script.has_folder == False)
+                .filter(Script.is_has_folder == False)
                 .limit(batch_size)
                 .all()
             )
@@ -46,7 +46,7 @@ def reconcile_has_folder(app, batch_size: int = 50):
                     project_root = app.root_path.parent
                     project_path = Path(get_project_path(script.script_data, project_root)).resolve()
                     if project_path.exists():
-                        script.has_folder = True
+                        script.is_has_folder = True
                         _db.session.add(script)
                         updated += 1
                 except Exception:
@@ -56,12 +56,12 @@ def reconcile_has_folder(app, batch_size: int = 50):
             if updated > 0:
                 try:
                     _db.session.commit()
-                    log.info("reconcile.has_folder.committed", updated=updated)
+                    log.info("reconcile.is_has_folder.committed", updated=updated)
                 except Exception as e:
                     _db.session.rollback()
-                    log.error("reconcile.has_folder.commit_failed", error=str(e))
+                    log.error("reconcile.is_has_folder.commit_failed", error=str(e))
     except Exception as e:
-        log.error("reconcile.has_folder.failed", error=str(e))
+        log.error("reconcile.is_has_folder.failed", error=str(e))
 
 
 def job_worker(app):

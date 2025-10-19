@@ -7,7 +7,7 @@ defined in `main.py` to obtain the DB bindings and model definitions.
 
 Behavior:
  - Find all Script rows with status == 'new'
- - For each, create episode folder, content.txt and capcut-api.json (using generation_params if present)
+ - For each, create episode folder, content.txt and capcut-api.json (using builder_configs if present)
  - If creation succeeds for a script, set its status to 'prepared' and commit immediately
  - If creation fails for a script, leave its status as-is and continue
 
@@ -54,10 +54,10 @@ def process_script_item(repo_root: Path, script: Script, force: bool = False) ->
 
         # capcut-api.json
         script_json_path = episode_path / "capcut-api.json"
-        generation_params = data.get('generation_params')
+        builder_configs = data.get('builder_configs')
         payload = data.copy()
-        if generation_params:
-            payload['generation_params'] = generation_params
+        if builder_configs:
+            payload['builder_configs'] = builder_configs
 
         if script_json_path.exists() and not force:
             print(f"⏩ Bỏ qua capcut-api.json (tồn tại): {_display(script_json_path)}")

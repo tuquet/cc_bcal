@@ -7,9 +7,11 @@ from app.extensions import db, cache
 def get_all_prompts():
     """
     Get all prompts from the database, sort by file name and cache the results.
+
+    Returns a mapping of filename -> content to match legacy clients/tests.
     """
     prompts_from_db = Prompt.query.order_by(Prompt.name).all()
-    return [{"id": p.id, "name": p.name, "content": p.content} for p in prompts_from_db]
+    return {p.name: p.content for p in prompts_from_db}
 
 
 def save_prompt(name: str, content: str):
@@ -17,6 +19,10 @@ def save_prompt(name: str, content: str):
     Creates a new prompt or updates an existing one based on the filename.
     Returns the saved prompt object.
     """
+
+    # Basic validation: require a filename-like name ending with .md
+    if not name or not isinstance(name, str) or not name.endswith(".md"):
+        raise ValueError("Invalid prompt name; expected a filename ending with .md")
 
     prompt = Prompt.query.filter_by(name=name).first()
     if prompt:

@@ -2,6 +2,8 @@ import os
 from app import create_app
 from app.tasks import init_tasks
 from app.extensions import db
+import click
+from app.cli.seed_commands import init_seed_commands
 
 # Create the Flask app instance using the application factory
 # It will load the config based on FLASK_CONFIG or default to 'development'
@@ -25,6 +27,8 @@ def create_db_command():
     with app.app_context():
         db.create_all()
     print('Database tables created.')
+# Register modular CLI commands
+init_seed_commands(app)
 
 if __name__ == '__main__':
     # For production, use a proper WSGI server like Gunicorn or Waitress.

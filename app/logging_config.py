@@ -50,4 +50,8 @@ def configure_logging(log_level: str = "INFO", is_debug: bool = False):
     )
 
     log_mode = "development (console)" if is_debug else "production (JSON)"
-    print(f"✅ Logging configured in {log_mode} mode with level: {log_level.upper()}")
+    # Use standard logging to report startup status. Avoid printing non-ASCII
+    # characters (like emoji) which can cause UnicodeEncodeError on some
+    # Windows consoles that use cp1252 encoding.
+    logger = logging.getLogger(__name__)
+    logger.info(f"Logging configured in {log_mode} mode with level: {log_level.upper()}")
