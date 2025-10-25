@@ -8,7 +8,16 @@ class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     CACHE_TYPE = "SimpleCache"
     SWAGGER = {"title": "Nexo API", "uiversion": 3, "specs_route": "/api/docs/"}
-
+    # Number of background task worker threads. Can be overridden via
+    # environment variable NUM_WORKERS or app config entry 'NUM_WORKERS'.
+    try:
+        NUM_WORKERS = int(os.environ.get('NUM_WORKERS', '4'))
+    except Exception:
+        NUM_WORKERS = 4
+    # VBEE integration settings (external TTS/API provider)
+    VBEE_API_URL = os.environ.get('VBEE_API_URL', 'https://vbee.vn/api/v1')
+    VBEE_API_KEY = os.environ.get('VBEE_API_KEY') or os.environ.get('VBEE_KEY')
+    
 
 class DevelopmentConfig(Config):
     DEBUG = True

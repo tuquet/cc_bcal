@@ -1,74 +1,53 @@
 import queue
 import threading
-import json
 import redis
-from datetime import datetime, timezone
 from pathlib import Path
-import contextlib
 import structlog
+import os
 
 # These are initialized by init_tasks
 redis_client = None
 JOB_QUEUE = queue.Queue()
 BACKGROUND_JOBS = {}
 REDIS_CHANNEL = 'job_updates'
+DEFAULT_NUM_WORKERS = 4
+NUM_WORKERS = DEFAULT_NUM_WORKERS
 
 # module logger
 log = structlog.get_logger()
 
 
-def reconcile_has_folder(app, batch_size: int = 50):
-    """Scan a limited number of scripts with is_has_folder == False and update the DB
-    if their project folder exists on disk. This keeps per-request latency low while
-    ensuring eventual consistency.
+# Event used to signal workers to stop (best-effort). Threads still start as
+# daemon threads by default to avoid preventing process exit in simple setups.
+STOP_EVENT = threading.Event()
 
-    Usage: schedule this periodically (cron/worker) or publish a job to JOB_QUEUE.
+
+def _parse_workers(raw_value, default=DEFAULT_NUM_WORKERS, min_v=1, max_v=32):
+    """Parse and clamp a raw worker value from config/env.
+
+    Returns an int in range [min_v, max_v]. Logs a warning when input is invalid
+    or out of range and falls back to default.
     """
-    from .models.script import Script
-    from .extensions import db as _db
-
-    updated = 0
     try:
-        with app.app_context():
-            # Query a small batch of scripts that are missing the folder flag
-            candidates = (
-                _db.session.query(Script)
-                .filter(Script.is_has_folder == False)
-                .limit(batch_size)
-                .all()
-            )
+        v = int(raw_value)
+    except Exception:
+        log.warning("NUM_WORKERS invalid, using default", raw_value=raw_value, default=default)
+        return default
 
-            from .utils import get_project_path
-
-            for script in candidates:
-                try:
-                    # Compute project path using utility (avoid expensive imports at module load)
-                    project_root = app.root_path.parent
-                    project_path = Path(get_project_path(script.script_data, project_root)).resolve()
-                    if project_path.exists():
-                        script.is_has_folder = True
-                        _db.session.add(script)
-                        updated += 1
-                except Exception:
-                    # Ignore per-script errors and continue
-                    continue
-
-            if updated > 0:
-                try:
-                    _db.session.commit()
-                    log.info("reconcile.is_has_folder.committed", updated=updated)
-                except Exception as e:
-                    _db.session.rollback()
-                    log.error("reconcile.is_has_folder.commit_failed", error=str(e))
-    except Exception as e:
-        log.error("reconcile.is_has_folder.failed", error=str(e))
-
+    if v < min_v or v > max_v:
+        log.warning("NUM_WORKERS out of allowed range, clamping", raw_value=v, min=min_v, max=max_v)
+    return max(min(v, max_v), min_v)
 
 def job_worker(app):
     """A dedicated worker thread that processes jobs from the JOB_QUEUE one by one."""
-    while True:
+    while not STOP_EVENT.is_set():
         try:
-            job = JOB_QUEUE.get()  # This will block until a job is available
+            # use a short timeout to allow checking STOP_EVENT periodically
+            job = JOB_QUEUE.get(timeout=1)
+        except queue.Empty:
+            continue
+
+        try:
             target_func = job.get('target')
             args = job.get('args', ())
             if callable(target_func):
@@ -77,18 +56,40 @@ def job_worker(app):
         except Exception as e:
             # Use app logger if available, otherwise print
             if app:
-                app.logger.exception("Error in job worker thread.")
+                try:
+                    app.logger.exception("Error in job worker thread.")
+                except Exception:
+                    log.exception("Error in job worker thread")
             else:
                 print(f"Error in job worker thread: {e}")
+        finally:
+            try:
+                JOB_QUEUE.task_done()
+            except Exception:
+                pass
 
 def init_tasks(app):
     """Initializes the task runner background thread and Redis client."""
-    global redis_client
+    global redis_client, BACKGROUND_JOBS
+
+    # Determine worker count from app config -> env var -> default and validate
+    raw = app.config.get('NUM_WORKERS', None)
+    if raw is None:
+        raw = os.getenv('NUM_WORKERS', DEFAULT_NUM_WORKERS)
+
+    num_workers = _parse_workers(raw, default=DEFAULT_NUM_WORKERS)
+
+    # update alias for backward compatibility
+    global NUM_WORKERS
+    NUM_WORKERS = num_workers
+
+    log.info(f"Starting {num_workers} job worker threads.")
+
     redis_client = redis.Redis(
         host=app.config.get('REDIS_HOST', 'localhost'),
         port=app.config.get('REDIS_PORT', 6379),
         db=app.config.get('REDIS_DB', 0),
-        decode_responses=True
+        decode_responses=True,
     )
     try:
         redis_client.ping() # Check connection
@@ -116,6 +117,21 @@ def init_tasks(app):
             except Exception:
                 pass
 
-    # Start the single job worker thread
-    threading.Thread(target=job_worker, args=(app,), daemon=True).start()
-    log.info("Job worker thread started.")
+
+    for i in range(num_workers):
+        thread_name = f"Worker-Thread-{i+1}"
+        thread = threading.Thread(
+            target=job_worker,
+            args=(app,),
+            daemon=True,
+            name=thread_name,  # Gán tên để dễ debug
+        )
+        thread.start()
+        # store actual thread object for runtime introspection
+        try:
+            BACKGROUND_JOBS[thread_name] = thread
+        except Exception:
+            # best-effort bookkeeping
+            pass
+
+    log.info(f"{num_workers} job worker threads started.")

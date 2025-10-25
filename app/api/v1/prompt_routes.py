@@ -15,6 +15,30 @@ def create_prompt():
     """Create a new prompt.
 
     Accepts JSON: {name: str, content: str}
+
+    ---
+    tags:
+      - Prompts
+    consumes:
+      - application/json
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+              content:
+                type: string
+    responses:
+      201:
+        description: Prompt created
+      400:
+        description: Bad request
+      500:
+        description: Server error
     """
     payload = request.get_json() or {}
     try:
@@ -31,7 +55,21 @@ def create_prompt():
 @prompts_bp.route("/prompts", methods=["GET"])
 @with_pagination
 def get_prompts():
-    """List prompts. Returns legacy mapping when no pagination args provided."""
+    """List prompts. Returns legacy mapping when no pagination args provided.
+
+    ---
+    tags:
+      - Prompts
+    parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+        description: 'Return format: map or array'
+    responses:
+      200:
+        description: List prompts or a mapping
+    """
     try:
         args = request.args or {}
 
@@ -79,6 +117,38 @@ def get_prompts():
 @prompts_bp.route("/prompts/<int:prompt_id>", methods=["PUT"])
 @with_example_file("api/examples/prompt_example.json")
 def update_prompt(prompt_id):
+    """Update a prompt by id.
+
+    ---
+    tags:
+      - Prompts
+    consumes:
+      - application/json
+    parameters:
+      - in: path
+        name: prompt_id
+        schema:
+          type: integer
+        required: true
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+              content:
+                type: string
+    responses:
+      200:
+        description: Prompt updated
+      400:
+        description: Bad request
+      404:
+        description: Prompt not found
+    """
     payload = request.get_json() or {}
     try:
         updated = prompt_service.update_prompt_by_id(prompt_id, payload.get("name"), payload.get("content"))
@@ -95,6 +165,23 @@ def update_prompt(prompt_id):
 
 @prompts_bp.route("/prompts/<int:prompt_id>", methods=["GET"])
 def get_prompt(prompt_id):
+    """Get a prompt by id.
+
+    ---
+    tags:
+      - Prompts
+    parameters:
+      - in: path
+        name: prompt_id
+        schema:
+          type: integer
+        required: true
+    responses:
+      200:
+        description: Prompt found
+      404:
+        description: Prompt not found
+    """
     try:
         prompt = prompt_service.get_prompt_by_id(prompt_id)
         if not prompt:
@@ -107,6 +194,23 @@ def get_prompt(prompt_id):
 
 @prompts_bp.route("/prompts/<int:prompt_id>", methods=["DELETE"])
 def delete_prompt(prompt_id):
+    """Delete a prompt by id.
+
+    ---
+    tags:
+      - Prompts
+    parameters:
+      - in: path
+        name: prompt_id
+        schema:
+          type: integer
+        required: true
+    responses:
+      200:
+        description: Prompt deleted
+      404:
+        description: Prompt not found
+    """
     try:
         res = prompt_service.delete_prompt_by_id(prompt_id)
         # Service may return a Flask response tuple (response, status) or a Response
@@ -153,4 +257,4 @@ def save_prompt_alias():
         return _err(e, 400)
     except Exception as e:
         return _err(e, 500)
-    
+

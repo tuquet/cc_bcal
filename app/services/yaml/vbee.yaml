@@ -1,0 +1,117 @@
+openapi: 3.0.0
+info:
+  title: vbee.vn API
+  version: 1.0.0
+  description: OpenAPI schema được sinh từ folder vbee.vn trong Postman
+servers:
+  - url: https://vbee.vn/api/v1
+paths:
+  /projects:
+    post:
+      summary: Tạo mới project
+      description: Generated from Postman request "https://vbee.vn/api/v1/projects"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                product:
+                  type: string
+                isDeleted:
+                  type: boolean
+                blocks:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      characters:
+                        type: integer
+                      speed:
+                        type: number
+                      elements:
+                        type: array
+                        items: {}
+      responses:
+        '200':
+          description: Thành công
+      security:
+        - bearerAuth: []
+    get:
+      summary: Lấy danh sách projects
+      description: Generated from Postman request "GET /projects?limit=10&sort=updatedAt_desc"
+      parameters:
+        - in: query
+          name: limit
+          schema:
+            type: integer
+        - in: query
+          name: sort
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Thành công
+      security:
+        - bearerAuth: []
+  /projects/{projectId}:
+    get:
+      summary: Lấy thông tin chi tiết project
+      description: Generated from Postman request "GET /projects/{projectId}"
+      parameters:
+        - in: path
+          name: projectId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Thành công
+      security:
+        - bearerAuth: []
+    put:
+      summary: Cập nhật project
+      description: Generated from Postman request "PUT /projects/{projectId}"
+      parameters:
+        - in: path
+          name: projectId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              # Thêm các trường cần cập nhật ở đây
+      responses:
+        '200':
+          description: Thành công
+      security:
+        - bearerAuth: []
+    delete:
+      summary: Xóa project
+      description: Generated from Postman request "DELETE /projects/{projectId}"
+      parameters:
+        - in: path
+          name: projectId
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Xóa thành công
+      security:
+        - bearerAuth: []
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

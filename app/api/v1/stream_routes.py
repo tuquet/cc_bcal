@@ -1,6 +1,5 @@
 from flask import Blueprint, Response, request
 from app.tasks import redis_client, REDIS_CHANNEL
-import json
 import structlog
 
 stream_bp = Blueprint('stream', __name__)

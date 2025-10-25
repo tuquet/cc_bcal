@@ -1,8 +1,15 @@
 import os
+# Load local .env file early so config.py can pick up environment overrides
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except Exception:
+    # python-dotenv not installed or .env missing; continue without raising
+    pass
+
 from app import create_app
 from app.tasks import init_tasks
 from app.extensions import db
-import click
 from app.cli.seed_commands import init_seed_commands
 
 # Create the Flask app instance using the application factory

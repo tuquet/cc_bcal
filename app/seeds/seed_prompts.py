@@ -102,6 +102,7 @@ def run(app, prompts_dir: Optional[str] = None, create_tables_if_missing: bool =
             if not os.path.isfile(full):
                 continue
             try:
+                entries = []
                 if fname.lower().endswith('.json'):
                     # JSON file can be several shapes:
                     # 1) {"name": "...", "content": "..."}
@@ -110,7 +111,6 @@ def run(app, prompts_dir: Optional[str] = None, create_tables_if_missing: bool =
                     with open(full, 'r', encoding='utf-8') as fh:
                         payload = json.load(fh)
 
-                    entries = []
                     # shape 1: single object with name/content
                     if isinstance(payload, dict) and 'name' in payload and 'content' in payload:
                         entries.append((payload['name'], payload['content']))
@@ -127,8 +127,13 @@ def run(app, prompts_dir: Optional[str] = None, create_tables_if_missing: bool =
                         # unsupported JSON shape
                         continue
                 else:
-                    # ignore non-json files in examples (we only accept .json seed files)
-                    continue
+                    # For non-json files (markdown, txt), use filename as name and file contents as content
+                    try:
+                        with open(full, 'r', encoding='utf-8') as fh:
+                            file_text = fh.read()
+                        entries = [(fname, file_text)]
+                    except Exception:
+                        continue
 
                 # Process all resolved entries from the current file
                 for name, content in entries:
